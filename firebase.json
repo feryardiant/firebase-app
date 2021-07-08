@@ -22,11 +22,15 @@
         ]
       },
       {
-        "source": "**/*.@(gif|ico|jpg|jpeg|png|svg|txt)",
+        "source": "**/*.@(gif|ico|jpg|jpeg|png|svg|txt|css|js|html)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=7200"
+            "value": "max-age=604800"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
           }
         ]
       }
