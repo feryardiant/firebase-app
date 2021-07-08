@@ -1,0 +1,23 @@
+# Generic
+# --------------------------
+Thumbs.db
+Desktop.ini
+*.cache
+*.log
+*.old
+*.zip
+._
+*~
+
+# Developments
+# --------------------------
+.env.*
+.env
+dist
+node_modules
+runtime-config.json
+service-account.json
+
+# But Keep these
+# --------------------------
+!.gitkeep

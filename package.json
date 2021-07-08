@@ -1,0 +1,50 @@
+{
+  "name": "@feryardiant/firebase",
+  "version": "0.0.0",
+  "author": {
+    "name": "Fery Wardiyanto",
+    "email": "ferywardiyanto@gmail.com"
+  },
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "functions",
+    "website"
+  ],
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "deploy": "firebase deploy",
+    "deploy:database": "firebase deploy --only database",
+    "deploy:functions": "firebase deploy --only functions",
+    "deploy:firestore": "firebase deploy --only firestore",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:storage": "firebase deploy --only storage",
+    "lint": "yarn workspaces run lint",
+    "lint:fix": "yarn workspaces run lint:fix",
+    "firebase": "cross-env GOOGLE_APPLICATION_CREDENTIALS=.firebase/service-account.json firebase",
+    "prepare": "husky install .vscode/husky"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1",
+    "@commitlint/config-conventional": "^12.1",
+    "cross-env": "^7.0",
+    "dotenv": "^10.0",
+    "firebase-tools": "^9.14",
+    "husky": "^7.0",
+    "lint-staged": "^11.0",
+    "npm-run-all": "^4.1"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "{functions,websites}/src/**/*.{js,vue}": [
+      "yarn workspaces run lint"
+    ]
+  }
+}

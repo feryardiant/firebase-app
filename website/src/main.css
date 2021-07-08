@@ -1,0 +1,35 @@
+:root {
+  --prism-font-size: .9em;
+  --prism-line-height: 1.8em;
+  --prism-font-family: 'Fira Code', monospace;
+  --prism-block-padding-y: 0.5em;
+  --prism-block-radius: 0.25rem;
+}
+
+html,
+body,
+#app {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  @apply bg-gray-200;
+}
+
+#nprogress {
+  pointer-events: none;
+
+  .bar {
+    @apply bg-teal-600 opacity-75;
+
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+  }
+}

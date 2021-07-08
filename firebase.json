@@ -1,0 +1,70 @@
+{
+  "hosting": {
+    "public": "website/dist",
+    "ignore": [
+      "CNAME",
+      "README.md",
+      "firebase.json",
+      "**/node_modules/**",
+      "**/.*"
+    ],
+    "predeploy": [
+      "yarn --cwd \"$RESOURCE_DIR\" build"
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(gif|ico|jpg|jpeg|png|svg|txt)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=7200"
+          }
+        ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/app",
+        "function": "app"
+      },
+      {
+        "source": "/**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+
+  "functions": {
+    "source": "functions",
+    "predeploy": [
+      "yarn --cwd \"$RESOURCE_DIR\" build"
+    ],
+    "ignore": [
+      "README.md",
+      "node_modules",
+      "tests",
+      ".*"
+    ]
+  },
+
+  "firestore": {
+    "rules": ".firebase/firestore.rules"
+  },
+
+  "database": {
+    "rules": ".firebase/database-rules.json"
+  },
+
+  "storage": {
+    "rules": ".firebase/storage.rules"
+  }
+}
