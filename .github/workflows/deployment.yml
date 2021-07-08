@@ -1,0 +1,59 @@
+name: Deployment
+
+on:
+  pull_request:
+    branches:
+      - source
+  push:
+    branches:
+      - source
+    paths:
+      - .github/workflows/deoloyment.yml
+      - '*/src/**'
+      - '**/package.json'
+
+env:
+  BASE_URL: https://admin.feryardiant.id/
+  VITE_FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
+  VITE_FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
+  VITE_FIREBASE_MEASUREMENTID: ${{ secrets.FIREBASE_MEASUREMENTID }}
+  VITE_FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
+  VITE_FIREBASE_PROJECTID: ${{ secrets.FIREBASE_PROJECTID }}
+  VITE_RECAPTCHA_SITEKEY: ${{ secrets.RECAPTCHA_SITEKEY }}
+  VITE_RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
+  SENDGRID_KEY: ${{ secrets.SENDGRID_KEY }}
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Setup Node.JS
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Get Yarn cache path
+      id: yarn-cache
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
+    - name: Cache Dependencies
+      uses: actions/cache@v2
+      with:
+        path: ${{ steps.yarn-cache.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: ${{ runner.os }}-yarn-
+
+    - name: Install Dependencies
+      run: yarn
+
+    - name: Build
+      run: yarn build
+
+    - name: Deploy
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      run: yarn deploy
