@@ -8,23 +8,15 @@ on:
     branches:
       - master
     paths:
+      - .firebase/database-rules.json
+      - .firebase/firestore.rules
+      - .firebase/storage.rules
       - .github/workflows/deoloyment.yml
       - '*/src/**'
       - '**/package.json'
 
-env:
-  BASE_URL: https://admin.feryardiant.id/
-  VITE_FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
-  VITE_FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
-  VITE_FIREBASE_MEASUREMENTID: ${{ secrets.FIREBASE_MEASUREMENTID }}
-  VITE_FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
-  VITE_FIREBASE_PROJECTID: ${{ secrets.FIREBASE_PROJECTID }}
-  VITE_RECAPTCHA_SITEKEY: ${{ secrets.RECAPTCHA_SITEKEY }}
-  VITE_RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
-  SENDGRID_KEY: ${{ secrets.SENDGRID_KEY }}
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-20.04
 
     steps:
@@ -50,11 +42,16 @@ jobs:
     - name: Install Dependencies
       run: yarn
 
-    - name: Build
-      run: yarn build
-
     - name: Deploy
       env:
+        BASE_URL: https://admin.feryardiant.id/
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      run: |
-        yarn deploy --token "$FIREBASE_TOKEN"
+        SENDGRID_KEY: ${{ secrets.SENDGRID_KEY }}
+        VITE_FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
+        VITE_FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
+        VITE_FIREBASE_MEASUREMENTID: ${{ secrets.FIREBASE_MEASUREMENTID }}
+        VITE_FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
+        VITE_FIREBASE_PROJECTID: ${{ secrets.FIREBASE_PROJECTID }}
+        VITE_RECAPTCHA_SITEKEY: ${{ secrets.RECAPTCHA_SITEKEY }}
+        VITE_RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
+      run: yarn deploy --token "$FIREBASE_TOKEN"
