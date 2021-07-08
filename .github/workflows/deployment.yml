@@ -55,5 +55,6 @@ jobs:
 
     - name: Deploy
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-      run: yarn deploy
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      run: |
+        yarn deploy --token "$FIREBASE_TOKEN"
