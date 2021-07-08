@@ -1,10 +1,6 @@
 {
   "name": "@feryardiant/firebase",
   "version": "0.0.0",
-  "author": {
-    "name": "Fery Wardiyanto",
-    "email": "ferywardiyanto@gmail.com"
-  },
   "license": "MIT",
   "private": true,
   "workspaces": [
@@ -14,14 +10,9 @@
   "scripts": {
     "build": "yarn workspaces run build",
     "deploy": "firebase deploy",
-    "deploy:database": "firebase deploy --only database",
-    "deploy:functions": "firebase deploy --only functions",
-    "deploy:firestore": "firebase deploy --only firestore",
-    "deploy:hosting": "firebase deploy --only hosting",
-    "deploy:storage": "firebase deploy --only storage",
+    "firebase": "cross-env GOOGLE_APPLICATION_CREDENTIALS=.firebase/service-account.json firebase",
     "lint": "yarn workspaces run lint",
     "lint:fix": "yarn workspaces run lint:fix",
-    "firebase": "cross-env GOOGLE_APPLICATION_CREDENTIALS=.firebase/service-account.json firebase",
     "prepare": "husky install .vscode/husky"
   },
   "engines": {
