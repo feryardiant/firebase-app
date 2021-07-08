@@ -8,7 +8,7 @@ on:
       - .firebase/database-rules.json
       - .firebase/firestore.rules
       - .firebase/storage.rules
-      - .github/workflows/deoloyment.yml
+      - .github/workflows/deployment.yml
       - '*/src/**'
       - '**/package.json'
 
