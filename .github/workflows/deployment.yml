@@ -15,13 +15,17 @@ on:
       - '*/src/**'
       - '**/package.json'
 
+env:
+  BASE_URL: https://admin.feryardiant.id/
+  PROJECT_ID: fery-wardiyanto
+
 jobs:
   deploy:
     runs-on: ubuntu-20.04
 
     environment:
       name: production
-      url: https://admin.feryardiant.id
+      url: ${{ env.BASE_URL }}
 
     steps:
     - name: Checkout
@@ -48,14 +52,13 @@ jobs:
 
     - name: Deploy
       env:
-        BASE_URL: https://admin.feryardiant.id/
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         SENDGRID_KEY: ${{ secrets.SENDGRID_KEY }}
         VITE_FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
         VITE_FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
         VITE_FIREBASE_MEASUREMENTID: ${{ secrets.FIREBASE_MEASUREMENTID }}
         VITE_FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
-        VITE_FIREBASE_PROJECTID: ${{ secrets.FIREBASE_PROJECTID }}
+        VITE_FIREBASE_PROJECTID: ${{ env.PROJECT_ID }}
         VITE_RECAPTCHA_SITEKEY: ${{ secrets.RECAPTCHA_SITEKEY }}
         VITE_RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
       run: yarn deploy --token "$FIREBASE_TOKEN"
