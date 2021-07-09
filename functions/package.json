@@ -9,8 +9,8 @@
   "private": true,
   "scripts": {
     "build": "rollup -c",
-    "lint": "eslint --ext .js src",
-    "lint:fix": "yarn lint --fix",
+    "lint": "eslint src/*.js",
+    "lint:fix": "eslint src/*.js --fix",
     "serve": "firebase serve --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
@@ -24,9 +24,12 @@
     "node": "14"
   },
   "dependencies": {
+    "@feryardiant/sendgrid-inbound-parser": "*",
+    "@google-cloud/storage": "^5.8.5",
+    "@rollup/plugin-json": "^4.1.0",
+    "express": "^4.17.1",
     "firebase-admin": "^9.10",
-    "firebase-functions": "^3.14",
-    "polka": "^0.5.2"
+    "firebase-functions": "^3.14"
   },
   "devDependencies": {
     "@firebase/app-types": "^0.6",
