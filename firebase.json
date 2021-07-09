@@ -8,9 +8,6 @@
       "**/node_modules/**",
       "**/.*"
     ],
-    "predeploy": [
-      "yarn --cwd \"$RESOURCE_DIR\" build"
-    ],
     "headers": [
       {
         "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
@@ -43,15 +40,16 @@
       {
         "source": "/**",
         "destination": "/index.html"
+      },
+      {
+        "source": "!/@(app|inbound)/**",
+        "destination": "/index.html"
       }
     ]
   },
 
   "functions": {
     "source": "functions",
-    "predeploy": [
-      "yarn --cwd \"$RESOURCE_DIR\" build"
-    ],
     "ignore": [
       "README.md",
       "node_modules",
