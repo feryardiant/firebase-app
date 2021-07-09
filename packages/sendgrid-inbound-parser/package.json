@@ -1,0 +1,44 @@
+{
+  "name": "@feryardiant/sendgrid-inbound-parser",
+  "version": "0.0.0",
+  "description": "Simple library to parse SendGrid Inbound Mail",
+  "author": "Fery Wardiyanto",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/feryardiant/firebase-app.git",
+    "directory": "packages/sendgrid-inbound-parser"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "types.d.ts",
+  "files": [
+    "types.d.ts",
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint *.js",
+    "lint:fix": "eslint --fix *.js"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "busboy": "^0.3.1",
+    "mailparser": "^3.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.30",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "rollup": "^2.52"
+  },
+  "eslintConfig": {
+    "extends": "../.eslintrc.json"
+  }
+}
