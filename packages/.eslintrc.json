@@ -1,0 +1,15 @@
+{
+  "extends": "standard",
+  "ignorePatterns": [
+    "node_modules/",
+    "tests/**",
+    "dist/**",
+    "**.old",
+    "**.cjs",
+    "**.mjs"
+  ],
+  "rules": {
+    "no-unused-vars": 0,
+    "one-var": 0
+  }
+}
