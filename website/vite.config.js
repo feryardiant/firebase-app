@@ -22,13 +22,15 @@ export default defineConfig({
     },
   },
 
-  // https://github.com/vitejs/vite#dev-server-proxy
-  proxy: {
-    '/__': 'http://localhost:5000',
-    '/api': {
-      target: 'http://localhost:5001',
-      rewrite: path => path.replace(/^\/api/, '/fery-wardiyanto/us-central')
-    }
+  server: {
+    // https://vitejs.dev/config/#server-proxy
+    proxy: {
+      '/__': 'http://localhost:5000',
+      '/app': {
+        target: 'http://localhost:5001',
+        rewrite: path => `/fery-wardiyanto/us-central1/${path}`
+      }
+    },
   },
 
   optimizeDeps: {
