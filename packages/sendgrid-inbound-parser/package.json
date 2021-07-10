@@ -9,6 +9,9 @@
     "url": "https://github.com/feryardiant/firebase-app.git",
     "directory": "packages/sendgrid-inbound-parser"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "index.d.ts",

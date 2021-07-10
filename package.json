@@ -14,7 +14,8 @@
     "firebase": "cross-env GOOGLE_APPLICATION_CREDENTIALS=.firebase/service-account.json firebase",
     "lint": "yarn workspaces run lint",
     "lint:fix": "yarn workspaces run lint:fix",
-    "prepare": "husky install .vscode/husky"
+    "prepare": "husky install .vscode/husky",
+    "publish:packages": "lerna publish from-package --ignore-scripts"
   },
   "engines": {
     "node": "14.x"
@@ -26,6 +27,7 @@
     "dotenv": "^10.0",
     "firebase-tools": "^9.14",
     "husky": "^7.0",
+    "lerna": "^4.0.0",
     "lint-staged": "^11.0",
     "npm-run-all": "^4.1"
   },
