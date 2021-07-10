@@ -3,25 +3,27 @@ import { extname } from 'path'
 import { simpleParser } from 'mailparser'
 
 /**
- * @param {import('.').IncomingMail} body
+ * @param {import('.').IncomingMail} envelope
  * @returns {import('.').Envelope}
  */
-function normalizeMail (body) {
+function normalizeMail (envelope) {
   const mail = {
-    spamReport: body.spam_report,
-    spamScore: parseFloat(body.spam_score),
-    senderIp: body.sender_ip,
-    subject: body.subject,
-    date: body.email.date,
-    messageId: body.email.messageId,
-    from: body.email.from.value[0],
-    to: null
+    spamReport: envelope.spam_report,
+    spamScore: parseFloat(envelope.spam_score),
+    senderIp: envelope.sender_ip,
+    subject: envelope.subject,
+    date: envelope.email.date,
+    messageId: envelope.email.messageId,
+    inReplyTo: envelope.email.inReplyTo,
+    from: envelope.email.from.value[0],
+    to: null,
+    contents: {}
   }
 
-  if (body.email.references) {
-    const references = Array.isArray(body.email.references)
-      ? body.email.references
-      : body.email.references.split(',')
+  if (envelope.email.references) {
+    const references = Array.isArray(envelope.email.references)
+      ? envelope.email.references
+      : envelope.email.references.split(',')
 
     mail.references = references.reduce((arr, ref) => {
       arr.push(...ref.split(','))
@@ -29,8 +31,8 @@ function normalizeMail (body) {
     }, []).filter(a => a.length > 0)
   }
 
-  const threadTopic = body.email.headers.has('thread-topic')
-    ? body.email.headers.get('thread-topic')
+  const threadTopic = envelope.email.headers.has('thread-topic')
+    ? envelope.email.headers.get('thread-topic')
     : (mail.subject.toLowerCase().startsWith('re: ') ? mail.subject.slice(4) : null)
 
   if (threadTopic) {
@@ -38,26 +40,26 @@ function normalizeMail (body) {
   }
 
   for (const participant of ['to', 'cc', 'bcc', 'replyTo']) {
-    if (!body.email[participant]) continue
+    if (!envelope.email[participant]) continue
 
-    mail[participant] = Array.isArray(body.email[participant])
-      ? body.email[participant].map((part) => part.value)
-      : body.email[participant].value
+    mail[participant] = Array.isArray(envelope.email[participant])
+      ? envelope.email[participant].map((part) => part.value)
+      : envelope.email[participant].value
   }
 
-  for (const contentType of ['inReplyTo', 'html', 'text', 'textAsHtml']) {
-    if (body.email[contentType]) {
-      mail[contentType] = body.email[contentType]
+  for (const type of ['html', 'text', 'textAsHtml']) {
+    if (envelope.email[type]) {
+      mail.contents[type] = envelope.email[type]
     }
   }
 
-  mail.attachments = body.email.attachments
+  mail.attachments = envelope.email.attachments
 
   return mail
 }
 
 /**
- * @param {import('http').IncomingMessage} req
+ * @param {import('express').Request} req
  * @returns {Promise<void>}
  */
 const parseBody = (req) => new Promise((resolve, reject) => {
@@ -66,14 +68,18 @@ const parseBody = (req) => new Promise((resolve, reject) => {
   }
 
   const busboy = new Busboy({ headers: req.headers })
+  const body = {}
 
   busboy.on('field', (field, value) => {
-    req.body[field] = value
+    body[field] = value
   })
 
   busboy
     .on('error', reject)
-    .on('finish', resolve)
+    .on('finish', () => {
+      req.body = body
+      resolve(body)
+    })
     .end(req.rawBody)
 
   req.pipe(busboy)
@@ -109,13 +115,15 @@ export const storeAttachment = (attachment, bucket) => new Promise((resolve, rej
 
 /**
  * @param {import('@google-cloud/storage').Bucket} bucket
- * @returns {Function<Promise>}
+ * @returns {import('express').RequestHandler}
  */
-export const inboundParser = () => (req, _, next) => parseBody(req)
-  .then(async () => {
-    req.body.email = await simpleParser(req.body.email)
-    req.envelope = normalizeMail(req.body)
+export const inboundParser = () => {
+  return (req, _, next) => parseBody(req)
+    .then(async () => {
+      req.body.email = await simpleParser(req.body.email)
+      req.envelope = normalizeMail(req.body)
 
-    return next()
-  })
-  .catch((err) => next(err))
+      return next()
+    })
+    .catch((err) => next(err))
+}
