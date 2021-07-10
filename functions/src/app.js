@@ -34,7 +34,12 @@ export function requestHandler (admin, logger) {
   app.post('/inbound', inboundParser(), inboundHandler(db, bucket, logger))
 
   app.all('*', (req, res) => {
-    console.log(req)
+    logger.info('Route not found', {
+      url: req.url,
+      method: req.method,
+      headers: req.headers
+    })
+
     return res.status(404).send('Not Found')
   })
 
@@ -77,6 +82,12 @@ const inboundHandler = (db, bucket, logger) => async (req, res) => {
     })
 
     logger.info('message recieved', { messageId, envelope })
+    console.log({
+      headers: req.headers,
+      rawBody: req.rawBody.toString(),
+      body: req.body.toString(),
+      envelope: req.envelope
+    })
 
     res.sendStatus(200)
   } catch (err) {
