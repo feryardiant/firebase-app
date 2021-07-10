@@ -16,10 +16,11 @@
   "module": "dist/index.mjs",
   "types": "index.d.ts",
   "files": [
-    "types.d.ts",
-    "dist",
+    "CHANGELOG.md",
+    "LICENSE",
     "README.md",
-    "LICENSE"
+    "dist",
+    "index.d.ts"
   ],
   "scripts": {
     "build": "rollup -c",
