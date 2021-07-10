@@ -16,7 +16,6 @@
   "module": "dist/index.mjs",
   "types": "index.d.ts",
   "files": [
-    "CHANGELOG.md",
     "LICENSE",
     "README.md",
     "dist",
@@ -26,7 +25,7 @@
     "build": "rollup -c",
     "lint": "eslint *.js",
     "lint:fix": "eslint --fix *.js",
-    "release": "standard-version --skip.tag"
+    "release": "standard-version"
   },
   "engines": {
     "node": ">=10"
@@ -47,5 +46,10 @@
   "eslintConfig": {
     "extends": "../.eslintrc.json"
   },
-  "standard-version": {}
+  "standard-version": {
+    "skip": {
+      "tag": true,
+      "changelog": true
+    }
+  }
 }
