@@ -1,12 +1,14 @@
 {
-  "exclude": ["node_modules", "**/node_modules"],
+  "exclude": ["dist", "**/dist/*", "node_modules", "**/node_modules/*"],
   "compilerOptions": {
     "sourceMap": true,
     "moduleResolution": "node",
     "target": "es6",
-    "baseUrl": "./website/src",
+    "baseUrl": ".",
     "paths": {
-      "/~/*": ["./website/src/*"]
+      "@feryardiant/firebase-functions": ["./functions"],
+      "@feryardiant/firebase-website": ["./website"],
+      "@feryardiant/*": ["./packages/*"]
     }
   }
 }
