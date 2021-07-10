@@ -31,7 +31,7 @@ export function requestHandler (admin, logger) {
     res.status(200).send('OK')
   })
 
-  app.get('/inbound', inboundParser(), inboundHandler(db, bucket, logger))
+  app.post('/inbound', inboundParser(), inboundHandler(db, bucket, logger))
 
   app.all('*', (req, res) => {
     console.log(req)
