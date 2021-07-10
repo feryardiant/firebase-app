@@ -34,15 +34,11 @@
     ],
     "rewrites": [
       {
-        "source": "/app",
-        "function": "app"
+        "source": "/inbound",
+        "function": "func"
       },
       {
-        "source": "/**",
-        "destination": "/index.html"
-      },
-      {
-        "source": "!/@(app|inbound)/**",
+        "source": "!/@(inbound|mail)/**",
         "destination": "/index.html"
       }
     ]

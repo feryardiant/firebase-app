@@ -1,10 +1,7 @@
 import { https, logger } from 'firebase-functions'
-import admin from 'firebase-admin'
+import { initializeApp } from 'firebase-admin'
+import { requestHandler } from './app'
 
-admin.initializeApp()
+const admin = initializeApp()
 
-export const api = https.onRequest(async (req, res) => {
-  logger.info(req.ip)
-
-  return res.status(200).send('OK')
-})
+export const func = https.onRequest(requestHandler(admin, logger))
