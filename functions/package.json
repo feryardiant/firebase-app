@@ -1,5 +1,5 @@
 {
-  "name": "@feryardiant/firebase-functions",
+  "name": "@feryardiant/admin-func",
   "version": "0.0.0",
   "author": {
     "name": "Fery Wardiyanto",
@@ -15,7 +15,8 @@
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "watch": "rollup -c --watch"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",

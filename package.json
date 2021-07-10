@@ -8,17 +8,20 @@
     "functions",
     "website"
   ],
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "build": "yarn workspaces run build",
     "deploy": "firebase deploy",
+    "emulator": "firebase emulators:start",
     "firebase": "cross-env GOOGLE_APPLICATION_CREDENTIALS=.firebase/service-account.json firebase",
     "lint": "yarn workspaces run lint",
     "lint:fix": "yarn workspaces run lint:fix",
     "prepare": "husky install .vscode/husky",
-    "publish:packages": "lerna publish from-package --ignore-scripts"
-  },
-  "engines": {
-    "node": "14.x"
+    "publish:packages": "lerna publish from-package --ignore-scripts",
+    "serve": "run-p watch emulator",
+    "watch": "lerna run --parallel watch"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1",

@@ -6,8 +6,8 @@
     "target": "es6",
     "baseUrl": ".",
     "paths": {
-      "@feryardiant/firebase-functions": ["./functions"],
-      "@feryardiant/firebase-website": ["./website"],
+      "@feryardiant/admin-func": ["./functions"],
+      "@feryardiant/admin-web": ["./website"],
       "@feryardiant/*": ["./packages/*"]
     }
   }

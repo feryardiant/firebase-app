@@ -25,7 +25,8 @@
     "build": "rollup -c",
     "lint": "eslint *.js",
     "lint:fix": "eslint --fix *.js",
-    "release": "standard-version"
+    "release": "standard-version",
+    "watch": "rollup -c --watch"
   },
   "engines": {
     "node": ">=10"

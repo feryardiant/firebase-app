@@ -1,5 +1,5 @@
 {
-  "name": "@feryardiant/firebase-website",
+  "name": "@feryardiant/admin-web",
   "version": "0.0.0",
   "author": {
     "name": "Fery Wardiyanto",
@@ -13,8 +13,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "yarn lint --fix",
-    "serve": "vite preview",
-    "watch": "vite build --mode development --watch"
+    "serve": "vite preview"
   },
   "types": "types.d.ts",
   "engines": {
