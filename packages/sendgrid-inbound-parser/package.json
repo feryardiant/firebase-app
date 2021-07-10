@@ -21,7 +21,8 @@
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint *.js",
-    "lint:fix": "eslint --fix *.js"
+    "lint:fix": "eslint --fix *.js",
+    "release": "standard-version --skip.tag"
   },
   "engines": {
     "node": ">=10"
@@ -36,9 +37,11 @@
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "rollup": "^2.52"
+    "rollup": "^2.52",
+    "standard-version": "^9.0"
   },
   "eslintConfig": {
     "extends": "../.eslintrc.json"
-  }
+  },
+  "standard-version": {}
 }
