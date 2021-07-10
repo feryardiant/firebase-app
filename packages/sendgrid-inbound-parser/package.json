@@ -1,6 +1,6 @@
 {
   "name": "@feryardiant/sendgrid-inbound-parser",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Simple library to parse SendGrid Inbound Mail",
   "author": "Fery Wardiyanto",
   "license": "MIT",
