@@ -13,7 +13,7 @@ export interface AttachmentFile extends Attachment {
   uploadedFile?: File;
 }
 
-export interface IncomingMailRequest {
+export interface EmailRequest extends Request {
   body: IncomingMail;
   envelope: Envelope;
 }
