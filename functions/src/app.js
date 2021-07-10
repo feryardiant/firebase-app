@@ -50,26 +50,31 @@ export function requestHandler (admin, logger) {
  * @param {import('firebase-admin').firestore.Firestore} db
  * @param {import('@google-cloud/storage').Bucket} bucket
  * @param {import('firebase-functions').logger} logger
- * @returns {express.RequestHandler<import('.').IncomingMailRequest>}
+ * @returns {express.RequestHandler<import('@feryardiant/sendgrid-inbound-parser').EmailRequest>}
  */
 const inboundHandler = (db, bucket, logger) => async (req, res) => {
   const messageCollection = db.collection('messages')
   const attachmentCollection = db.collection('attachments')
 
   try {
-    const { messageId, attachments, ...envelope } = req.envelope
+    const { messageId, attachments, headers, ...envelope } = req.envelope
+    const uploadedAttachments = []
 
     await Promise.all(attachments.map(async (attachment) => {
       if (attachment.contentDisposition === 'inline') return
 
       attachment.uploadedFile = await storeAttachment(attachment, bucket)
+      uploadedAttachments.push(attachment)
     }))
 
     await db.runTransaction(async (trans) => {
       const messageRef = messageCollection.doc(messageId)
-      trans.set(messageRef, envelope)
+      trans.set(messageRef, {
+        headers: Object.fromEntries(headers),
+        ...envelope
+      })
 
-      for (const { uploadedFile, ...attachment } of attachments) {
+      for (const { uploadedFile, ...attachment } of uploadedAttachments) {
         if (attachment.contentDisposition === 'inline') continue
 
         const attachmentRef = attachmentCollection.doc(attachment.checksum)
@@ -82,12 +87,7 @@ const inboundHandler = (db, bucket, logger) => async (req, res) => {
     })
 
     logger.info('message recieved', { messageId, envelope })
-    console.log({
-      headers: req.headers,
-      rawBody: req.rawBody.toString(),
-      body: req.body.toString(),
-      envelope: req.envelope
-    })
+    console.log(req.envelope)
 
     res.sendStatus(200)
   } catch (err) {
