@@ -13,11 +13,12 @@ function normalizeMail (envelope) {
     senderIp: envelope.sender_ip,
     subject: envelope.subject,
     date: envelope.email.date,
-    messageId: envelope.email.messageId,
-    inReplyTo: envelope.email.inReplyTo,
+    messageId: null,
+    inReplyTo: null,
+    headers: envelope.email.headers,
+    headerLines: envelope.email.headerLines,
     from: envelope.email.from.value[0],
-    to: null,
-    contents: {}
+    to: null
   }
 
   if (envelope.email.references) {
@@ -47,13 +48,19 @@ function normalizeMail (envelope) {
       : envelope.email[participant].value
   }
 
-  for (const type of ['html', 'text', 'textAsHtml']) {
-    if (envelope.email[type]) {
-      mail.contents[type] = envelope.email[type]
-    }
-  }
-
   mail.attachments = envelope.email.attachments
+  mail.contents = {}
+
+  for (const type of ['messageId', 'inReplyTo', 'html', 'text', 'textAsHtml']) {
+    if (!envelope.email[type]) continue
+
+    if (['messageId', 'inReplyTo'].includes(type)) {
+      mail[type] = envelope.email[type]
+      continue
+    }
+
+    mail.contents[type] = envelope.email[type]
+  }
 
   return mail
 }
