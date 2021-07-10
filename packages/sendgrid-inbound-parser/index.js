@@ -3,15 +3,8 @@ import { extname } from 'path'
 import { simpleParser } from 'mailparser'
 
 /**
- * @typedef {Object} ReadableEmail
- * @property {import('mailparser').ParsedMail} email
- * @property {String} spam_report
- * @property {String} spam_score
- * @property {String} sender_ip
- * @property {String} subject
- *
- * @param {ReadableEmail} body
- * @returns {import('./types').Mail}
+ * @param {import('.').IncomingMail} body
+ * @returns {import('.').Envelope}
  */
 function normalizeMail (body) {
   const mail = {
@@ -21,8 +14,8 @@ function normalizeMail (body) {
     subject: body.subject,
     date: body.email.date,
     messageId: body.email.messageId,
-    to: body.email.to.value,
-    from: body.email.from.value[0]
+    from: body.email.from.value[0],
+    to: null
   }
 
   if (body.email.references) {
@@ -44,10 +37,12 @@ function normalizeMail (body) {
     mail.topic = threadTopic
   }
 
-  for (const participant of ['cc', 'replyTo']) {
-    if (body.email[participant]) {
-      mail[participant] = body.email[participant].value
-    }
+  for (const participant of ['to', 'cc', 'bcc', 'replyTo']) {
+    if (!body.email[participant]) continue
+
+    mail[participant] = Array.isArray(body.email[participant])
+      ? body.email[participant].map((part) => part.value)
+      : body.email[participant].value
   }
 
   for (const contentType of ['inReplyTo', 'html', 'text', 'textAsHtml']) {
@@ -85,7 +80,7 @@ const parseBody = (req) => new Promise((resolve, reject) => {
 })
 
 /**
- * @param {import('./types').Attachment} attachment
+ * @param {import('.').AttachmentFile} attachment
  * @param {import('@google-cloud/storage').Bucket} bucket
  * @returns {Promise<import('@google-cloud/storage').File>}
  */
