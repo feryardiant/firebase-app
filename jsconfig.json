@@ -1,9 +1,5 @@
 {
   "exclude": ["node_modules", "**/node_modules"],
-  "include": [
-    "*/src/**/*",
-    "*/*.d.ts"
-  ],
   "compilerOptions": {
     "sourceMap": true,
     "moduleResolution": "node",
