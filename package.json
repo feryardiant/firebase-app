@@ -41,7 +41,7 @@
   },
   "lint-staged": {
     "{functions,websites}/src/**/*.{js,vue}": [
-      "yarn workspaces run lint"
+      "eslint --fix"
     ]
   }
 }

@@ -6,7 +6,7 @@ import { simpleParser } from 'mailparser'
  * @param {import('.').IncomingMail} envelope
  * @returns {import('.').Envelope}
  */
-function normalizeMail (envelope) {
+function normalizeMail(envelope) {
   const mail = {
     spamReport: envelope.spam_report,
     spamScore: parseFloat(envelope.spam_score),
@@ -26,15 +26,19 @@ function normalizeMail (envelope) {
       ? envelope.email.references
       : envelope.email.references.split(',')
 
-    mail.references = references.reduce((arr, ref) => {
-      arr.push(...ref.split(','))
-      return arr
-    }, []).filter(a => a.length > 0)
+    mail.references = references
+      .reduce((arr, ref) => {
+        arr.push(...ref.split(','))
+        return arr
+      }, [])
+      .filter((a) => a.length > 0)
   }
 
   const threadTopic = envelope.email.headers.has('thread-topic')
     ? envelope.email.headers.get('thread-topic')
-    : (mail.subject.toLowerCase().startsWith('re: ') ? mail.subject.slice(4) : null)
+    : mail.subject.toLowerCase().startsWith('re: ')
+    ? mail.subject.slice(4)
+    : null
 
   if (threadTopic) {
     mail.topic = threadTopic
@@ -69,68 +73,73 @@ function normalizeMail (envelope) {
  * @param {import('express').Request} req
  * @returns {Promise<void>}
  */
-const parseBody = (req) => new Promise((resolve, reject) => {
-  if (!req.headers['content-type']?.startsWith('multipart/form-data')) {
-    return reject(new Error('Could not parse non-multipart data'))
-  }
+const parseBody = (req) =>
+  new Promise((resolve, reject) => {
+    if (!req.headers['content-type']?.startsWith('multipart/form-data')) {
+      return reject(new Error('Could not parse non-multipart data'))
+    }
 
-  const busboy = new Busboy({ headers: req.headers })
-  const body = {}
+    const busboy = new Busboy({ headers: req.headers })
+    const body = {}
 
-  busboy.on('field', (field, value) => {
-    body[field] = value
-  })
-
-  busboy
-    .on('error', reject)
-    .on('finish', () => {
-      req.body = body
-      resolve(body)
+    busboy.on('field', (field, value) => {
+      body[field] = value
     })
-    .end(req.rawBody)
 
-  req.pipe(busboy)
-})
+    busboy
+      .on('error', reject)
+      .on('finish', () => {
+        req.body = body
+        resolve(body)
+      })
+      .end(req.rawBody)
+
+    req.pipe(busboy)
+  })
 
 /**
  * @param {import('.').AttachmentFile} attachment
  * @param {import('@google-cloud/storage').Bucket} bucket
  * @returns {Promise<import('@google-cloud/storage').File>}
  */
-export const storeAttachment = (attachment, bucket) => new Promise((resolve, reject) => {
-  const filename = `${attachment.checksum}${extname(attachment.filename).toLowerCase()}`
-  const file = bucket.file(`attachments/${filename}`)
-  const stream = file.createWriteStream({
-    public: true,
-    metadata: {
-      contentType: attachment.contentType
-    }
-  })
+export const storeAttachment = (attachment, bucket) =>
+  new Promise((resolve, reject) => {
+    const filename = `${attachment.checksum}${extname(
+      attachment.filename
+    ).toLowerCase()}`
+    const file = bucket.file(`attachments/${filename}`)
+    const stream = file.createWriteStream({
+      public: true,
+      metadata: {
+        contentType: attachment.contentType
+      }
+    })
 
-  stream.on('error', (err) => {
-    attachment.isUploaded = false
-    reject(err)
-  })
+    stream.on('error', (err) => {
+      attachment.isUploaded = false
+      reject(err)
+    })
 
-  stream.on('finish', () => {
-    attachment.isUploaded = true
-    resolve(file)
-  })
+    stream.on('finish', () => {
+      attachment.isUploaded = true
+      resolve(file)
+    })
 
-  stream.end(attachment.content)
-})
+    stream.end(attachment.content)
+  })
 
 /**
  * @param {import('@google-cloud/storage').Bucket} bucket
  * @returns {import('express').RequestHandler}
  */
 export const inboundParser = () => {
-  return (req, _, next) => parseBody(req)
-    .then(async () => {
-      req.body.email = await simpleParser(req.body.email)
-      req.envelope = normalizeMail(req.body)
+  return (req, _, next) =>
+    parseBody(req)
+      .then(async () => {
+        req.body.email = await simpleParser(req.body.email)
+        req.envelope = normalizeMail(req.body)
 
-      return next()
-    })
-    .catch((err) => next(err))
+        return next()
+      })
+      .catch((err) => next(err))
 }

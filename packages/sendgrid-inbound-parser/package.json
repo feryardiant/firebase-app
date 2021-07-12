@@ -36,17 +36,17 @@
     "mailparser": "^3.2.0"
   },
   "devDependencies": {
+    "@feryardiant/eslint-config-dev": "*",
     "eslint": "^7.30",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
+    "prettier": "^2.3.2",
+    "prettier-config-standard": "~4.0",
     "rollup": "^2.52",
     "standard-version": "^9.0"
   },
   "eslintConfig": {
-    "extends": "../.eslintrc.json"
+    "extends": "@feryardiant/dev"
   },
+  "prettier": "prettier-config-standard",
   "standard-version": {
     "skip": {
       "tag": true,

@@ -1,11 +1,14 @@
 import express from 'express'
-import { inboundParser, storeAttachment } from '@feryardiant/sendgrid-inbound-parser'
+import {
+  inboundParser,
+  storeAttachment
+} from '@feryardiant/sendgrid-inbound-parser'
 
 /**
  * @param {import('firebase-functions').logger} logger
  * @returns {express.ErrorRequestHandler}
  */
-export function useLogger (logger) {
+export function useLogger(logger) {
   return (err, _, res, __) => {
     logger.error(err)
 
@@ -19,7 +22,7 @@ export function useLogger (logger) {
  * @param {import('firebase-functions').logger} logger
  * @returns {express.Application}
  */
-export function requestHandler (admin, logger) {
+export function requestHandler(admin, logger) {
   const app = express()
   const db = admin.firestore()
   const bucket = admin.storage().bucket()
@@ -60,12 +63,14 @@ const inboundHandler = (db, bucket, logger) => async (req, res) => {
     const { messageId, attachments, headers, ...envelope } = req.envelope
     const uploadedAttachments = []
 
-    await Promise.all(attachments.map(async (attachment) => {
-      if (attachment.contentDisposition === 'inline') return
+    await Promise.all(
+      attachments.map(async (attachment) => {
+        if (attachment.contentDisposition === 'inline') return
 
-      attachment.uploadedFile = await storeAttachment(attachment, bucket)
-      uploadedAttachments.push(attachment)
-    }))
+        attachment.uploadedFile = await storeAttachment(attachment, bucket)
+        uploadedAttachments.push(attachment)
+      })
+    )
 
     await db.runTransaction(async (trans) => {
       const messageRef = messageCollection.doc(messageId)
