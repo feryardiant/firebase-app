@@ -35,8 +35,8 @@
   "devDependencies": {
     "@feryardiant/eslint-config-dev": "*",
     "@firebase/app-types": "^0.6",
-    "eslint": "^7.30",
-    "prettier": "^2.3.2",
+    "eslint": "~7.30",
+    "prettier": "~2.3",
     "prettier-config-standard": "~4.0",
     "rollup": "^2.52",
     "rollup-plugin-terser": "^7.0.2"

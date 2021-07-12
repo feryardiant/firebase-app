@@ -37,8 +37,8 @@
   },
   "devDependencies": {
     "@feryardiant/eslint-config-dev": "*",
-    "eslint": "^7.30",
-    "prettier": "^2.3.2",
+    "eslint": "~7.30",
+    "prettier": "~2.3",
     "prettier-config-standard": "~4.0",
     "rollup": "^2.52",
     "standard-version": "^9.0"
