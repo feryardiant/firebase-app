@@ -1,8 +1,5 @@
 import express from 'express'
-import {
-  inboundParser,
-  storeAttachment
-} from '@feryardiant/sendgrid-inbound-parser'
+import { inboundParser, storeAttachment } from '@feryardiant/sendgrid-inbound-parser'
 
 /**
  * @param {import('firebase-functions').logger} logger
@@ -56,43 +53,90 @@ export function requestHandler(admin, logger) {
  * @returns {express.RequestHandler<import('@feryardiant/sendgrid-inbound-parser').EmailRequest>}
  */
 const inboundHandler = (db, bucket, logger) => async (req, res) => {
-  const messageCollection = db.collection('messages')
-  const attachmentCollection = db.collection('attachments')
+  const messageCol = db.collection('messages')
+  const attachmentCol = db.collection('attachments')
+  const conversationCol = db.collection('conversations')
+  const peopleCol = db.collection('people')
 
   try {
+    /** @type {import('@feryardiant/sendgrid-inbound-parser').Envelope} */
     const { messageId, attachments, headers, ...envelope } = req.envelope
-    const uploadedAttachments = []
-
-    await Promise.all(
-      attachments.map(async (attachment) => {
-        if (attachment.contentDisposition === 'inline') return
-
-        attachment.uploadedFile = await storeAttachment(attachment, bucket)
-        uploadedAttachments.push(attachment)
-      })
-    )
 
     await db.runTransaction(async (trans) => {
-      const messageRef = messageCollection.doc(messageId)
-      trans.set(messageRef, {
+      const conversationRef = conversationCol.doc(envelope.topic || envelope.subject)
+      const convMessageCol = conversationRef.collection('messages')
+      const convParticipantCol = conversationRef.collection('participants')
+      const convAttachmentCol = conversationRef.collection('attachments')
+      const parties = []
+      const message = {
         headers: Object.fromEntries(headers),
+        attachments: [],
         ...envelope
-      })
-
-      for (const { uploadedFile, ...attachment } of uploadedAttachments) {
-        if (attachment.contentDisposition === 'inline') continue
-
-        const attachmentRef = attachmentCollection.doc(attachment.checksum)
-
-        trans.set(attachmentRef, {
-          ...attachment,
-          publicUrl: uploadedFile.publicUrl()
-        })
       }
+
+      const getExistingPerson = async (person) => {
+        const sender = await trans.get(peopleCol.doc(person.address))
+        const existing = sender.exists ? sender.data() : person
+
+        return {
+          address: person.address,
+          name: person.name || existing.name,
+          messages: existing.messages || []
+        }
+      }
+
+      const sender = await getExistingPerson(envelope.from)
+
+      parties.push(sender)
+
+      for (const field of ['to', 'cc', 'bcc']) {
+        if (!envelope[field]) continue
+
+        for (let participant of envelope[field]) {
+          if (participant.address.endsWith('@feryardiant.id')) continue
+
+          participant = await getExistingPerson(participant)
+
+          parties.push(participant)
+        }
+      }
+
+      await Promise.all(
+        attachments.map(async ({ headers, ...attachment }) => {
+          if (attachment.contentDisposition === 'inline') return
+
+          const uploadedFile = await storeAttachment(attachment, bucket)
+          const attachmentFile = {
+            messageId,
+            filename: attachment.filename,
+            contentId: attachment.contentId,
+            contentType: attachment.contentType,
+            size: attachment.size,
+            isUploaded: attachment.isUploaded,
+            headers: Object.fromEntries(headers),
+            publicUrl: uploadedFile.publicUrl()
+          }
+
+          trans.set(attachmentCol.doc(attachment.checksum), attachmentFile)
+          trans.set(convAttachmentCol.doc(attachment.checksum), attachmentFile)
+          message.attachments.push(attachmentFile)
+        })
+      )
+
+      for (const party of parties) {
+        if (!party.messages.includes(messageId)) {
+          party.messages.push(messageId)
+        }
+
+        trans.set(peopleCol.doc(party.address), party)
+        trans.set(convParticipantCol.doc(party.address), party)
+      }
+
+      trans.set(messageCol.doc(messageId), message)
+      trans.set(convMessageCol.doc(messageId), message)
     })
 
-    logger.info('message recieved', { messageId, envelope })
-    console.log(req.envelope)
+    logger.info('message recieved', { messageId })
 
     res.sendStatus(200)
   } catch (err) {
