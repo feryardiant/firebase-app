@@ -21,6 +21,7 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "types.d.ts",
+  "typings": "types.d.ts",
   "engines": {
     "node": "14"
   },
@@ -28,14 +29,22 @@
     "@feryardiant/sendgrid-inbound-parser": "*",
     "@google-cloud/storage": "^5.8.5",
     "@rollup/plugin-json": "^4.1.0",
+    "@sendgrid/mail": "^7.4.5",
     "express": "^4.17.1",
     "firebase-admin": "^9.10",
     "firebase-functions": "^3.14"
   },
   "devDependencies": {
     "@feryardiant/eslint-config-dev": "*",
-    "@firebase/app-types": "^0.6",
+    "@firebase/app-types": "^0.6.2",
+    "@firebase/util": "^1.1.0",
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "chai": "^4.3.4",
     "eslint": "~7.30",
+    "firebase-functions-test": "^0.3.0",
+    "mocha": "^9.0.2",
     "prettier": "~2.3",
     "prettier-config-standard": "~4.0",
     "rollup": "^2.52",

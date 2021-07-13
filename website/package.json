@@ -16,6 +16,7 @@
     "serve": "vite preview"
   },
   "types": "types.d.ts",
+  "typings": "types.d.ts",
   "engines": {
     "node": "14.x"
   },
