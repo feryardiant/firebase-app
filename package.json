@@ -12,16 +12,16 @@
     "node": "14.x"
   },
   "scripts": {
-    "build": "yarn workspaces run build",
+    "build": "pnpm run --parallel --if-present build",
     "deploy": "firebase deploy",
     "emulator": "firebase emulators:start",
     "firebase": "cross-env GOOGLE_APPLICATION_CREDENTIALS=.firebase/service-account.json firebase",
-    "lint": "yarn workspaces run lint",
-    "lint:fix": "yarn workspaces run lint:fix",
+    "lint": "pnpm run --parallel --if-present lint",
+    "lint:fix": "pnpm run --parallel --if-present lint:fix",
     "prepare": "husky install .vscode/husky",
     "publish:packages": "lerna publish from-package --ignore-scripts",
-    "serve": "run-p watch emulator",
-    "watch": "lerna run --parallel watch"
+    "serve": "run-p emulator watch",
+    "watch": "pnpm run --parallel --if-present watch"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1",
