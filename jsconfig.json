@@ -1,13 +1,19 @@
 {
   "exclude": ["dist", "**/dist/*", "node_modules", "**/node_modules/*"],
   "compilerOptions": {
+    "baseUrl": ".",
     "sourceMap": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": true,
     "target": "es6",
+    "module": "es6",
     "paths": {
-      "@feryardiant/admin-func": ["./functions"],
-      "@feryardiant/admin-web": ["./website"],
-      "@feryardiant/*": ["./packages/*"]
+      "@feryardiant/admin-func": ["functions"],
+      "@feryardiant/admin-web": ["website"],
+      "@feryardiant/*": ["packages/*"]
     }
   }
 }

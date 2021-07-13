@@ -2,10 +2,15 @@
   "extends": "../jsconfig.json",
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    "target": "es6",
     "baseUrl": ".",
+    "lib": ["DOM", "ESNext"],
+    "types": [
+      "vite/client",
+      "vite-plugin-pages/client",
+      "vite-plugin-vue-layouts/client"
+    ],
     "paths": {
-      "/~": ["."]
+      "~/*": ["src/*"]
     }
   }
 }
