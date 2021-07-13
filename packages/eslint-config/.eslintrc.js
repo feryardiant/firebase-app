@@ -1,1 +1,0 @@
-module.eports = require('./index')
