@@ -28,11 +28,38 @@
         ]
       },
       {
-        "source": "**/*.@(gif|ico|jpg|jpeg|png|svg|txt|css|js|html)",
+        "source": "manifest.webmanifest",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/manifest+json; charset=utf-8"
+          }
+        ]
+      },
+      {
+        "source": "**/*.svg",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "image/svg+xml; charset=utf-8"
+          }
+        ]
+      },
+      {
+        "source": "**/*.js",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-javascript; charset=utf-8"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(gif|ico|jpg|jpeg|png|svg|txt|css|js|html|webmanifest)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "max-age=604800, public, must-revalidate"
           },
           {
             "key": "X-Content-Type-Options",
