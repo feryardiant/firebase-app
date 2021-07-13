@@ -35,7 +35,7 @@
     "firebase-functions": "^3.14"
   },
   "devDependencies": {
-    "@feryardiant/eslint-config-standard": "~0.0.1",
+    "@feryardiant/eslint-config-standard": "~0.0.2",
     "@firebase/app-types": "^0.6.2",
     "@firebase/util": "^1.1.0",
     "@rollup/plugin-commonjs": "^19.0.0",
@@ -53,5 +53,5 @@
   "eslintConfig": {
     "extends": "@feryardiant/standard"
   },
-  "prettier": "prettier-config-standard"
+  "prettier": "./../packages/.prettierrc.js"
 }
