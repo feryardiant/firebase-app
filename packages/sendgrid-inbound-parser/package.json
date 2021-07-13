@@ -37,7 +37,7 @@
     "mailparser": "^3.2.0"
   },
   "devDependencies": {
-    "@feryardiant/eslint-config-dev": "*",
+    "@feryardiant/eslint-config-standard": "~0.0.1",
     "eslint": "~7.30",
     "prettier": "~2.3",
     "prettier-config-standard": "~4.0",
@@ -45,7 +45,7 @@
     "standard-version": "^9.0"
   },
   "eslintConfig": {
-    "extends": "@feryardiant/dev"
+    "extends": "@feryardiant/standard"
   },
   "prettier": "prettier-config-standard",
   "standard-version": {
