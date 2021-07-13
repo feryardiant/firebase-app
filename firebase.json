@@ -19,11 +19,20 @@
         ]
       },
       {
+        "source": "favicon.ico",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "image/x-icon"
+          }
+        ]
+      },
+      {
         "source": "**/*.@(gif|ico|jpg|jpeg|png|svg|txt|css|js|html)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=604800"
+            "value": "no-cache"
           },
           {
             "key": "X-Content-Type-Options",
