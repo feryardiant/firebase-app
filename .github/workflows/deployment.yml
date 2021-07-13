@@ -62,4 +62,4 @@ jobs:
         VITE_FIREBASE_PROJECTID: ${{ env.PROJECT_ID }}
         VITE_RECAPTCHA_SITEKEY: ${{ secrets.RECAPTCHA_SITEKEY }}
         VITE_RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
-      run: pnpm deploy --token "$FIREBASE_TOKEN"
+      run: pnpm deploy -- --token "$FIREBASE_TOKEN"
