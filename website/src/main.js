@@ -1,51 +1,34 @@
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import { useAnalytics } from './firebase'
+// import { createApp } from 'vue'
+import { ViteSSG } from 'vite-ssg'
+import { createWebHistory } from 'vue-router'
 
 import autoRoutes from 'pages-generated'
 import { setupLayouts } from 'layouts-generated'
 
 import App from './App.vue'
 
-import 'windi.css'
+import 'virtual:windi.css'
+import 'virtual:windi-devtools'
 import './main.css'
 
-const app = createApp(App)
-
-app.config.errorHandler = async (error) => {
-  const analytics = await useAnalytics()
-
-  analytics?.logEvent('exception', {
-    description: error.toString(),
-    fatal: true
-  })
-}
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes: setupLayouts(autoRoutes.map((route) => {
-    return {
-      ...route,
-      alias: route.path.endsWith('/')
-        ? `${route.path}index.html`
-        : `${route.path}.html`,
-    }
-  })),
-  scrollBehavior (from, to, position) {
-    return position || { top: 0 }
+const routes = autoRoutes.map((route) => {
+  return {
+    ...route,
+    alias: route.path.endsWith('/')
+      ? `${route.path}index.html`
+      : `${route.path}.html`,
   }
 })
 
-router.afterEach(async (to) => {
-  const analytics = await useAnalytics()
-
-  analytics?.logEvent('page_view', {
-    page_location: to.fullPath,
-    page_path: to.path,
-    page_title: to.meta.title || '',
-  })
+export const createApp = ViteSSG(App, {
+  routes: setupLayouts(routes),
+  scrollBehavior (from, to, position) {
+    return position || { top: 0 }
+  }
+}, (ctx) => {
+  return Promise.all(
+    Object.values(
+      import.meta.globEager('./modules/*.js')
+    ).map(mod => mod.install?.(ctx))
+  )
 })
-
-app.use(router)
-
-app.mount('#app')
