@@ -30,7 +30,7 @@ importers:
 
   functions:
     specifiers:
-      '@feryardiant/eslint-config-standard': ~0.0.1
+      '@feryardiant/eslint-config-standard': ~0.0.2
       '@feryardiant/sendgrid-inbound-parser': '*'
       '@firebase/app-types': ^0.6.2
       '@firebase/util': ^1.1.0
@@ -59,7 +59,7 @@ importers:
       firebase-admin: 9.10.0_@firebase+app-types@0.6.2
       firebase-functions: 3.14.1_firebase-admin@9.10.0
     devDependencies:
-      '@feryardiant/eslint-config-standard': 0.0.1_eslint@7.30.0+prettier@2.3.2
+      '@feryardiant/eslint-config-standard': 0.0.2_eslint@7.30.0+prettier@2.3.2
       '@firebase/app-types': 0.6.2
       '@firebase/util': 1.1.0
       '@rollup/plugin-commonjs': 19.0.0_rollup@2.53.1
@@ -75,7 +75,7 @@ importers:
 
   packages/sendgrid-inbound-parser:
     specifiers:
-      '@feryardiant/eslint-config-standard': ~0.0.1
+      '@feryardiant/eslint-config-standard': ~0.0.2
       busboy: ^0.3.1
       eslint: ~7.30
       mailparser: ^3.2.0
@@ -87,7 +87,7 @@ importers:
       busboy: 0.3.1
       mailparser: 3.2.0
     devDependencies:
-      '@feryardiant/eslint-config-standard': 0.0.1_eslint@7.30.0+prettier@2.3.2
+      '@feryardiant/eslint-config-standard': 0.0.2_eslint@7.30.0+prettier@2.3.2
       eslint: 7.30.0
       prettier: 2.3.2
       prettier-config-standard: 4.0.0
@@ -363,8 +363,8 @@ packages:
       - supports-color
     dev: true
 
-  /@feryardiant/eslint-config-standard/0.0.1_eslint@7.30.0+prettier@2.3.2:
-    resolution: {integrity: sha512-+sqLrjc//xMW1RKOsqpBVgte37EjF1M+2vefyYdVrGHPP59wpRSAKRHONejSXg47s+CBJq5XkzAaOSOhznCqug==}
+  /@feryardiant/eslint-config-standard/0.0.2_eslint@7.30.0+prettier@2.3.2:
+    resolution: {integrity: sha512-lx0Eo9OjTf47vpVBDJpG3MyI/wAuSSvIbnShOK/vigJHA3+wqBEnz7Q1/kSQwvjIlME+AD8teg5KTozOZJyZIw==}
     peerDependencies:
       eslint: ~7.30
       prettier: ~2.3
