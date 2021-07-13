@@ -1,3 +1,5 @@
+import { ViteSSGContext } from 'vite-ssg'
+
 interface ImportMeta {
   env: {
     VITE_FIREBASE_APPID?: string;
@@ -9,3 +11,5 @@ interface ImportMeta {
     VITE_RECAPTCHA_SECRETKEY?: string;
   }
 }
+
+export type UserModule = (ctx: ViteSSGContext) => void

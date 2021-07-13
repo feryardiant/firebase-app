@@ -5,9 +5,14 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { useHead } from '@vueuse/head'
+import { app } from '../package.json'
 
-onMounted(() => {
-  console.log('Hello World')
+// https://github.com/vueuse/head
+useHead({
+  title: app.name,
+  meta: [
+    { name: 'description', content: app.description },
+  ],
 })
 </script>

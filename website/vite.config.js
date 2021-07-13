@@ -7,10 +7,13 @@ import layouts from 'vite-plugin-vue-layouts'
 import windiCSS from 'vite-plugin-windicss'
 import components from 'vite-plugin-components'
 import markdown from 'vite-plugin-md'
+import { VitePWA as pwa } from 'vite-plugin-pwa'
 import matter from 'gray-matter'
 import mdIt from 'markdown-it'
 import mdAnchor from 'markdown-it-anchor'
 import mdLinkAttr from 'markdown-it-link-attributes'
+
+import { app } from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -18,7 +21,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      '/~': resolve(__dirname, 'src')
+      '~/': `${resolve(__dirname, 'src')}/`
     },
   },
 
@@ -35,12 +38,19 @@ export default defineConfig({
 
   optimizeDeps: {
     include: [
+      '@vueuse/core',
       'vue',
       'vue-router',
     ],
     exclude: [
       'vue-demi',
     ],
+  },
+
+  // https://github.com/antfu/vite-ssg
+  ssgOptions: {
+    script: 'async',
+    formatting: 'minify',
   },
 
   plugins: [
@@ -120,6 +130,35 @@ export default defineConfig({
       preflight: {
         enableAll: true,
       }
+    }),
+
+    pwa({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'robots.txt', 'icons/safari-pinned-tab.svg'],
+      manifest: {
+        name: app.name,
+        short_name: app.name,
+        description: app.description,
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: '/icons/mobile-icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icons/mobile-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: '/icons/mobile-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
+        ],
+      },
     })
   ]
 })
