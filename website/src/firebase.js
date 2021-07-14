@@ -3,7 +3,6 @@ import firebase from 'firebase/app'
 const initialized = {}
 const isDev = import.meta.env.DEV
 const $app = firebase.initializeApp(FIREBASE_CONFIG)
-console.log(FIREBASE_CONFIG)
 
 /**
  * @param {firebase.app.App} app

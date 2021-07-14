@@ -87,24 +87,32 @@ export default ({ mode, command }) => {
       // https://github.com/hannoeru/vite-plugin-pages
       pages({
         extensions: ['vue', 'md'],
-        extendRoute(page) {
-          const path = resolve(__dirname, page.component.slice(1))
-          const md = readFileSync(path, 'utf-8')
-          const { data, excerpt } = matter(md, {
-            excerpt: true,
-            excerpt_separator: '<!-- more -->',
-          })
+        extendRoute({ title, description, meta, ...route }) {
+          const frontmatter = {
+            title,
+            comments: true,
+            layout: 'default',
+            locale: 'en',
+          }
 
-          page.meta = Object.assign(page.meta || {}, {
-            frontmatter: Object.assign({}, {
-              comments: true,
+          if (typeof route.component === 'string' && route.component.endsWith('.md')) {
+            const path = resolve(__dirname, route.component.slice(1))
+            const { data, excerpt } = matter(readFileSync(path, 'utf-8'), {
+              excerpt: true,
+              excerpt_separator: '<!-- more -->',
+            })
+
+            meta.frontmatter = Object.assign({}, frontmatter, {
               excerpt: mdIt().render(excerpt),
-              layout: 'default',
-              locale: 'id',
             }, data)
-          })
+          }
 
-          return page
+          route.meta = Object.assign({}, {
+            title: frontmatter.title,
+            description: description || APP_INFO.description,
+          }, meta)
+
+          return route
         }
       }),
 

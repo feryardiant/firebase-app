@@ -24,11 +24,11 @@ import { useAnalytics } from '../firebase'
     })
   }
 
-  router.afterEach(async (to) => {
+  router.afterEach((to) => {
     analytics?.logEvent('page_view', {
       page_location: to.fullPath,
       page_path: to.path,
-      page_title: to.meta.title || '',
+      page_title: to.meta.title,
     })
   })
 }
