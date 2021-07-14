@@ -17,6 +17,7 @@ import { app } from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.BASE_URL || '/',
   envDir: resolve(__dirname, '../.env'),
 
   resolve: {
