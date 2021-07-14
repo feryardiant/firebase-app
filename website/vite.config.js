@@ -204,6 +204,13 @@ export default ({ mode, command }) => {
  */
 const resolveEnv = (mode, envDir) => {
   const env = loadEnv(mode, envDir)
+  /**
+   * @param {string} key
+   * @returns {string}
+   */
+  const getEnv = (key, defaults = '') => {
+    return env[key] || process.env[key] || defaults
+  }
 
   if (mode !== 'production') {
     const { parsed } = dotenv.config({ path: envDir })
@@ -212,19 +219,21 @@ const resolveEnv = (mode, envDir) => {
     }
   }
 
-  const fbaseConfEnv = JSON.parse(process.env.FIREBASE_CONFIG || '{}')
+  const fbaseConfEnv = JSON.parse(getEnv('FIREBASE_CONFIG', '{}'))
   const fbaseConf = {
-    appId: env.FIREBASE_APPID || process.env.FIREBASE_APPID,
-    apiKey: env.FIREBASE_APIKEY || process.env.FIREBASE_APIKEY,
-    messagingSenderId: env.FIREBASE_MEASUREMENTID || process.env.FIREBASE_MEASUREMENTID,
-    measurementId: env.FIREBASE_MESSAGINGSENDERID || process.env.FIREBASE_MESSAGINGSENDERID,
-    projectId: env.PROJECT_ID || process.env.PROJECT_ID,
+    appId: getEnv('FIREBASE_APPID'),
+    apiKey: getEnv('FIREBASE_APIKEY'),
+    messagingSenderId: getEnv('FIREBASE_MEASUREMENTID'),
+    measurementId: getEnv('FIREBASE_MESSAGINGSENDERID'),
+    projectId: getEnv('PROJECT_ID'),
   }
 
   for (const [key, val] of Object.entries(fbaseConf)) {
     fbaseConfEnv[key] = fbaseConfEnv[key] || val
   }
 
+  env.APP_NAME = getEnv('APP_NAME', fbaseConf.projectId)
+  env.BASE_URL = getEnv('BASE_URL', '/')
   env.FIREBASE_CONFIG = JSON.stringify(fbaseConfEnv)
 
   return env
