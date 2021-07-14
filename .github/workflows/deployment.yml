@@ -62,6 +62,11 @@ jobs:
         VITE_RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
       run: pnpm build
 
+    - name: Publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: pnpm -r publish --ignore-scripts --no-git-checks
+
     - name: Deploy
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
