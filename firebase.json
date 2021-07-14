@@ -10,25 +10,20 @@
     ],
     "headers": [
       {
-        "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+        "source": "/",
         "headers": [
           {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
+            "key": "Cache-Control",
+            "value": "no-cache"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
           }
         ]
       },
       {
-        "source": "favicon.ico",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "image/x-icon"
-          }
-        ]
-      },
-      {
-        "source": "manifest.webmanifest",
+        "source": "/manifest.webmanifest",
         "headers": [
           {
             "key": "Content-Type",
@@ -37,7 +32,16 @@
         ]
       },
       {
-        "source": "**/*.svg",
+        "source": "/{*,**/*}.ico",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "image/x-icon"
+          }
+        ]
+      },
+      {
+        "source": "/{*,**/*}.svg",
         "headers": [
           {
             "key": "Content-Type",
@@ -46,20 +50,29 @@
         ]
       },
       {
-        "source": "**/*.js",
+        "source": "/{*,**/*}.js",
         "headers": [
           {
             "key": "Content-Type",
-            "value": "application/x-javascript; charset=utf-8"
+            "value": "text/javascript; charset=utf-8"
           }
         ]
       },
       {
-        "source": "**/*.@(gif|ico|jpg|jpeg|png|svg|txt|css|js|html|webmanifest)",
+        "source": "/{*,**/*}.@(eot|otf|ttf|ttc|woff|font.css)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      },
+      {
+        "source": "/{*,**/*}.@(gif|ico|jpg|jpeg|png|svg|txt|css|js|webmanifest)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=604800, public, must-revalidate"
+            "value": "max-age=31536000, private, immutable"
           },
           {
             "key": "X-Content-Type-Options",
