@@ -10,7 +10,7 @@
       "vite-plugin-vue-layouts/client"
     ],
     "paths": {
-      "~/*": ["src/*"]
+      "@/*": ["src/*"]
     }
   }
 }

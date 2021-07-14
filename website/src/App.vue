@@ -6,13 +6,12 @@
 
 <script setup>
 import { useHead } from '@vueuse/head'
-import { app } from '../package.json'
 
 // https://github.com/vueuse/head
 useHead({
-  title: app.name,
+  title: APP_INFO.title,
   meta: [
-    { name: 'description', content: app.description },
+    { name: 'description', content: APP_INFO.description },
   ],
 })
 </script>

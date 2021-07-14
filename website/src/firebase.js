@@ -2,15 +2,8 @@ import firebase from 'firebase/app'
 
 const initialized = {}
 const isDev = import.meta.env.DEV
-const projectId = import.meta.env.VITE_FIREBASE_PROJECTID
-
-const $app = firebase.initializeApp({
-  appId: import.meta.env.VITE_FIREBASE_APPID,
-  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGINGSENDERID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENTID,
-  projectId,
-})
+const $app = firebase.initializeApp(FIREBASE_CONFIG)
+console.log(FIREBASE_CONFIG)
 
 /**
  * @param {firebase.app.App} app

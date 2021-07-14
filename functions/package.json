@@ -1,25 +1,18 @@
 {
   "name": "@feryardiant/admin-func",
   "version": "0.0.0",
-  "author": {
-    "name": "Fery Wardiyanto",
-    "email": "ferywardiyanto@gmail.com"
-  },
   "license": "MIT",
   "private": true,
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint src/*.js",
     "lint:fix": "eslint src/*.js --fix",
-    "serve": "firebase serve --only functions",
-    "shell": "firebase functions:shell",
-    "start": "npm run shell",
+    "start": "firebase functions:shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "watch": "rollup -c --watch"
   },
   "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
   "types": "types.d.ts",
   "typings": "types.d.ts",
   "engines": {
