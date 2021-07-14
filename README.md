@@ -1,4 +1,4 @@
-# My Personal FireBase Site
+# My Personal Admin App built with Vue, hosted on FireBase
 
 ## Licenses
 code is licensed under [MIT](./LICENSE),
