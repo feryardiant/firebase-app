@@ -13,8 +13,8 @@ on:
       - '**/package.json'
 
 env:
-  BASE_URL: https://admin.feryardiant.id/
-  PROJECT_ID: fery-wardiyanto
+  BASE_URL: 'https://admin.feryardiant.id/'
+  PROJECT_ID: 'fery-wardiyanto'
 
 jobs:
   deploy:
@@ -59,7 +59,7 @@ jobs:
         VITE_FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
         VITE_FIREBASE_MEASUREMENTID: ${{ secrets.FIREBASE_MEASUREMENTID }}
         VITE_FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
-        VITE_FIREBASE_PROJECTID: ${{ env.PROJECT_ID }}
+        VITE_FIREBASE_PROJECTID: $PROJECT_ID
         VITE_RECAPTCHA_SITEKEY: ${{ secrets.RECAPTCHA_SITEKEY }}
         VITE_RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
       run: pnpm deploy -- --token "$FIREBASE_TOKEN"
