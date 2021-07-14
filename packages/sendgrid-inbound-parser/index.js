@@ -104,9 +104,7 @@ const parseBody = (req) =>
  */
 export const storeAttachment = (attachment, bucket) =>
   new Promise((resolve, reject) => {
-    const filename = `${attachment.checksum}${extname(
-      attachment.filename
-    ).toLowerCase()}`
+    const filename = `${attachment.checksum}${extname(attachment.filename).toLowerCase()}`
     const file = bucket.file(`attachments/${filename}`)
     const stream = file.createWriteStream({
       public: true,

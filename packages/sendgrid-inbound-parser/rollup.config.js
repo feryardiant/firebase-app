@@ -1,8 +1,6 @@
 import pkg from './package.json'
 
-const external = Object.keys(
-  Object.assign({}, pkg.dependencies, pkg.devDependencies)
-)
+const external = Object.keys(Object.assign({}, pkg.dependencies, pkg.devDependencies))
 
 /**
  * Suppresses unresolved dependency

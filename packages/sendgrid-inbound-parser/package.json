@@ -10,14 +10,13 @@
     "directory": "packages/sendgrid-inbound-parser"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "typings": "index.d.ts"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "index.d.ts",
-  "typings": "index.d.ts",
   "files": [
-    "LICENSE",
     "README.md",
     "dist",
     "index.d.ts"
