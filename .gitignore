@@ -13,6 +13,7 @@ Desktop.ini
 # --------------------------
 .env.*
 .env
+.firebaserc
 dist
 node_modules
 runtime-config.json

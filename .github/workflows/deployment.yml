@@ -9,6 +9,7 @@ on:
       - .firebase/firestore.rules
       - .firebase/storage.rules
       - .github/workflows/deployment.yml
+      - firebasejson
       - '*/src/**'
       - '**/package.json'
 
@@ -64,4 +65,4 @@ jobs:
     - name: Deploy
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      run: pnpm deploy -- --token "$FIREBASE_TOKEN"
+      run: pnpm deploy -- --project ${{ env.PROJECT_ID }} --token "$FIREBASE_TOKEN"
