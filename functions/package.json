@@ -30,9 +30,11 @@
     "@google-cloud/storage": "^5.8.5",
     "@rollup/plugin-json": "^4.1.0",
     "@sendgrid/mail": "^7.4.5",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "firebase-admin": "^9.10",
-    "firebase-functions": "^3.14"
+    "firebase-functions": "^3.14",
+    "qs": "^6.10.1"
   },
   "devDependencies": {
     "@feryardiant/eslint-config-standard": "~0.0.2",

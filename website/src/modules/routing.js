@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { useAnalytics } from '../firebase'
 
 /**
@@ -6,9 +7,17 @@ import { useAnalytics } from '../firebase'
  export const install = async ({ app, isClient, router }) => {
   if (!isClient) return
 
+  const redirect = Cookies.get('redirect')
+
+  if (redirect) {
+    Cookies.remove('redirect')
+    router.push(redirect)
+    return
+  }
+
   const analytics = await useAnalytics()
 
-  app.config.errorHandler = async (error) => {
+  app.config.errorHandler = (error) => {
     analytics?.logEvent('exception', {
       description: error.toString(),
       fatal: true

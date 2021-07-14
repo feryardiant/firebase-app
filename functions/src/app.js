@@ -1,4 +1,5 @@
 import express from 'express'
+import cookieParser from 'cookie-parser'
 import { inboundParser, storeAttachment } from '@feryardiant/sendgrid-inbound-parser'
 
 /**
@@ -24,6 +25,7 @@ export function requestHandler(admin, logger) {
   const db = admin.firestore()
   const bucket = admin.storage().bucket()
 
+  app.use(cookieParser())
   app.use(useLogger(logger))
 
   app.get('/mail', (req, res) => {
@@ -40,7 +42,14 @@ export function requestHandler(admin, logger) {
       headers: req.headers
     })
 
-    return res.status(404).send('Not Found')
+    res.cookie('redirect', req.path, {
+      path: '/',
+      expires: new Date(Date.now() + 5 * 60000),
+      sameSite: true,
+      secure: req.secure
+    })
+
+    return res.redirect('/')
   })
 
   return app

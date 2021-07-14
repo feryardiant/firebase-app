@@ -40,6 +40,7 @@ importers:
       '@rollup/plugin-node-resolve': ^13.0.0
       '@sendgrid/mail': ^7.4.5
       chai: ^4.3.4
+      cookie-parser: ^1.4.5
       eslint: ~7.30
       express: ^4.17.1
       firebase-admin: ^9.10
@@ -48,6 +49,7 @@ importers:
       mocha: ^9.0.2
       prettier: ~2.3
       prettier-config-standard: ~4.0
+      qs: ^6.10.1
       rollup: ^2.52
       rollup-plugin-terser: ^7.0.2
     dependencies:
@@ -55,9 +57,11 @@ importers:
       '@google-cloud/storage': 5.8.5
       '@rollup/plugin-json': 4.1.0_rollup@2.53.1
       '@sendgrid/mail': 7.4.5
+      cookie-parser: 1.4.5
       express: 4.17.1
       firebase-admin: 9.10.0_@firebase+app-types@0.6.2
       firebase-functions: 3.14.1_firebase-admin@9.10.0
+      qs: 6.10.1
     devDependencies:
       '@feryardiant/eslint-config-standard': 0.0.2_eslint@7.30.0+prettier@2.3.2
       '@firebase/app-types': 0.6.2
@@ -104,13 +108,14 @@ importers:
       eslint-plugin-vue: ^7.13
       firebase: ^8.7
       gray-matter: ^4.0.3
+      js-cookie: ^2.2.1
       markdown-it: ^12.1.0
       markdown-it-anchor: ^8.1.0
       markdown-it-link-attributes: ^3.0.0
       nprogress: ^0.2
       postcss: ^8.3
       postcss-nested: ^5.0
-      qs: ^6.10
+      qs: ^6.10.1
       vite: ^2.4
       vite-plugin-components: ^0.12.2
       vite-plugin-md: ^0.6.7
@@ -125,6 +130,7 @@ importers:
       workbox-window: ^6.1.5
     dependencies:
       firebase: 8.7.1
+      js-cookie: 2.2.1
       nprogress: 0.2.0
       qs: 6.10.1
       vue: 3.1.4
@@ -4582,6 +4588,14 @@ packages:
       safe-buffer: 5.1.2
     dev: true
 
+  /cookie-parser/1.4.5:
+    resolution: {integrity: sha512-f13bPUj/gG/5mDr+xLmSxxDsB9DQiTIfhJS/sqjrmfAWiAN+x2O4i/XguTL9yDZ+/IFDanJ+5x7hC4CXT9Tdzw==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      cookie: 0.4.0
+      cookie-signature: 1.0.6
+    dev: false
+
   /cookie-signature/1.0.6:
     resolution: {integrity: sha1-4wOogrNCzD7oylE6eZmXNNqzriw=}
 
@@ -7283,6 +7297,10 @@ packages:
     engines: {node: '>=10.13.0 < 13 || >=13.7.0'}
     dependencies:
       '@panva/asn1.js': 1.0.0
+    dev: false
+
+  /js-cookie/2.2.1:
+    resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}
     dev: false
 
   /js-tokens/4.0.0:

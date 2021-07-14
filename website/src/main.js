@@ -1,6 +1,5 @@
 // import { createApp } from 'vue'
 import { ViteSSG } from 'vite-ssg'
-import { createWebHistory } from 'vue-router'
 
 import autoRoutes from 'pages-generated'
 import { setupLayouts } from 'layouts-generated'
@@ -25,10 +24,8 @@ export const createApp = ViteSSG(App, {
   scrollBehavior (from, to, position) {
     return position || { top: 0 }
   }
-}, (ctx) => {
-  return Promise.all(
-    Object.values(
-      import.meta.globEager('./modules/*.js')
-    ).map(mod => mod.install?.(ctx))
-  )
-})
+}, (ctx) => Promise.all(
+  Object.values(
+    import.meta.globEager('./modules/*.js')
+  ).map(mod => mod.install?.(ctx))
+))

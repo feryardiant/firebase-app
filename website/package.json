@@ -26,8 +26,9 @@
   },
   "dependencies": {
     "firebase": "^8.7",
+    "js-cookie": "^2.2.1",
     "nprogress": "^0.2",
-    "qs": "^6.10",
+    "qs": "^6.10.1",
     "vue": "^3.0",
     "vue-router": "^4.0"
   },
