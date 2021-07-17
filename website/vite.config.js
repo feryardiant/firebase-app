@@ -1,7 +1,6 @@
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
 import { loadEnv } from 'vite'
-import dotenv from 'dotenv'
 import vue from '@vitejs/plugin-vue'
 import pages from 'vite-plugin-pages'
 import layouts from 'vite-plugin-vue-layouts'
@@ -14,6 +13,7 @@ import mdIt from 'markdown-it'
 import mdAnchor from 'markdown-it-anchor'
 import mdLinkAttr from 'markdown-it-link-attributes'
 
+import { loadEnvFile, ensureEnv } from '../util'
 import { author, name, description, version } from '../package.json'
 
 /**
@@ -204,41 +204,10 @@ export default ({ mode, command }) => {
  */
 const resolveEnv = (mode, envDir) => {
   const env = loadEnv(mode, envDir)
-  /**
-   * @param {string} key
-   * @param {any?} defaults
-   * @param {Function?} cb
-   * @returns {string}
-   */
-  const getEnv = (key, defaults = '', cb) => {
-    const ret = env[key] || process.env[key] || defaults
-
-    return typeof cb === 'function' ? cb(ret) : ret
-  }
 
   if (mode !== 'production') {
-    const { parsed } = dotenv.config({ path: envDir })
-    for (const [key, val] of Object.entries(parsed)) {
-      env[key] = env[key] || val
-    }
+    loadEnvFile(envDir, env)
   }
 
-  const fbaseConfEnv = getEnv('FIREBASE_CONFIG', '{}', JSON.parse)
-  const fbaseConf = {
-    appId: getEnv('FIREBASE_APPID'),
-    apiKey: getEnv('FIREBASE_APIKEY'),
-    messagingSenderId: getEnv('FIREBASE_MEASUREMENTID'),
-    measurementId: getEnv('FIREBASE_MESSAGINGSENDERID'),
-    projectId: getEnv('PROJECT_ID'),
-  }
-
-  for (const [key, val] of Object.entries(fbaseConf)) {
-    fbaseConfEnv[key] = fbaseConfEnv[key] || val
-  }
-
-  env.APP_NAME = getEnv('APP_NAME', fbaseConf.projectId)
-  env.BASE_URL = getEnv('BASE_URL', '/')
-  env.FIREBASE_CONFIG = JSON.stringify(fbaseConfEnv)
-
-  return env
+  return ensureEnv(env)
 }
