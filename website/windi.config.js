@@ -1,7 +1,7 @@
-const { defineConfig } = require('vite-plugin-windicss')
-const defaultTheme = require('windicss/defaultTheme')
+import { defineConfig } from 'vite-plugin-windicss'
+import { fontFamily } from 'windicss/defaultTheme'
 
-module.exports = defineConfig({
+export default defineConfig({
   darkMode: 'class',
   variants: {
     extends: {
@@ -32,8 +32,8 @@ module.exports = defineConfig({
       },
     },
     fontFamily: {
-      sans: ['Merriweather Sans', ...defaultTheme.fontFamily.sans],
-      mono: ['Fira Code', defaultTheme.fontFamily.mono],
+      sans: ['Merriweather Sans', ...fontFamily.sans],
+      mono: ['Fira Code', fontFamily.mono],
     },
     screens: {
       'sm': '640px',
