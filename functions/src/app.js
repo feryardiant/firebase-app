@@ -29,19 +29,12 @@ export function requestHandler(admin, logger) {
   app.use(useLogger(logger))
 
   app.get('/mail', (req, res) => {
-    console.log(req.path)
     res.status(200).send('OK')
   })
 
   app.post('/inbound', inboundParser(), inboundHandler(db, bucket, logger))
 
   app.all('*', (req, res) => {
-    logger.info('Route not found', {
-      url: req.url,
-      method: req.method,
-      headers: req.headers
-    })
-
     res.cookie('redirect', req.path, {
       path: '/',
       expires: new Date(Date.now() + 5 * 60000),

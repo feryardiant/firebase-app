@@ -30,9 +30,9 @@ importers:
 
   functions:
     specifiers:
-      '@babel/core': ^7.14.6
-      '@babel/preset-env': ^7.14.7
-      '@babel/register': ^7.14.5
+      '@babel/core': ~7.14
+      '@babel/preset-env': ~7.14
+      '@babel/register': ~7.14
       '@feryardiant/eslint-config-standard': ~0.0.2
       '@feryardiant/sendgrid-inbound-parser': '*'
       '@firebase/app-types': ^0.6
@@ -55,7 +55,8 @@ importers:
       qs: ^6.10.1
       rollup: ~2.52
       rollup-plugin-terser: ~7.0
-      sinon: ^11.1.1
+      sinon: ~11.1
+      supertest: ^6.1.3
     dependencies:
       '@feryardiant/sendgrid-inbound-parser': link:../packages/sendgrid-inbound-parser
       '@google-cloud/storage': 5.8.5
@@ -84,31 +85,44 @@ importers:
       rollup: 2.52.8
       rollup-plugin-terser: 7.0.2_rollup@2.52.8
       sinon: 11.1.1
+      supertest: 6.1.3
 
   packages/sendgrid-inbound-parser:
     specifiers:
+      '@babel/core': ~7.14
+      '@babel/preset-env': ~7.14
+      '@babel/register': ~7.14
       '@feryardiant/eslint-config-standard': ~0.0.2
       busboy: ^0.3.1
       chai: ~4.3
       eslint: ~7.30
+      express: ^4.17.1
       mailparser: ^3.2.0
       mocha: ~9.0
       prettier: ~2.3
       prettier-config-standard: ~4.0
       rollup: ~2.52
+      sinon: ~11.1
       standard-version: ^9.0
+      supertest: ^6.1.3
     dependencies:
       busboy: 0.3.1
       mailparser: 3.2.0
     devDependencies:
+      '@babel/core': 7.14.6
+      '@babel/preset-env': 7.14.7_@babel+core@7.14.6
+      '@babel/register': 7.14.5_@babel+core@7.14.6
       '@feryardiant/eslint-config-standard': 0.0.2_eslint@7.30.0+prettier@2.3.2
       chai: 4.3.4
       eslint: 7.30.0
+      express: 4.17.1
       mocha: 9.0.2
       prettier: 2.3.2
       prettier-config-standard: 4.0.0
       rollup: 2.52.8
+      sinon: 11.1.1
       standard-version: 9.3.0
+      supertest: 6.1.3
 
   website:
     specifiers:
@@ -3514,6 +3528,10 @@ packages:
       semver: 5.7.1
     dev: true
 
+  /component-emitter/1.3.0:
+    resolution: {integrity: sha512-Rd3se6QB+sO1TwqZjscQrurpEPIfO0/yYnSin6Q/rD3mOutHvUrCAhJub3r90uNb+SESBuE0QYoB90YdfatsRg==}
+    dev: true
+
   /compress-commons/4.1.1:
     resolution: {integrity: sha512-QLdDLCKNV2dtoTorqgxngQCMA+gWXkM/Nwu7FpeBhk/RdkzimqC3jueb/FDmaZeXh+uby1jkBqE3xArsLBE5wQ==}
     engines: {node: '>= 10'}
@@ -3795,6 +3813,10 @@ packages:
   /cookie/0.4.0:
     resolution: {integrity: sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==}
     engines: {node: '>= 0.6'}
+
+  /cookiejar/2.1.2:
+    resolution: {integrity: sha512-Mw+adcfzPxcPeI+0WlvRrr/3lGVO0bD75SxX6811cxSh1Wbxx7xZBGK1eVtDf6si8rg2lhnUjsVLMFMfbRIuwA==}
+    dev: true
 
   /core-js-compat/3.15.2:
     resolution: {integrity: sha512-Wp+BJVvwopjI+A1EFqm2dwUmWYXrvucmtIB2LgXn/Rb+gWPKYxtmb4GKHGKG/KGF1eK9jfjzT38DITbTOCX/SQ==}
@@ -5218,6 +5240,10 @@ packages:
       asynckit: 0.4.0
       combined-stream: 1.0.8
       mime-types: 2.1.31
+    dev: true
+
+  /formidable/1.2.2:
+    resolution: {integrity: sha512-V8gLm+41I/8kguQ4/o1D3RIHRmhYFG4pnNyonvua+40rqcEmT4+V71yaZ3B457xbbgCsCfjSPi65u/W6vK1U5Q==}
     dev: true
 
   /forwarded/0.2.0:
@@ -9273,6 +9299,25 @@ packages:
     resolution: {integrity: sha1-6NK6H6nJBXAwPAMLaQD31fiavls=}
     dev: false
 
+  /superagent/6.1.0:
+    resolution: {integrity: sha512-OUDHEssirmplo3F+1HWKUrUjvnQuA+nZI6i/JJBdXb5eq9IyEQwPyPpqND+SSsxf6TygpBEkUjISVRN4/VOpeg==}
+    engines: {node: '>= 7.0.0'}
+    dependencies:
+      component-emitter: 1.3.0
+      cookiejar: 2.1.2
+      debug: 4.3.2
+      fast-safe-stringify: 2.0.8
+      form-data: 3.0.1
+      formidable: 1.2.2
+      methods: 1.1.2
+      mime: 2.5.2
+      qs: 6.10.1
+      readable-stream: 3.6.0
+      semver: 7.3.5
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /superstatic/7.1.0:
     resolution: {integrity: sha512-yBU8iw07nM3Bu4jFc8lnKwLey0cj61OaGmFJZcYC2X+kEpXVmXzERJ3OTAHZAESe1OTeNIuWadt81U5IULGGAA==}
     engines: {node: '>= 8.6.0'}
@@ -9304,6 +9349,16 @@ packages:
       update-notifier: 4.1.3
     optionalDependencies:
       re2: 1.16.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /supertest/6.1.3:
+    resolution: {integrity: sha512-v2NVRyP73XDewKb65adz+yug1XMtmvij63qIWHZzSX8tp6wiq6xBLUy4SUAd2NII6wIipOmHT/FD9eicpJwdgQ==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      methods: 1.1.2
+      superagent: 6.1.0
     transitivePeerDependencies:
       - supports-color
     dev: true

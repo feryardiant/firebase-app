@@ -1,8 +1,9 @@
-import { assert } from 'chai'
-import { resolve } from 'path'
+import { expect } from 'chai'
 import { stub } from 'sinon'
+import supertest from 'supertest'
 import admin from 'firebase-admin'
 import testInit from 'firebase-functions-test'
+import { resolve } from 'path'
 
 import { loadEnv } from '../../util'
 
@@ -12,33 +13,36 @@ const test = testInit(
 )
 
 describe('the func', () => {
-  let func, adminStub
+  let apiFunc, adminStub
 
-  before((done) => {
-    adminStub = stub(admin, 'initializeApp')
+  before(async () => {
+    adminStub = stub(admin, 'initializeApp').returns({
+      firestore: stub(admin, 'firestore'),
+      storage: stub(admin, 'storage').returns({
+        bucket: stub()
+      }),
+    })
 
-    return import('../src').then((fn) => {
-      func = fn
-    }).then(done).catch(done)
+    const { func } = await import('../src')
+
+    /** @type {import('supertest').Test} */
+    apiFunc = supertest(func)
   })
 
   after(() => {
+    adminStub.restore()
     test.cleanup()
   })
 
-  it('should redirect', (done) => {
-    const wrapped = test.wrap(func)
-    const req = {
-      path: '/foo'
-    }
+  it('should be ok', async () => {
+    const res = await apiFunc.get('/mail')
 
-    const res = {
-      redirect(code, url) {
-        assert.equal(code, 302)
-        done()
-      }
-    }
+    expect(res.status).equal(200)
+  })
 
-    return func(req, res).catch(done)
+  it('should redirect', async () => {
+    const res = await apiFunc.get('/foo')
+
+    expect(res.status).equal(302)
   })
 })
