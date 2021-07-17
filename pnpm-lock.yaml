@@ -13,7 +13,7 @@ importers:
       husky: ^7.0.1
       lint-staged: ^11.0.1
       npm-run-all: ^4.1.5
-      pnpm: ^6.10.0
+      pnpm: ~6.10.0
       prettier: ~2.3.2
     devDependencies:
       '@commitlint/cli': 12.1.4
@@ -32,30 +32,30 @@ importers:
     specifiers:
       '@feryardiant/eslint-config-standard': ~0.0.2
       '@feryardiant/sendgrid-inbound-parser': '*'
-      '@firebase/app-types': ^0.6.2
-      '@firebase/util': ^1.1.0
+      '@firebase/app-types': ^0.6
+      '@firebase/util': ^1.1
       '@google-cloud/storage': ^5.8.5
-      '@rollup/plugin-commonjs': ^19.0.0
+      '@rollup/plugin-commonjs': ~19.0
       '@rollup/plugin-json': ^4.1.0
-      '@rollup/plugin-node-resolve': ^13.0.0
+      '@rollup/plugin-node-resolve': ~13.0
       '@sendgrid/mail': ^7.4.5
-      chai: ^4.3.4
+      chai: ~4.3
       cookie-parser: ^1.4.5
       eslint: ~7.30
       express: ^4.17.1
       firebase-admin: ^9.10
       firebase-functions: ^3.14
-      firebase-functions-test: ^0.3.0
-      mocha: ^9.0.2
+      firebase-functions-test: ~0.3
+      mocha: ~9.0
       prettier: ~2.3
       prettier-config-standard: ~4.0
       qs: ^6.10.1
-      rollup: ^2.52
-      rollup-plugin-terser: ^7.0.2
+      rollup: ~2.52
+      rollup-plugin-terser: ~7.0
     dependencies:
       '@feryardiant/sendgrid-inbound-parser': link:../packages/sendgrid-inbound-parser
       '@google-cloud/storage': 5.8.5
-      '@rollup/plugin-json': 4.1.0_rollup@2.53.1
+      '@rollup/plugin-json': 4.1.0_rollup@2.52.8
       '@sendgrid/mail': 7.4.5
       cookie-parser: 1.4.5
       express: 4.17.1
@@ -66,36 +66,40 @@ importers:
       '@feryardiant/eslint-config-standard': 0.0.2_eslint@7.30.0+prettier@2.3.2
       '@firebase/app-types': 0.6.2
       '@firebase/util': 1.1.0
-      '@rollup/plugin-commonjs': 19.0.0_rollup@2.53.1
-      '@rollup/plugin-node-resolve': 13.0.0_rollup@2.53.1
+      '@rollup/plugin-commonjs': 19.0.0_rollup@2.52.8
+      '@rollup/plugin-node-resolve': 13.0.0_rollup@2.52.8
       chai: 4.3.4
       eslint: 7.30.0
       firebase-functions-test: 0.3.0_fbedb3658730adc9e4bf500a5a5b021e
       mocha: 9.0.2
       prettier: 2.3.2
       prettier-config-standard: 4.0.0
-      rollup: 2.53.1
-      rollup-plugin-terser: 7.0.2_rollup@2.53.1
+      rollup: 2.52.8
+      rollup-plugin-terser: 7.0.2_rollup@2.52.8
 
   packages/sendgrid-inbound-parser:
     specifiers:
       '@feryardiant/eslint-config-standard': ~0.0.2
       busboy: ^0.3.1
+      chai: ~4.3
       eslint: ~7.30
       mailparser: ^3.2.0
+      mocha: ~9.0
       prettier: ~2.3
       prettier-config-standard: ~4.0
-      rollup: ^2.52
+      rollup: ~2.52
       standard-version: ^9.0
     dependencies:
       busboy: 0.3.1
       mailparser: 3.2.0
     devDependencies:
       '@feryardiant/eslint-config-standard': 0.0.2_eslint@7.30.0+prettier@2.3.2
+      chai: 4.3.4
       eslint: 7.30.0
+      mocha: 9.0.2
       prettier: 2.3.2
       prettier-config-standard: 4.0.0
-      rollup: 2.53.1
+      rollup: 2.52.8
       standard-version: 9.3.0
 
   website:
@@ -143,7 +147,7 @@ importers:
       '@vueuse/core': 5.1.3_vue@3.1.4
       '@vueuse/head': 0.5.1_vue@3.1.4
       dotenv: 10.0.0
-      eslint-plugin-vue: 7.13.0
+      eslint-plugin-vue: 7.13.0_eslint@7.30.0
       gray-matter: 4.0.3
       markdown-it: 12.1.0
       markdown-it-anchor: 8.1.0_markdown-it@12.1.0
@@ -2048,29 +2052,29 @@ packages:
       rollup: 2.53.1
     dev: true
 
-  /@rollup/plugin-commonjs/19.0.0_rollup@2.53.1:
+  /@rollup/plugin-commonjs/19.0.0_rollup@2.52.8:
     resolution: {integrity: sha512-adTpD6ATGbehdaQoZQ6ipDFhdjqsTgpOAhFiPwl+dzre4pPshsecptDPyEFb61JMJ1+mGljktaC4jI8ARMSNyw==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
       rollup: ^2.38.3
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.53.1
+      '@rollup/pluginutils': 3.1.0_rollup@2.52.8
       commondir: 1.0.1
       estree-walker: 2.0.2
       glob: 7.1.7
       is-reference: 1.2.1
       magic-string: 0.25.7
       resolve: 1.20.0
-      rollup: 2.53.1
+      rollup: 2.52.8
     dev: true
 
-  /@rollup/plugin-json/4.1.0_rollup@2.53.1:
+  /@rollup/plugin-json/4.1.0_rollup@2.52.8:
     resolution: {integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==}
     peerDependencies:
       rollup: ^1.20.0 || ^2.0.0
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.53.1
-      rollup: 2.53.1
+      '@rollup/pluginutils': 3.1.0_rollup@2.52.8
+      rollup: 2.52.8
     dev: false
 
   /@rollup/plugin-node-resolve/11.2.1_rollup@2.53.1:
@@ -2088,19 +2092,19 @@ packages:
       rollup: 2.53.1
     dev: true
 
-  /@rollup/plugin-node-resolve/13.0.0_rollup@2.53.1:
+  /@rollup/plugin-node-resolve/13.0.0_rollup@2.52.8:
     resolution: {integrity: sha512-41X411HJ3oikIDivT5OKe9EZ6ud6DXudtfNrGbC4nniaxx2esiWjkLOzgnZsWq1IM8YIeL2rzRGLZLBjlhnZtQ==}
     engines: {node: '>= 10.0.0'}
     peerDependencies:
       rollup: ^2.42.0
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.53.1
+      '@rollup/pluginutils': 3.1.0_rollup@2.52.8
       '@types/resolve': 1.17.1
       builtin-modules: 3.2.0
       deepmerge: 4.2.2
       is-module: 1.0.0
       resolve: 1.20.0
-      rollup: 2.53.1
+      rollup: 2.52.8
     dev: true
 
   /@rollup/plugin-replace/2.4.2_rollup@2.53.1:
@@ -2113,6 +2117,17 @@ packages:
       rollup: 2.53.1
     dev: true
 
+  /@rollup/pluginutils/3.1.0_rollup@2.52.8:
+    resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      '@types/estree': 0.0.39
+      estree-walker: 1.0.1
+      picomatch: 2.3.0
+      rollup: 2.52.8
+
   /@rollup/pluginutils/3.1.0_rollup@2.53.1:
     resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
     engines: {node: '>= 8.0.0'}
@@ -2123,6 +2138,7 @@ packages:
       estree-walker: 1.0.1
       picomatch: 2.3.0
       rollup: 2.53.1
+    dev: true
 
   /@sendgrid/client/7.4.3:
     resolution: {integrity: sha512-tTaHx893w5iqG0sVtUnMyRchuwYF95k4UOkmov1MouMIeMUbNvbalITo7cG7YSXUTY9rT2t4eBY6HcEBCVeqfg==}
@@ -2280,6 +2296,7 @@ packages:
 
   /@types/node/16.3.1:
     resolution: {integrity: sha512-N87VuQi7HEeRJkhzovao/JviiqKjDKMVKxKMfUvSKw+MbkbW8R0nA3fi/MQhhlxV2fQ+2ReM+/Nt4efdrJx3zA==}
+    dev: false
 
   /@types/node/16.3.2:
     resolution: {integrity: sha512-jJs9ErFLP403I+hMLGnqDRWT0RYKSvArxuBVh2veudHV7ifEC1WAmjJADacZ7mRbA2nWgHtn8xyECMAot0SkAw==}
@@ -2303,7 +2320,7 @@ packages:
   /@types/resolve/1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 16.3.1
+      '@types/node': 16.3.2
     dev: true
 
   /@types/serve-static/1.13.10:
@@ -3343,6 +3360,7 @@ packages:
     resolution: {integrity: sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=}
     engines: {node: '>=0.10.0'}
     dev: true
+    optional: true
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -4516,16 +4534,17 @@ packages:
       eslint: 7.30.0
     dev: true
 
-  /eslint-plugin-vue/7.13.0:
+  /eslint-plugin-vue/7.13.0_eslint@7.30.0:
     resolution: {integrity: sha512-u0+jL8h2MshRuMTCLslktxRsPTjlENNcNufhgHu01N982DmHVdeFniyMPoVLLRjACQOwdz3FdlsgYGBMBG+AKg==}
     engines: {node: '>=8.10'}
     peerDependencies:
       eslint: ^6.2.0 || ^7.0.0
     dependencies:
+      eslint: 7.30.0
       eslint-utils: 2.1.0
       natural-compare: 1.4.0
       semver: 7.3.5
-      vue-eslint-parser: 7.8.0
+      vue-eslint-parser: 7.8.0_eslint@7.30.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6038,6 +6057,7 @@ packages:
     dependencies:
       number-is-nan: 1.0.1
     dev: true
+    optional: true
 
   /is-fullwidth-code-point/2.0.0:
     resolution: {integrity: sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=}
@@ -6263,7 +6283,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 16.3.1
+      '@types/node': 16.3.2
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
@@ -7487,6 +7507,7 @@ packages:
     resolution: {integrity: sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=}
     engines: {node: '>=0.10.0'}
     dev: true
+    optional: true
 
   /nwsapi/2.2.0:
     resolution: {integrity: sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==}
@@ -8514,6 +8535,18 @@ packages:
       glob: 7.1.7
     dev: true
 
+  /rollup-plugin-terser/7.0.2_rollup@2.52.8:
+    resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
+    peerDependencies:
+      rollup: ^2.0.0
+    dependencies:
+      '@babel/code-frame': 7.14.5
+      jest-worker: 26.6.2
+      rollup: 2.52.8
+      serialize-javascript: 4.0.0
+      terser: 5.7.1
+    dev: true
+
   /rollup-plugin-terser/7.0.2_rollup@2.53.1:
     resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
     peerDependencies:
@@ -8524,6 +8557,14 @@ packages:
       rollup: 2.53.1
       serialize-javascript: 4.0.0
       terser: 5.7.1
+    dev: true
+
+  /rollup/2.52.8:
+    resolution: {integrity: sha512-IjAB0C6KK5/lvqzJWAzsvOik+jV5Bt907QdkQ/gDP4j+R9KYNI1tjqdxiPitGPVrWC21Mf/ucXgowUjN/VemaQ==}
+    engines: {node: '>=10.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /rollup/2.53.1:
@@ -8942,6 +8983,7 @@ packages:
       is-fullwidth-code-point: 1.0.0
       strip-ansi: 3.0.1
     dev: true
+    optional: true
 
   /string-width/2.1.1:
     resolution: {integrity: sha512-nOqH59deCq9SRHlxq1Aw85Jnt4w6KvLKqWVik6oA9ZklXLNIOlqg4F2yrT1MVaTjAqvVwdfeZ7w7aCvJD7ugkw==}
@@ -9862,13 +9904,14 @@ packages:
       vue: 3.1.4
     dev: true
 
-  /vue-eslint-parser/7.8.0:
+  /vue-eslint-parser/7.8.0_eslint@7.30.0:
     resolution: {integrity: sha512-ehmmrLZNYLUoKayvVW8l8HyPQIfuYZHiJoQLRP3dapDlTU7bGs4tqIKVGdAEpMuXS/b4R/PImCt7Tkj4UhX1SQ==}
     engines: {node: '>=8.10'}
     peerDependencies:
       eslint: '>=5.0.0'
     dependencies:
       debug: 4.3.2
+      eslint: 7.30.0
       eslint-scope: 5.1.1
       eslint-visitor-keys: 1.3.0
       espree: 6.2.1
@@ -10022,7 +10065,7 @@ packages:
   /wide-align/1.1.3:
     resolution: {integrity: sha512-QGkOQc8XL6Bt5PwnsExKBPuMKBxnGxWWW3fU55Xt4feHozMUhdUMaBCk290qpm/wG5u/RSKzwdAC4i51YigihA==}
     dependencies:
-      string-width: 1.0.2
+      string-width: 2.1.1
     dev: true
 
   /widest-line/3.1.0:

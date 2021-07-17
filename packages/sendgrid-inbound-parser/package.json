@@ -37,10 +37,12 @@
   },
   "devDependencies": {
     "@feryardiant/eslint-config-standard": "~0.0.2",
+    "chai": "~4.3",
     "eslint": "~7.30",
+    "mocha": "~9.0",
     "prettier": "~2.3",
     "prettier-config-standard": "~4.0",
-    "rollup": "^2.52",
+    "rollup": "~2.52",
     "standard-version": "^9.0"
   },
   "eslintConfig": {

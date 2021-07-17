@@ -31,19 +31,19 @@
   },
   "devDependencies": {
     "@feryardiant/eslint-config-standard": "~0.0.2",
-    "@firebase/app-types": "^0.6.2",
-    "@firebase/util": "^1.1.0",
-    "@rollup/plugin-commonjs": "^19.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
-    "chai": "^4.3.4",
+    "@firebase/app-types": "^0.6",
+    "@firebase/util": "^1.1",
+    "@rollup/plugin-commonjs": "~19.0",
+    "@rollup/plugin-json": "~4.1",
+    "@rollup/plugin-node-resolve": "~13.0",
+    "chai": "~4.3",
     "eslint": "~7.30",
-    "firebase-functions-test": "^0.3.0",
-    "mocha": "^9.0.2",
+    "firebase-functions-test": "~0.3",
+    "mocha": "~9.0",
     "prettier": "~2.3",
     "prettier-config-standard": "~4.0",
-    "rollup": "^2.52",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup": "~2.52",
+    "rollup-plugin-terser": "~7.0"
   },
   "eslintConfig": {
     "extends": "@feryardiant/standard"
