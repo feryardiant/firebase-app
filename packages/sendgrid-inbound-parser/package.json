@@ -26,6 +26,7 @@
     "lint": "eslint *.js",
     "lint:fix": "eslint --fix *.js",
     "release": "standard-version",
+    "test": "mocha",
     "watch": "rollup -c --watch"
   },
   "engines": {
@@ -36,6 +37,9 @@
     "mailparser": "^3.2.0"
   },
   "devDependencies": {
+    "@babel/core": "~7.14",
+    "@babel/preset-env": "~7.14",
+    "@babel/register": "~7.14",
     "@feryardiant/eslint-config-standard": "~0.0.2",
     "chai": "~4.3",
     "eslint": "~7.30",
@@ -43,10 +47,32 @@
     "prettier": "~2.3",
     "prettier-config-standard": "~4.0",
     "rollup": "~2.52",
+    "sinon": "~11.1",
     "standard-version": "^9.0"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
   "eslintConfig": {
-    "extends": "@feryardiant/standard"
+    "extends": "@feryardiant/standard",
+    "overrides": [
+      {
+        "files": ["*.spec.js"],
+        "env": {
+          "mocha": true
+        }
+      }
+    ]
+  },
+  "mocha": {
+    "require": "@babel/register",
+    "reporter": "spec",
+    "spec": [
+      "index.spec.js"
+    ],
+    "ui": "bdd"
   },
   "prettier": "prettier-config-standard",
   "standard-version": {
