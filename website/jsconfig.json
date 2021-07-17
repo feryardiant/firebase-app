@@ -3,7 +3,7 @@
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "baseUrl": ".",
-    "lib": ["DOM", "ESNext"],
+    "lib": ["DOM", "ESNext", "webworker"],
     "types": [
       "vite/client",
       "vite-plugin-pages/client",
