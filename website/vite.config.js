@@ -206,10 +206,14 @@ const resolveEnv = (mode, envDir) => {
   const env = loadEnv(mode, envDir)
   /**
    * @param {string} key
+   * @param {any?} defaults
+   * @param {Function?} cb
    * @returns {string}
    */
-  const getEnv = (key, defaults = '') => {
-    return env[key] || process.env[key] || defaults
+  const getEnv = (key, defaults = '', cb) => {
+    const ret = env[key] || process.env[key] || defaults
+
+    return typeof cb === 'function' ? cb(ret) : ret
   }
 
   if (mode !== 'production') {
@@ -219,7 +223,7 @@ const resolveEnv = (mode, envDir) => {
     }
   }
 
-  const fbaseConfEnv = JSON.parse(getEnv('FIREBASE_CONFIG', '{}'))
+  const fbaseConfEnv = getEnv('FIREBASE_CONFIG', '{}', JSON.parse)
   const fbaseConf = {
     appId: getEnv('FIREBASE_APPID'),
     apiKey: getEnv('FIREBASE_APIKEY'),
