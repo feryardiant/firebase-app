@@ -3,9 +3,9 @@
     <router-view :key="fullPath" />
   </main>
 
-  <Toast :show="showToast" @close="close">
+  <toast :show="showToast" @close="close">
     <span>Reload</span>
-  </Toast>
+  </toast>
 </template>
 
 <script>
