@@ -64,7 +64,6 @@
       "plugin:vue/vue3-recommended"
     ],
     "parser": "vue-eslint-parser",
-    "root": true,
     "ignorePatterns": [
       "dist/",
       "node_modules/",
