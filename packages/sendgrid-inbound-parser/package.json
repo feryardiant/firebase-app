@@ -10,16 +10,21 @@
     "directory": "packages/sendgrid-inbound-parser"
   },
   "publishConfig": {
-    "access": "public",
-    "typings": "index.d.ts"
+    "access": "public"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
-  "types": "index.d.ts",
+  "types": "types.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
     "README.md",
     "dist",
-    "index.d.ts"
+    "types.d.ts"
   ],
   "scripts": {
     "build": "rollup -c",
@@ -54,7 +59,14 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "esmodules": true
+          }
+        }
+      ]
     ]
   },
   "eslintConfig": {
@@ -71,7 +83,9 @@
     ]
   },
   "mocha": {
-    "require": "@babel/register",
+    "require": [
+      "@babel/register"
+    ],
     "reporter": "spec",
     "spec": [
       "index.spec.js"

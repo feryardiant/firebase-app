@@ -3,8 +3,8 @@ import { extname } from 'path'
 import { simpleParser } from 'mailparser'
 
 /**
- * @param {import('.').IncomingMail} envelope
- * @returns {import('.').Envelope}
+ * @param {import('./types').IncomingMail} envelope
+ * @returns {import('./types').Envelope}
  */
 function normalizeMail(envelope) {
   const mail = {
@@ -98,7 +98,7 @@ const parseBody = (req) =>
   })
 
 /**
- * @param {import('.').AttachmentFile} attachment
+ * @param {import('./types').AttachmentFile} attachment
  * @param {import('@google-cloud/storage').Bucket} bucket
  * @returns {Promise<import('@google-cloud/storage').File>}
  */

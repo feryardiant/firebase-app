@@ -15,7 +15,6 @@
   },
   "main": "dist/index.cjs",
   "types": "types.d.ts",
-  "typings": "types.d.ts",
   "engines": {
     "node": "14"
   },

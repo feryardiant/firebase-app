@@ -6,13 +6,14 @@ import testInit from 'firebase-functions-test'
 import { resolve } from 'path'
 
 import { loadEnv } from '../../util'
+import pkg from '../package.json'
 
 const env = loadEnv(resolve(__dirname, '../../.env'))
 const test = testInit(
   JSON.parse(env.FIREBASE_CONFIG)
 )
 
-describe('the func', () => {
+describe(pkg.name, () => {
   let apiFunc, adminStub
 
   before(async () => {
@@ -34,15 +35,17 @@ describe('the func', () => {
     test.cleanup()
   })
 
-  it('should be ok', async () => {
-    const res = await apiFunc.get('/mail')
+  describe('func', () => {
+    it('should be ok', async () => {
+      const res = await apiFunc.get('/api')
 
-    expect(res.status).equal(200)
-  })
+      expect(res.status).equal(200)
+    })
 
-  it('should redirect', async () => {
-    const res = await apiFunc.get('/foo')
+    it('should redirect', async () => {
+      const res = await apiFunc.get('/foo')
 
-    expect(res.status).equal(302)
+      expect(res.status).equal(302)
+    })
   })
 })

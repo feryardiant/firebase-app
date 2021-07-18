@@ -28,8 +28,12 @@ export function requestHandler(admin, logger) {
   app.use(cookieParser())
   app.use(useLogger(logger))
 
-  app.get('/mail', (req, res) => {
-    res.status(200).send('OK')
+  app.get('/api', (req, res) => {
+    const body = {
+      ok: true
+    }
+
+    res.status(200).send(JSON.stringify(body))
   })
 
   app.post('/inbound', inboundParser(), inboundHandler(db, bucket, logger))
@@ -42,7 +46,7 @@ export function requestHandler(admin, logger) {
       secure: req.secure
     })
 
-    return res.redirect('/')
+    res.redirect('/')
   })
 
   return app

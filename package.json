@@ -14,7 +14,8 @@
     "website"
   ],
   "engines": {
-    "node": "14.x"
+    "node": "14.x",
+    "pnpm": "^6.10.0"
   },
   "scripts": {
     "build": "pnpm -r build",
@@ -34,13 +35,12 @@
     "@commitlint/config-conventional": "^12.1.4",
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
-    "eslint": "~7.30.0",
+    "eslint": "^7.31.0",
     "firebase-tools": "^9.16.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.0.1",
     "npm-run-all": "^4.1.5",
-    "pnpm": "~6.10.0",
-    "prettier": "~2.3.2"
+    "prettier": "^2.3.2"
   },
   "commitlint": {
     "extends": [

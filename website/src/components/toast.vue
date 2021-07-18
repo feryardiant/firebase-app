@@ -1,5 +1,5 @@
 <template>
-  <div v-if="opened" role="alert" class="toast rounded fixed left-4 bottom-4 px-4 py-3 bg-white border border-gray-300">
+  <div v-if="shown" role="alert" class="toast rounded fixed left-4 bottom-4 px-4 py-3 bg-white border border-gray-300">
     <div class="message">
       <slot />
     </div>
@@ -8,25 +8,23 @@
 </template>
 
 <script>
-import { toRef } from 'vue'
+// import { defineComponent } from 'vue'
 
 export default {
   inheritAttrs: false,
 
   props: {
-    open: {
+    show: {
       type: Boolean,
-      default: false
+      default: () => true,
     }
   },
 
   emits: ['close'],
 
   setup (props) {
-    const opened = toRef(props.open)
-
     return {
-      opened
+      shown: props.show
     }
   }
 }
