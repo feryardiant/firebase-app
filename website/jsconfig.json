@@ -1,16 +1,24 @@
 {
   "extends": "../jsconfig.json",
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["dist", "node_modules", "node_modules/*", "tests"],
+  "include": [
+    "./src/**/*"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
-    "lib": ["DOM", "ESNext", "webworker"],
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    // "lib": ["esnext", "dom", "dom.iterable", "webworker"],
+    "lib": ["dom", "es6"],
     "types": [
+      "./types",
       "vite/client",
       "vite-plugin-pages/client",
-      "vite-plugin-vue-layouts/client"
+      "vite-plugin-pwa/client",
+      // "vite-plugin-vue-layouts/client"
     ],
     "paths": {
-      "@/*": ["src/*"]
+      "/@/*": ["src/*"]
     }
   }
 }
