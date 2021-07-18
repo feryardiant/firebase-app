@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import pages from 'vite-plugin-pages'
 import layouts from 'vite-plugin-vue-layouts'
 import windiCSS from 'vite-plugin-windicss'
-import components from 'vite-plugin-components'
+import components, { VueUseComponentsResolver } from 'vite-plugin-components'
 import markdown from 'vite-plugin-md'
 import { VitePWA as pwa } from 'vite-plugin-pwa'
 import matter from 'gray-matter'
@@ -152,10 +152,14 @@ export default ({ mode, command }) => {
       // https://github.com/antfu/vite-plugin-components
       components({
         extensions: ['vue', 'md'],
+        globalComponentsDeclaration: true,
         customLoaderMatcher: path => path.endsWith('.md'),
-        // customComponentResolvers: ViteIconsResolver({
-        //   componentPrefix: '',
-        // }),
+        customComponentResolvers: [
+          VueUseComponentsResolver(),
+          // ViteIconsResolver({
+          //   componentPrefix: '',
+          // }),
+        ]
       }),
 
       // https://github.com/antfu/vite-plugin-windicss
