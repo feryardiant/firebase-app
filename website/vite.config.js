@@ -55,7 +55,7 @@ export default ({ mode, command }) => {
       // https://vitejs.dev/config/#server-proxy
       proxy: {
         '/__': 'http://localhost:5000',
-        '/app': {
+        '/api': {
           target: 'http://localhost:5001',
           rewrite: path => `/fery-wardiyanto/us-central1/${path}`
         }
