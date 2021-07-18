@@ -1,5 +1,5 @@
 import { Request, RequestHandler } from 'express'
-import { ParsedMail, EmailAddress, Attachment } from 'mailparser'
+import { ParsedMail, EmailAddress, Attachment, Headers, HeaderLines } from 'mailparser'
 import { File, Bucket } from '@google-cloud/storage'
 
 /**
@@ -7,12 +7,12 @@ import { File, Bucket } from '@google-cloud/storage'
  * @param {Bucket} bucket
  * @return {Promise<File>}
  */
-export declare function storeAttachment(attachment: AttachmentFile, bucket: Bucket): Promise<File>;
+export function storeAttachment(attachment: AttachmentFile, bucket: Bucket): Promise<File>;
 
 /**
  * @return {RequestHandler}
  */
-export declare function inboundParser(): RequestHandler
+export function inboundParser(): RequestHandler
 
 export interface AttachmentFile extends Attachment {
   /**
@@ -43,6 +43,8 @@ export interface Envelope {
   spamScore: number;
   senderIp: string;
   messageId: string;
+  headers: Headers;
+  headerLines: HeaderLines;
   subject: string;
   topic: string;
   date: string;

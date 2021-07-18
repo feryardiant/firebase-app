@@ -1,3 +1,5 @@
+/* eslint-disable import/no-duplicates */
+
 import { ViteSSGContext } from 'vite-ssg'
 
 interface ImportMeta {
