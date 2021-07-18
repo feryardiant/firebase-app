@@ -2,6 +2,8 @@
   "files.associations": {
     "*.css": "postcss"
   },
+  // "volar.tsPlugin": true,
+  "volar.tsPluginStatus": false,
   "json.schemas": [
     {
       "fileMatch": [
