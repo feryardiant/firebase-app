@@ -15,8 +15,8 @@ function ensureEnv (env) {
   const fbaseConf = {
     appId: getEnv('FIREBASE_APPID'),
     apiKey: getEnv('FIREBASE_APIKEY'),
-    messagingSenderId: getEnv('FIREBASE_MEASUREMENTID'),
-    measurementId: getEnv('FIREBASE_MESSAGINGSENDERID'),
+    measurementId: getEnv('FIREBASE_MEASUREMENTID'),
+    messagingSenderId: getEnv('FIREBASE_MESSAGINGSENDERID'),
     projectId: getEnv('PROJECT_ID'),
   }
 
