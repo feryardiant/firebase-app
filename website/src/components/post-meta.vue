@@ -18,29 +18,22 @@
   <p v-if="excerpt && frontmatter.excerpt" class="excerpt" v-html="frontmatter.excerpt" />
 </template>
 
-<script>
-export default {
-  props: {
-    frontmatter: {
-      type: Object,
-      required: true,
-    },
-    excerpt: {
-      type: Boolean,
-      default: () => true,
-    }
+<script setup>
+import { defineProps } from 'vue'
+
+const { excerpt, frontmatter } = defineProps({
+  frontmatter: {
+    type: Object,
+    required: true,
   },
-
-  setup (props) {
-    const postDate = props.frontmatter.modified || props.frontmatter.date
-    const formatDate = (date) => new Date(date).toLocaleDateString()
-
-    return {
-      postDate,
-      formatDate
-    }
+  excerpt: {
+    type: Boolean,
+    default: () => true,
   }
-}
+})
+
+const postDate = frontmatter.modified || frontmatter.date
+const formatDate = (date) => new Date(date).toLocaleDateString()
 </script>
 
 <style lang="postcss" scoped>

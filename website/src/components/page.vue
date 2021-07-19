@@ -8,19 +8,15 @@
   <slot />
 </template>
 
-<script>
-export default {
-  props: {
-    frontmatter: {
-      type: Object,
-      required: true,
-    }
-  },
+<script setup>
+import { defineProps } from 'vue'
 
-  setup () {
-    return {}
+const { frontmatter } = defineProps({
+  frontmatter: {
+    type: Object,
+    required: true,
   }
-}
+})
 </script>
 
 <style lang="postcss">

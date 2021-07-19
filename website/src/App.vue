@@ -8,33 +8,22 @@
   </toast>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script setup>
 import { useHead } from '@vueuse/head'
 import { useRoute } from 'vue-router'
 
-export default {
-  setup () {
-    const { meta, fullPath } = useRoute()
-    const showToast = ref(false)
+const { meta, fullPath } = useRoute()
+const showToast = ref(false)
 
-    const close = () => {
-      showToast.value = false
-    }
+// https://github.com/vueuse/head
+useHead({
+  title: `${meta.title} - ${APP_INFO.title}`,
+  meta: [
+    { name: 'description', content: meta.description },
+  ],
+})
 
-    // https://github.com/vueuse/head
-    useHead({
-      title: `${meta.title} - ${APP_INFO.title}`,
-      meta: [
-        { name: 'description', content: meta.description },
-      ],
-    })
-
-    return {
-      close,
-      fullPath,
-      showToast
-    }
-  }
+const close = () => {
+  showToast.value = false
 }
 </script>
