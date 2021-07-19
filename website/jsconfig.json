@@ -1,7 +1,6 @@
 {
   "extends": "./../jsconfig.json",
   "exclude": ["dist", "node_modules", "node_modules/*", "tests"],
-  "composite": true,
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",

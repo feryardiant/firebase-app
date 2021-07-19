@@ -10,13 +10,5 @@
     "allowSyntheticDefaultImports": true,
     "rootDir": ".",
     "strict": true,
-  },
-  "references": [
-    {
-      "path": "./functions/jsconfig.json"
-    },
-    {
-      "path": "./website/jsconfig.json"
-    }
-  ]
+  }
 }

@@ -1,7 +1,6 @@
 {
   "extends": "../jsconfig.json",
   "exclude": ["dist", "node_modules"],
-  "composite": true,
   "compilerOptions": {
     "target": "es6",
     "baseUrl": ".",
