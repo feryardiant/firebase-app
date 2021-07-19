@@ -9,6 +9,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useHead } from '@vueuse/head'
 import { useRoute } from 'vue-router'
 
