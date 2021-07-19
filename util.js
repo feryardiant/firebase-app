@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 function loadEnvFile (path, env) {
   const { parsed } = dotenv.config({ path })
 
-  for (const [key, val] of Object.entries(parsed)) {
+  for (const [key, val] of Object.entries(parsed || {})) {
     env[key] = getEnv(key, val)
   }
 

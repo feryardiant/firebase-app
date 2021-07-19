@@ -209,9 +209,7 @@ export default ({ mode, command }) => {
 const resolveEnv = (mode, envDir) => {
   const env = loadEnv(mode, envDir)
 
-  if (mode !== 'production') {
-    loadEnvFile(envDir, env)
-  }
+  loadEnvFile(envDir, env)
 
   return ensureEnv(env)
 }
