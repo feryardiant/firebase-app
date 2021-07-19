@@ -4,7 +4,7 @@ import { useAnalytics } from '../firebase'
 /**
  * @param {import('vite-ssg').ViteSSGContext} ctx
  */
- export const install = async ({ app, isClient, router }) => {
+export const install = async ({ app, isClient, router }) => {
   if (!isClient) return
 
   const redirect = Cookies.get('redirect')

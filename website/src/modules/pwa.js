@@ -1,7 +1,7 @@
 /**
  * @param {import('vite-ssg').ViteSSGContext} ctx
  */
- export const install = async ({ isClient, router }) => {
+export const install = async ({ isClient, router }) => {
   if (!isClient) return
 
   await router.isReady()
