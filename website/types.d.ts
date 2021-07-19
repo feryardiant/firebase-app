@@ -14,7 +14,6 @@ interface ImportMeta {
   }
 }
 
-export * from './components'
-export type UserModule = (ctx: ViteSSGContext) => void
+export type UserModule = (ctx: ViteSSGContext) => Promise<void>
 
 export { }

@@ -1,18 +1,14 @@
 {
   "extends": "./../jsconfig.json",
   "exclude": ["dist", "node_modules", "node_modules/*", "tests"],
-  "include": [
-    "src/**/*"
-  ],
+  "composite": true,
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",
     "skipLibCheck": true,
-    "module": "esnext",
-    "target": "es2016",
-    // "lib": ["esnext", "dom", "dom.iterable", "webworker"],
-    "lib": ["dom", "dom.iterable", "es6"],
+    "lib": ["esnext", "dom", "dom.iterable"],
     "types": [
+      "./components",
       "./types",
       "vite/client",
       "vite-plugin-pages/client",
