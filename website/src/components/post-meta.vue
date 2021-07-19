@@ -1,8 +1,6 @@
 <template>
   <p class="page-meta">
-    <time v-if="postDate" class="published" :datetime="postDate" :title="postDate">{{
-      formatDate(postDate)
-    }}</time>
+    <time v-if="postDate" class="published" :datetime="postDate" :title="postDate">{{ formatDate(postDate) }}</time>
 
     <span v-for="tag in frontmatter.tags" :key="tag" class="tag">#{{ tag }}</span>
   </p>
@@ -24,11 +22,11 @@ import { defineProps } from 'vue'
 const { excerpt, frontmatter } = defineProps({
   frontmatter: {
     type: Object,
-    required: true,
+    required: true
   },
   excerpt: {
     type: Boolean,
-    default: () => true,
+    default: () => true
   }
 })
 

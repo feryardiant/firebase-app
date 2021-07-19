@@ -8,9 +8,8 @@
       <h1 class="title">Hello World</h1>
 
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor, praesentium ab
-        blanditiis, natus fugiat iure adipisci id sint nisi placeat consectetur repellat
-        itaque explicabo quo architecto hic nostrum rerum sapiente.
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor, praesentium ab blanditiis, natus fugiat iure
+        adipisci id sint nisi placeat consectetur repellat itaque explicabo quo architecto hic nostrum rerum sapiente.
       </p>
     </div>
   </div>
@@ -28,5 +27,5 @@ p {
 </style>
 
 <route lang="yaml">
-  title: 'Home'
+title: 'Home'
 </route>

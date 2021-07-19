@@ -28,7 +28,7 @@ export const install = async ({ app, isClient, router }) => {
     analytics?.logEvent('page_view', {
       page_location: to.fullPath,
       page_path: to.path,
-      page_title: to.meta.title,
+      page_title: to.meta.title
     })
   })
 }

@@ -14,7 +14,7 @@ import { defineProps } from 'vue'
 const { frontmatter } = defineProps({
   frontmatter: {
     type: Object,
-    required: true,
+    required: true
   }
 })
 </script>

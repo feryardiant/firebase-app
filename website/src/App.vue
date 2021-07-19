@@ -18,9 +18,7 @@ const showToast = ref(false)
 // https://github.com/vueuse/head
 useHead({
   title: `${meta.title} - ${APP_INFO.title}`,
-  meta: [
-    { name: 'description', content: meta.description },
-  ],
+  meta: [{ name: 'description', content: meta.description }]
 })
 
 const close = () => {

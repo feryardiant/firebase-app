@@ -14,7 +14,7 @@ const emit = defineEmits(['close'])
 const { show } = defineProps({
   show: {
     type: Boolean,
-    default: () => true,
+    default: () => true
   }
 })
 </script>

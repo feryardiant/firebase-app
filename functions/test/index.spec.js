@@ -9,9 +9,7 @@ import { loadEnv } from '../../util'
 import pkg from '../package.json'
 
 const env = loadEnv(resolve(__dirname, '../../.env'))
-const test = testInit(
-  JSON.parse(env.FIREBASE_CONFIG)
-)
+const test = testInit(JSON.parse(env.FIREBASE_CONFIG))
 
 describe(pkg.name, () => {
   let apiFunc, adminStub
@@ -21,7 +19,7 @@ describe(pkg.name, () => {
       firestore: stub(admin, 'firestore'),
       storage: stub(admin, 'storage').returns({
         bucket: stub()
-      }),
+      })
     })
 
     const { func } = await import('../src')

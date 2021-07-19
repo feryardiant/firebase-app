@@ -37,7 +37,7 @@ export const useAuth = async (app = $app) => {
     auth.useEmulator('http://localhost:9099')
   }
 
-  return initialized.auth = auth
+  return (initialized.auth = auth)
 }
 
 /**
@@ -51,7 +51,7 @@ export const getCurrentUser = async () => {
   }
 
   return new Promise((resolve, reject) => {
-    const sub = auth.onAuthStateChanged(user => {
+    const sub = auth.onAuthStateChanged((user) => {
       sub()
       resolve(user)
     }, reject)
@@ -74,7 +74,7 @@ export const useDatabase = async (app = $app) => {
     database.useEmulator('localhost', 9000)
   }
 
-  return initialized.database = database
+  return (initialized.database = database)
 }
 
 /**
@@ -93,7 +93,7 @@ export const useFirestore = async (app = $app) => {
     firestore.useEmulator('localhost', 8080)
   }
 
-  return initialized.firestore = firestore
+  return (initialized.firestore = firestore)
 }
 
 /**
@@ -112,7 +112,7 @@ export const useFunctions = async (app = $app) => {
     functions.useEmulator('localhost', 5001)
   }
 
-  return initialized.functions = functions
+  return (initialized.functions = functions)
 }
 
 /**

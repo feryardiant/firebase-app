@@ -13,19 +13,17 @@ import './main.css'
 const routes = autoRoutes.map((route) => {
   return {
     ...route,
-    alias: route.path.endsWith('/')
-      ? `${route.path}index.html`
-      : `${route.path}.html`,
+    alias: route.path.endsWith('/') ? `${route.path}index.html` : `${route.path}.html`
   }
 })
 
-export const createApp = ViteSSG(App, {
-  routes: setupLayouts(routes),
-  scrollBehavior (from, to, position) {
-    return position || { top: 0 }
-  }
-}, (ctx) => Promise.all(
-  Object.values(
-    import.meta.globEager('./modules/*.js')
-  ).map(mod => mod.install?.(ctx))
-))
+export const createApp = ViteSSG(
+  App,
+  {
+    routes: setupLayouts(routes),
+    scrollBehavior(from, to, position) {
+      return position || { top: 0 }
+    }
+  },
+  (ctx) => Promise.all(Object.values(import.meta.globEager('./modules/*.js')).map((mod) => mod.install?.(ctx)))
+)
