@@ -5,13 +5,10 @@ on:
     branches:
       - master
     paths:
-      - .firebase/database-rules.json
-      - .firebase/firestore.rules
-      - .firebase/storage.rules
       - .github/workflows/deployment.yml
-      - firebasejson
-      - '*/src/**'
-      - '**/package.json'
+      - firebase/**
+      - website/**
+      - firebase.json
 
 env:
   APP_NAME: 'Admin App'

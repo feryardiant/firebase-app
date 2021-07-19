@@ -5,7 +5,7 @@ import admin from 'firebase-admin'
 import testInit from 'firebase-functions-test'
 import { resolve } from 'path'
 
-import { loadEnv } from '../../util'
+import { loadEnv } from '../../scripts/util'
 import pkg from '../package.json'
 
 const env = loadEnv(resolve(__dirname, '../../.env'))

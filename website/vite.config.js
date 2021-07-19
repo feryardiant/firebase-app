@@ -13,7 +13,7 @@ import mdIt from 'markdown-it'
 import mdAnchor from 'markdown-it-anchor'
 import mdLinkAttr from 'markdown-it-link-attributes'
 
-import { loadEnvFile, ensureEnv } from '../util'
+import { loadEnvFile, ensureEnv } from '../scripts/util'
 import { author, name, description, version } from '../package.json'
 
 /**
@@ -22,7 +22,8 @@ import { author, name, description, version } from '../package.json'
  * @returns {import('vite').UserConfig}
  */
 export default ({ mode, command }) => {
-  const envDir = resolve(__dirname, '../.env')
+  const root = __dirname
+  const envDir = resolve(root, '../.env')
   const env = resolveEnv(mode, envDir)
   const APP_INFO = {
     title: env.APP_NAME,
@@ -34,6 +35,7 @@ export default ({ mode, command }) => {
 
   return {
     base: env.BASE_URL || '/',
+    root,
     envDir,
 
     resolve: {

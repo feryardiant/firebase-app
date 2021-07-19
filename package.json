@@ -8,21 +8,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "functions",
-    "website"
-  ],
   "engines": {
     "node": "14.x",
     "pnpm": "^6.10.0"
   },
   "scripts": {
-    "build": "pnpm -r build",
     "deploy": "firebase deploy",
     "emulator": "firebase emulators:start",
-    "firebase": "cross-env GOOGLE_APPLICATION_CREDENTIALS=.firebase/service-account.json firebase",
-    "prepare": "husky install .vscode/husky",
+    "prepare": "husky install scripts/husky",
     "publish:packages": "pnpm -r publish --ignore-scripts --no-git-checks",
     "serve": "run-p emulator watch",
     "shell": "firebase functions:shell",
@@ -47,7 +40,7 @@
     ]
   },
   "lint-staged": {
-    "{functions,packages}/**/*.js": [
+    "{firebase,packages}/**/*.js": [
       "eslint --fix"
     ],
     "website/**/*.{js,vue}": [

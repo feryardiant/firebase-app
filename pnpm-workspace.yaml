@@ -1,4 +1,4 @@
 packages:
 - packages/*
-- functions
+- firebase
 - website
