@@ -17,8 +17,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-
 const { excerpt, frontmatter } = defineProps({
   frontmatter: {
     type: Object,

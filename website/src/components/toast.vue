@@ -8,8 +8,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue'
-
 const emit = defineEmits(['close'])
 const { show } = defineProps({
   show: {
