@@ -35,12 +35,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-    - name: Setup
+    - name: Set up Node.JS
       uses: actions/setup-node@v2
       with:
         node-version: '14'
 
-    - name: Cache
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Cache Dependencies
       uses: actions/cache@v2
       env:
         cache-name: pnpm-cache
@@ -54,19 +60,18 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
       continue-on-error: true
 
-    - name: Install
+    - name: Install Dependencies
       uses: pnpm/action-setup@v2.0.1
       with:
         version: 6.10.0
         run_install: true
 
-    - name: Lint
-      run: pnpm -r lint
+    - name: Code Quality
+      run: |
+        pnpm -r lint
+        pnpm emulator:test -- --project ${{ env.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
 
-    - name: Test
-      run: pnpm emulator:test -- --project ${{ env.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
-
-    - name: Build
+    - name: Build Distributions
       run: pnpm -r build
 
     - name: Publish Packages
