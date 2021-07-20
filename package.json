@@ -14,7 +14,8 @@
   },
   "scripts": {
     "deploy": "firebase deploy",
-    "emulator": "firebase emulators:start",
+    "emulator:start": "firebase emulators:start",
+    "emulator:test": "firebase emulators:exec 'pnpm -r test'",
     "prepare": "husky install scripts/husky",
     "publish:packages": "pnpm -r publish --ignore-scripts --no-git-checks",
     "serve": "run-p emulator watch",

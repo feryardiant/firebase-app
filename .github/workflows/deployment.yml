@@ -20,6 +20,13 @@ jobs:
   deploy:
     runs-on: ubuntu-20.04
 
+    env:
+      FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
+      FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
+      FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
+      RECAPTCHA_SITEKEY: ${{ secrets.RECAPTCHA_SITEKEY }}
+      RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
+
     environment:
       name: production
       url: ${{ env.BASE_URL }}
@@ -53,23 +60,19 @@ jobs:
         version: 6.10.0
         run_install: true
 
+    - name: Lint
+      run: pnpm -r lint
+
+    - name: Test
+      run: pnpm emulator:test -- --project ${{ env.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+
     - name: Build
-      env:
-        SENDGRID_KEY: ${{ secrets.SENDGRID_KEY }}
-        FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
-        FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
-        FIREBASE_MEASUREMENTID: ${{ secrets.FIREBASE_MEASUREMENTID }}
-        FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
-        RECAPTCHA_SITEKEY: ${{ secrets.RECAPTCHA_SITEKEY }}
-        RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
       run: pnpm -r build
 
     - name: Publish Packages
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: pnpm -r publish --ignore-scripts --no-git-checks --dry-run
+      run: pnpm -r publish --ignore-scripts --no-git-checks
 
     - name: Deploy
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      run: pnpm deploy -- --project ${{ env.PROJECT_ID }} --token "$FIREBASE_TOKEN"
+      run: pnpm deploy -- --project ${{ env.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
