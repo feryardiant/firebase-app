@@ -98,26 +98,26 @@
   },
 
   "functions": {
-    "source": "firebase",
+    "source": "functions",
     "ignore": [
       "README.md",
       "node_modules",
       "tests",
-      "*.rules.json",
+      "*-rules.json",
       "*.rules",
       ".*"
     ]
   },
 
   "firestore": {
-    "rules": "firebase/firestore.rules"
+    "rules": "firestore.rules"
   },
 
   "database": {
-    "rules": "firebase/database.rules.json"
+    "rules": "database-rules.json"
   },
 
   "storage": {
-    "rules": "firebase/storage.rules"
+    "rules": "storage.rules"
   }
 }

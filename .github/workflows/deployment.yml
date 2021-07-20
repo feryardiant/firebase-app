@@ -14,6 +14,7 @@ env:
   APP_NAME: 'Admin App'
   BASE_URL: 'https://admin.feryardiant.id/'
   PROJECT_ID: 'fery-wardiyanto'
+  FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/emulators-cache
 
 jobs:
   deploy:
@@ -32,23 +33,32 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Cache
+    - name: Cache Emulators
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.FIREBASE_EMULATORS_PATH }}
+        key: ${{ runner.os }}-firebase-emulators-${{ hashFiles('emulators-cache/**') }}
+      continue-on-error: true
+
+    - name: Cache Dependencies
       uses: actions/cache@v2
       env:
         cache-name: pnpm-cache
       with:
-        path: ~/.pnpm-store
+        path: |
+          **/node_modules
+          ~/.pnpm-store
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
 
-    - name: Install
+    - name: Install Dependencies
       uses: pnpm/action-setup@v2.0.1
       with:
         version: 6.10.0
         run_install: true
 
-    - name: Build
+    - name: Build All
       env:
         SENDGRID_KEY: ${{ secrets.SENDGRID_KEY }}
         FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
@@ -59,7 +69,7 @@ jobs:
         RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
       run: pnpm -r build
 
-    - name: Publish
+    - name: Publish Packages
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: pnpm -r publish --ignore-scripts --no-git-checks --dry-run
