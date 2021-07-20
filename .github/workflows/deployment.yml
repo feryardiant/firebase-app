@@ -24,6 +24,7 @@ jobs:
       FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
       FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
       FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       RECAPTCHA_SITEKEY: ${{ secrets.RECAPTCHA_SITEKEY }}
       RECAPTCHA_SECRETKEY: ${{ secrets.RECAPTCHA_SECRETKEY }}
 
@@ -69,7 +70,7 @@ jobs:
     - name: Code Quality
       run: |
         pnpm -r lint
-        pnpm emulator:test -- --project ${{ env.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+        pnpm -r test
 
     - name: Build Distributions
       run: pnpm -r build
@@ -80,4 +81,4 @@ jobs:
       run: pnpm -r publish --ignore-scripts --no-git-checks
 
     - name: Deploy
-      run: pnpm deploy -- --project ${{ env.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+      run: pnpm deploy -- --project ${{ env.PROJECT_ID }}
