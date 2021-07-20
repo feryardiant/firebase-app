@@ -14,7 +14,7 @@ env:
   APP_NAME: 'Admin App'
   BASE_URL: 'https://admin.feryardiant.id/'
   PROJECT_ID: 'fery-wardiyanto'
-  FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/emulators-cache
+  FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/.firebase
 
 jobs:
   deploy:
@@ -33,32 +33,27 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Cache Emulators
-      uses: actions/cache@v2
-      with:
-        path: ${{ env.FIREBASE_EMULATORS_PATH }}
-        key: ${{ runner.os }}-firebase-emulators-${{ hashFiles('emulators-cache/**') }}
-      continue-on-error: true
-
-    - name: Cache Dependencies
+    - name: Cache
       uses: actions/cache@v2
       env:
         cache-name: pnpm-cache
       with:
         path: |
-          **/node_modules
+          ${{ env.FIREBASE_EMULATORS_PATH }}
+          ${{ github.workspace }}/node_modules
           ~/.pnpm-store
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+      continue-on-error: true
 
-    - name: Install Dependencies
+    - name: Install
       uses: pnpm/action-setup@v2.0.1
       with:
         version: 6.10.0
         run_install: true
 
-    - name: Build All
+    - name: Build
       env:
         SENDGRID_KEY: ${{ secrets.SENDGRID_KEY }}
         FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
