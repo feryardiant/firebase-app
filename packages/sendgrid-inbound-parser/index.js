@@ -1,10 +1,12 @@
-import Busboy from 'busboy'
+'use strict'
+
 import { extname } from 'path'
+import Busboy from 'busboy'
 import { simpleParser } from 'mailparser'
 
 /**
- * @param {import('./types').IncomingMail} envelope
- * @returns {import('./types').Envelope}
+ * @param {import('.').IncomingMail} envelope
+ * @returns {import('.').Envelope}
  */
 function normalizeMail(envelope) {
   const mail = {
@@ -75,10 +77,6 @@ function normalizeMail(envelope) {
  */
 const parseBody = (req) =>
   new Promise((resolve, reject) => {
-    if (!req.headers['content-type']?.startsWith('multipart/form-data')) {
-      return reject(new Error('Could not parse non-multipart data'))
-    }
-
     const busboy = new Busboy({ headers: req.headers })
     const body = {}
 
@@ -98,7 +96,7 @@ const parseBody = (req) =>
   })
 
 /**
- * @param {import('./types').AttachmentFile} attachment
+ * @param {import('.').AttachmentFile} attachment
  * @param {import('@google-cloud/storage').Bucket} bucket
  * @returns {Promise<import('@google-cloud/storage').File>}
  */
