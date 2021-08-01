@@ -12,26 +12,27 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "types.d.ts",
+  "main": "index.cjs",
+  "module": "index.js",
+  "types": "index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "default": "./index.js",
+      "import": "./index.js",
+      "require": "./index.cjs"
     }
   },
   "files": [
-    "README.md",
-    "dist",
-    "types.d.ts"
+    "index.cjs",
+    "index.d.ts",
+    "index.js"
   ],
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "release": "standard-version",
-    "test": "mocha",
+    "test": "mocha -r esm '*.spec.js'",
     "watch": "rollup -c --watch"
   },
   "engines": {
@@ -42,18 +43,16 @@
     "mailparser": "^3.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14",
-    "@babel/preset-env": "^7.14",
-    "@babel/register": "^7.14",
-    "@feryardiant/eslint-config-standard": "^0.0.3",
-    "chai": "^4.3",
-    "eslint": "^7.30",
+    "@feryardiant/eslint-config": "^0.0.3",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
-    "mocha": "^9.0",
-    "rollup": "^2.52",
-    "sinon": "^11.1",
-    "standard-version": "^9.0",
-    "supertest": "^6.1.3"
+    "mocha": "^8.4.0",
+    "rollup": "^2.55.1",
+    "sinon": "^11.1.2",
+    "standard-version": "^9.3.1",
+    "supertest": "^6.1.4"
   },
   "babel": {
     "presets": [
@@ -68,17 +67,9 @@
     ]
   },
   "eslintConfig": {
-    "extends": "@feryardiant/standard"
-  },
-  "mocha": {
-    "require": [
-      "@babel/register"
-    ],
-    "reporter": "spec",
-    "spec": [
-      "index.spec.js"
-    ],
-    "ui": "bdd"
+    "extends": [
+      "@feryardiant"
+    ]
   },
   "standard-version": {
     "skip": {

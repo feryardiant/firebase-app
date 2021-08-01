@@ -10,7 +10,7 @@
     "start": "firebase functions:shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "mocha",
+    "test": "mocha -r esm 'test/*.spec.js'",
     "watch": "rollup -c --watch"
   },
   "main": "dist/index.cjs",
@@ -19,33 +19,30 @@
     "node": "14"
   },
   "dependencies": {
-    "@feryardiant/sendgrid-inbound-parser": "*",
-    "@google-cloud/storage": "^5.8.5",
+    "@feryardiant/sendgrid-inbound-parser": "workspace:^0.0.5",
+    "@google-cloud/storage": "^5.11.0",
     "@sendgrid/mail": "^7.4.5",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
-    "firebase-admin": "^9.10",
-    "firebase-functions": "^3.14",
+    "firebase-admin": "^9.11.0",
+    "firebase-functions": "^3.14.1",
     "qs": "^6.10.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.14",
-    "@babel/preset-env": "^7.14",
-    "@babel/register": "^7.14",
-    "@feryardiant/eslint-config-standard": "^0.0.3",
-    "@firebase/app-types": "^0.6",
-    "@firebase/util": "^1.1",
-    "@rollup/plugin-commonjs": "^19.0",
-    "@rollup/plugin-json": "^4.1",
-    "@rollup/plugin-node-resolve": "^13.0",
-    "chai": "^4.3",
-    "eslint": "^7.30",
-    "firebase-functions-test": "^0.3",
-    "mocha": "^9.0",
-    "rollup": "^2.52",
-    "rollup-plugin-terser": "^7.0",
-    "sinon": "^11.1",
-    "supertest": "^6.1.3"
+    "@feryardiant/eslint-config": "^0.0.3",
+    "@firebase/app-types": "^0.6.3",
+    "@firebase/util": "^1.2.0",
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "firebase-functions-test": "^0.3.0",
+    "mocha": "^8.4.0",
+    "rollup": "^2.55.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "sinon": "^11.1.2",
+    "supertest": "^6.1.4"
   },
   "babel": {
     "presets": [
@@ -60,16 +57,8 @@
     ]
   },
   "eslintConfig": {
-    "extends": ["@feryardiant/standard"]
-  },
-  "mocha": {
-    "require": [
-      "@babel/register"
-    ],
-    "reporter": "spec",
-    "spec": [
-      "test/**/*.spec.js"
-    ],
-    "ui": "bdd"
+    "extends": [
+      "@feryardiant"
+    ]
   }
 }
