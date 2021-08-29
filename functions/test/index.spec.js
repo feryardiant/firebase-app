@@ -1,9 +1,9 @@
+import { resolve } from 'path'
 import { expect } from 'chai'
 import { stub } from 'sinon'
 import supertest from 'supertest'
 import admin from 'firebase-admin'
 import testInit from 'firebase-functions-test'
-import { resolve } from 'path'
 
 import { loadEnv } from '../../scripts/util'
 import pkg from '../package.json'

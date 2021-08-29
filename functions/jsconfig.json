@@ -2,13 +2,6 @@
   "extends": "../jsconfig.json",
   "exclude": ["dist", "node_modules"],
   "compilerOptions": {
-    "target": "es6",
-    "baseUrl": ".",
-    "outDir": "./dist",
-    "noLib": true,
-    "paths": {},
-    "types": [
-      "./types"
-    ]
+    "target": "es6"
   },
 }
