@@ -1,11 +1,13 @@
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
+
 import { loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import components from 'unplugin-vue-components/vite'
+import { VueUseComponentsResolver } from 'unplugin-vue-components/resolvers'
 import pages from 'vite-plugin-pages'
 import layouts from 'vite-plugin-vue-layouts'
 import windiCSS from 'vite-plugin-windicss'
-import components, { VueUseComponentsResolver } from 'vite-plugin-components'
 import markdown from 'vite-plugin-md'
 import { VitePWA as pwa } from 'vite-plugin-pwa'
 import matter from 'gray-matter'
@@ -153,15 +155,10 @@ export default ({ mode, command }) => {
 
       // https://github.com/antfu/vite-plugin-components
       components({
-        extensions: ['vue', 'md'],
-        globalComponentsDeclaration: true,
-        customLoaderMatcher: path => path.endsWith('.md'),
-        customComponentResolvers: [
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        resolvers: [
           VueUseComponentsResolver(),
-          // ViteIconsResolver({
-          //   componentPrefix: '',
-          // }),
-        ]
+        ],
       }),
 
       // https://github.com/antfu/vite-plugin-windicss
