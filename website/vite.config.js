@@ -20,8 +20,6 @@ import { author, name, description, version } from '../package.json'
 
 /**
  * @type {import('vite').UserConfigFn}
- * @param {import('vite').ConfigEnv} conf
- * @returns {import('vite').UserConfig}
  */
 export default ({ mode, command }) => {
   const root = __dirname
@@ -35,6 +33,7 @@ export default ({ mode, command }) => {
     version
   }
 
+  /** @type {import('vite').UserConfig} */
   return {
     base: env.BASE_URL || '/',
     root,
