@@ -38,20 +38,20 @@
     "node": ">=10"
   },
   "dependencies": {
-    "busboy": "^0.3.1",
+    "busboy": "^1.4.0",
     "mailparser": "^3.4.0"
   },
   "devDependencies": {
-    "@feryardiant/eslint-config": "^0.0.3",
-    "chai": "^4.3.4",
+    "@feryardiant/eslint-config": "^0.1.0",
+    "chai": "^4.3.6",
     "eslint": "^7.32.0",
     "esm": "^3.2.25",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mocha": "^8.4.0",
-    "rollup": "^2.60.0",
-    "sinon": "^11.1.2",
+    "rollup": "^2.69.1",
+    "sinon": "^13.0.1",
     "standard-version": "^9.3.2",
-    "supertest": "^6.1.6"
+    "supertest": "^6.2.2"
   },
   "babel": {
     "presets": [
