@@ -1,9 +1,12 @@
 {
-  "files.associations": {
-    "*.css": "postcss"
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
   },
-  // "volar.tsPlugin": true,
-  "volar.tsPluginStatus": false,
+  "editor.formatOnSave": false,
+  "files.associations": {
+    "*.css": "postcss",
+    ".env.*": "env"
+  },
   "json.schemas": [
     {
       "fileMatch": [
@@ -17,5 +20,6 @@
       ],
       "url": "https://raw.githubusercontent.com/firebase/firebase-tools/master/schema/firebase-config.json"
     }
-  ]
+  ],
+  "prettier.enable": false,
 }
