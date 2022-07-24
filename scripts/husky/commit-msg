@@ -2,4 +2,4 @@
 
 . "$(dirname "$0")/_/husky.sh"
 
-pnpx commitlint --edit $1
+./node_modules/.bin/commitlint -e -V
