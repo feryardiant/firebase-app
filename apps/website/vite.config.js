@@ -15,13 +15,25 @@ import mdIt from 'markdown-it'
 import mdAnchor from 'markdown-it-anchor'
 import mdLinkAttr from 'markdown-it-link-attributes'
 
-import { loadEnvFile, ensureEnv } from '../scripts/util'
-import { author, name, description, version } from '../package.json'
+import { ensureEnv, loadEnvFile } from '../../scripts/util'
+import { author, description, name, version } from '../../package.json'
+
+/**
+ * @param {string} mode
+ * @param {string} envDir
+ */
+const resolveEnv = (mode, envDir) => {
+  const env = loadEnv(mode, envDir)
+
+  loadEnvFile(envDir, env)
+
+  return ensureEnv(env)
+}
 
 /**
  * @type {import('vite').UserConfigFn}
  */
-export default ({ mode, command }) => {
+export default ({ mode }) => {
   const root = __dirname
   const envDir = resolve(root, '../.env')
   const env = resolveEnv(mode, envDir)
@@ -30,7 +42,7 @@ export default ({ mode, command }) => {
     name: env.PROJECT_ID || name.split('/')[1],
     description,
     author,
-    version
+    version,
   }
 
   /** @type {import('vite').UserConfig} */
@@ -41,18 +53,18 @@ export default ({ mode, command }) => {
 
     resolve: {
       alias: {
-        '/@/': `/${resolve(__dirname, 'src')}/`
+        '/@/': `/${resolve(__dirname, 'src')}/`,
       },
     },
 
     define: {
       APP_INFO: JSON.stringify(APP_INFO),
-      FIREBASE_CONFIG: env.FIREBASE_CONFIG
+      FIREBASE_CONFIG: env.FIREBASE_CONFIG,
     },
 
     server: {
       fs: {
-        allow: ['..']
+        allow: ['..'],
       },
 
       // https://vitejs.dev/config/#server-proxy
@@ -60,8 +72,8 @@ export default ({ mode, command }) => {
         '/__': 'http://localhost:5000',
         '/api': {
           target: 'http://localhost:5001',
-          rewrite: path => `/fery-wardiyanto/us-central1/${path}`
-        }
+          rewrite: path => `/fery-wardiyanto/us-central1/${path}`,
+        },
       },
     },
 
@@ -116,7 +128,7 @@ export default ({ mode, command }) => {
           }, meta)
 
           return route
-        }
+        },
       }),
 
       // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
@@ -154,6 +166,7 @@ export default ({ mode, command }) => {
 
       // https://github.com/antfu/vite-plugin-components
       components({
+        dts: 'src/components.d.ts',
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
         resolvers: [
           VueUseComponentsResolver(),
@@ -165,7 +178,7 @@ export default ({ mode, command }) => {
         safelist: 'prose prose-sm m-auto text-left',
         preflight: {
           enableAll: true,
-        }
+        },
       }),
 
       pwa({
@@ -195,19 +208,7 @@ export default ({ mode, command }) => {
             },
           ],
         },
-      })
-    ]
+      }),
+    ],
   }
-}
-
-/**
- * @param {string} mode
- * @param {string} envDir
- */
-const resolveEnv = (mode, envDir) => {
-  const env = loadEnv(mode, envDir)
-
-  loadEnvFile(envDir, env)
-
-  return ensureEnv(env)
 }

@@ -1,21 +1,23 @@
+<script setup>
+const { frontmatter } = defineProps({
+  frontmatter: {
+    type: Object,
+    required: true,
+  },
+})
+</script>
+
 <template>
   <header class="page-header">
     <post-meta v-slot="{ title }" :excerpt="false" :frontmatter="frontmatter">
-      <h1 class="page-title entry-title">{{ title }}</h1>
+      <h1 class="page-title entry-title">
+        {{ title }}
+      </h1>
     </post-meta>
   </header>
 
   <slot />
 </template>
-
-<script setup>
-const { frontmatter } = defineProps({
-  frontmatter: {
-    type: Object,
-    required: true
-  }
-})
-</script>
 
 <style lang="postcss">
 .page-content {

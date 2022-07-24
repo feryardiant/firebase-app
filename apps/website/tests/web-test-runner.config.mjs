@@ -7,17 +7,17 @@ export default {
   groups: [
     {
       name: 'unit',
-      files: 'tests/unit/**/*.spec.js'
-    }
+      files: 'tests/unit/**/*.spec.js',
+    },
   ],
 
   plugins: [
-    vite()
+    vite(),
   ],
 
   coverageConfig: {
     include: [
-      'src/**/*.{js,vue}'
-    ]
-  }
+      'src/**/*.{js,vue}',
+    ],
+  },
 }

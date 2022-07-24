@@ -1,3 +1,19 @@
+<script setup>
+const { excerpt, frontmatter } = defineProps({
+  frontmatter: {
+    type: Object,
+    required: true,
+  },
+  excerpt: {
+    type: Boolean,
+    default: () => true,
+  },
+})
+
+const postDate = frontmatter.modified || frontmatter.date
+const formatDate = date => new Date(date).toLocaleDateString()
+</script>
+
 <template>
   <p class="page-meta">
     <time v-if="postDate" class="published" :datetime="postDate" :title="postDate">{{ formatDate(postDate) }}</time>
@@ -6,7 +22,9 @@
   </p>
 
   <slot v-bind="{ title: frontmatter.title }">
-    <h1 class="page-title entry-title">{{ frontmatter.title }}</h1>
+    <h1 class="page-title entry-title">
+      {{ frontmatter.title }}
+    </h1>
   </slot>
 
   <figure v-if="frontmatter.thumb">
@@ -15,22 +33,6 @@
 
   <p v-if="excerpt && frontmatter.excerpt" class="excerpt" v-html="frontmatter.excerpt" />
 </template>
-
-<script setup>
-const { excerpt, frontmatter } = defineProps({
-  frontmatter: {
-    type: Object,
-    required: true
-  },
-  excerpt: {
-    type: Boolean,
-    default: () => true
-  }
-})
-
-const postDate = frontmatter.modified || frontmatter.date
-const formatDate = (date) => new Date(date).toLocaleDateString()
-</script>
 
 <style lang="postcss" scoped>
 h1,

@@ -1,8 +1,12 @@
 {
   "name": "@feryardiant/admin-web",
   "version": "0.0.0",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
+  "types": "types.d.ts",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite-ssg build",
@@ -12,51 +16,46 @@
     "serve": "vite preview",
     "test": "web-test-runner --config tests/web-test-runner.config.mjs"
   },
-  "types": "types.d.ts",
-  "engines": {
-    "node": "14.x"
-  },
   "dependencies": {
-    "firebase": "^9.6.8",
+    "firebase": "^9.9.1",
     "js-cookie": "^3.0.1",
     "nprogress": "^0.2.0",
-    "qs": "^6.10.3",
-    "vue": "^3.2.31",
-    "vue-router": "^4.0.13"
+    "qs": "^6.11.0",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.2"
   },
   "devDependencies": {
     "@antfu/eslint-config-vue": "^0.25.2",
     "@types/markdown-it": "^12.2.3",
-    "@vitejs/plugin-vue": "^2.2.4",
-    "@vue/compiler-sfc": "^3.2.31",
-    "@vue/server-renderer": "^3.2.31",
-    "@vue/test-utils": "^2.0.0-rc.17",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/compiler-sfc": "^3.2.37",
+    "@vue/server-renderer": "^3.2.37",
+    "@vue/test-utils": "^2.0.2",
     "@vueuse/core": "^7.7.1",
-    "@vueuse/head": "^0.7.5",
-    "@web/test-runner": "^0.13.27",
+    "@vueuse/head": "^0.7.7",
+    "@web/test-runner": "^0.13.31",
     "chai": "^4.3.6",
     "dotenv": "^10.0.0",
     "eslint": "^8.20.0",
-    "eslint-plugin-vue": "^8.5.0",
     "gray-matter": "^4.0.3",
     "markdown-it": "^12.3.2",
-    "markdown-it-anchor": "^8.4.1",
+    "markdown-it-anchor": "^8.6.4",
     "markdown-it-link-attributes": "^4.0.0",
-    "postcss": "^8.4.7",
+    "postcss": "^8.4.14",
     "postcss-nested": "^5.0.6",
-    "rollup": "^2.69.1",
+    "rollup": "^2.77.0",
     "typescript": "^4.7.4",
     "unplugin-vue-components": "^0.17.21",
-    "vite": "^2.8.6",
-    "vite-plugin-md": "^0.11.8",
-    "vite-plugin-pages": "^0.21.3",
+    "vite": "^2.9.14",
+    "vite-plugin-md": "^0.11.9",
+    "vite-plugin-pages": "^0.21.4",
     "vite-plugin-pwa": "^0.11.13",
     "vite-plugin-vue-layouts": "^0.6.0",
-    "vite-plugin-windicss": "^1.8.3",
+    "vite-plugin-windicss": "^1.8.7",
     "vite-ssg": "^0.17.11",
     "vite-web-test-runner-plugin": "^0.1.0",
-    "windicss": "^3.5.1",
-    "workbox-window": "^6.5.1"
+    "windicss": "^3.5.6",
+    "workbox-window": "^6.5.3"
   },
   "browserslist": [
     "> 1%",
@@ -65,35 +64,29 @@
   ],
   "eslintConfig": {
     "extends": [
-      "plugin:vue/vue3-recommended",
-      "@feryardiant"
+      "@antfu/vue"
     ],
+    "globals": {
+      "vi": true,
+      "vitest": true
+    },
     "ignorePatterns": [
-      "dist/",
-      "node_modules/",
-      "public/",
-      "*.old"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "*.vue"
-        ],
-        "parser": "vue-eslint-parser"
-      }
+      "**/*.d.ts"
     ],
     "rules": {
-      "vue/max-attributes-per-line": [
-        "warn",
-        {
-          "singleline": 5
-        }
+      "vue/component-definition-name-casing": [
+        "error",
+        "kebab-case"
       ],
-      "vue/singleline-html-element-content-newline": "off",
-      "vue/html-self-closing": "off",
-      "vue/no-setup-props-destructure": "off",
-      "vue/no-v-html": "off",
-      "no-undef": "off"
-    }
+      "vue/html-self-closing": "off"
+    },
+    "overrides": [
+      {
+        "files": ["*.spec.js"],
+        "env": {
+          "mocha": true
+        }
+      }
+    ]
   }
 }

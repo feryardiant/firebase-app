@@ -5,7 +5,9 @@
     </figure>
 
     <div class="column">
-      <h1 class="title">Hello World</h1>
+      <h1 class="title">
+        Hello World
+      </h1>
 
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor, praesentium ab blanditiis, natus fugiat iure
@@ -27,5 +29,5 @@ p {
 </style>
 
 <route lang="yaml">
-title: 'Home'
+title: Home
 </route>

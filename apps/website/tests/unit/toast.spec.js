@@ -6,8 +6,8 @@ describe('toast', () => {
   it('show', () => {
     const wrapped = shallowMount(Toast, {
       props: {
-        show: true
-      }
+        show: true,
+      },
     })
 
     expect(wrapped.isVisible()).to.be.true

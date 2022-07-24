@@ -20,7 +20,7 @@ function normalizeMail(envelope) {
     headers: envelope.email.headers,
     headerLines: envelope.email.headerLines,
     from: envelope.email.from.value[0],
-    to: null
+    to: null,
   }
 
   if (envelope.email.references) {
@@ -33,24 +33,24 @@ function normalizeMail(envelope) {
         arr.push(...ref.split(','))
         return arr
       }, [])
-      .filter((a) => a.length > 0)
+      .filter(a => a.length > 0)
   }
 
   const threadTopic = envelope.email.headers.has('thread-topic')
     ? envelope.email.headers.get('thread-topic')
     : mail.subject.toLowerCase().startsWith('re: ')
-    ? mail.subject.slice(4)
-    : null
+      ? mail.subject.slice(4)
+      : null
 
-  if (threadTopic) {
+  if (threadTopic)
     mail.topic = threadTopic
-  }
 
   for (const participant of ['to', 'cc', 'bcc', 'replyTo']) {
-    if (!envelope.email[participant]) continue
+    if (!envelope.email[participant])
+      continue
 
     mail[participant] = Array.isArray(envelope.email[participant])
-      ? envelope.email[participant].map((part) => part.value)
+      ? envelope.email[participant].map(part => part.value)
       : envelope.email[participant].value
   }
 
@@ -58,7 +58,8 @@ function normalizeMail(envelope) {
   mail.contents = {}
 
   for (const type of ['messageId', 'inReplyTo', 'html', 'text', 'textAsHtml']) {
-    if (!envelope.email[type]) continue
+    if (!envelope.email[type])
+      continue
 
     if (['messageId', 'inReplyTo'].includes(type)) {
       mail[type] = envelope.email[type]
@@ -75,7 +76,7 @@ function normalizeMail(envelope) {
  * @param {import('express').Request} req
  * @returns {Promise<void>}
  */
-const parseBody = (req) =>
+const parseBody = req =>
   new Promise((resolve, reject) => {
     const busboy = new Busboy({ headers: req.headers })
     const body = {}
@@ -107,8 +108,8 @@ export const storeAttachment = (attachment, bucket) =>
     const stream = file.createWriteStream({
       public: true,
       metadata: {
-        contentType: attachment.contentType
-      }
+        contentType: attachment.contentType,
+      },
     })
 
     stream.on('error', (err) => {
@@ -137,5 +138,5 @@ export const inboundParser = () => {
 
         return next()
       })
-      .catch((err) => next(err))
+      .catch(err => next(err))
 }

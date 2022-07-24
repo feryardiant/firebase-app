@@ -1,6 +1,6 @@
 import sgMail from '@sendgrid/mail'
 
-import { author } from '../package.json'
+// import { author } from '../package.json'
 
 /**
  * @param {import('firebase-functions').config.Config} config

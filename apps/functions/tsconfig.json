@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "src/*.js"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "typeRoots": ["./src"],
+    "target": "ES6",
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  }
+}
+

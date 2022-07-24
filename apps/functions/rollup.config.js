@@ -11,5 +11,5 @@ export default {
   input: 'src/index.js',
   output: [{ file: pkg.main, format: 'cjs', sourcemap: true, exports: 'auto' }],
   external,
-  plugins: [json(), commonjs(), nodeResolve(), terser()]
+  plugins: [json(), commonjs(), nodeResolve(), terser()],
 }

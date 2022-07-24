@@ -1,18 +1,18 @@
 {
   "name": "@feryardiant/admin-app",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@7.2.0",
   "description": "My Personal Admin App",
   "author": {
     "name": "Fery Wardiyanto",
     "email": "ferywardiyanto@gmail.com"
   },
-  "version": "0.0.0",
   "license": "MIT",
-  "private": true,
   "engines": {
     "node": "14.x || 16.x",
     "pnpm": "^7.2.0"
   },
-  "packageManager": "pnpm@7.2.0",
   "scripts": {
     "deploy": "firebase deploy",
     "emulator:start": "firebase emulators:start",
@@ -24,6 +24,7 @@
     "watch": "pnpm run --parallel --if-present watch"
   },
   "devDependencies": {
+    "@antfu/eslint-config-basic": "^0.25.2",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "cross-env": "^7.0.3",
@@ -66,11 +67,16 @@
     }
   },
   "lint-staged": {
-    "{functions,packages}/**/*.js": [
+    "{apps,packages}/**/*.{js,json,ts,tsx,vue}": [
       "eslint --fix"
     ],
-    "website/**/*.{js,vue}": [
+    "{package,tsconfig}.json": [
       "eslint --fix"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "@antfu/basic"
     ]
   }
 }

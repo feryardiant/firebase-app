@@ -16,43 +16,6 @@ export function useLogger(logger) {
 }
 
 /**
- * @param {import('firebase-admin').app.App} admin
- * @param {import('firebase-functions').logger} logger
- * @returns {express.Application}
- */
-export function requestHandler(admin, logger) {
-  const app = express()
-  const db = admin.firestore()
-  const bucket = admin.storage().bucket()
-
-  app.use(cookieParser())
-  app.use(useLogger(logger))
-
-  app.get('/api', (req, res) => {
-    const body = {
-      ok: true
-    }
-
-    res.status(200).send(JSON.stringify(body))
-  })
-
-  app.post('/inbound', inboundParser(), inboundHandler(db, bucket, logger))
-
-  app.all('*', (req, res) => {
-    res.cookie('redirect', req.path, {
-      path: '/',
-      expires: new Date(Date.now() + 5 * 60000),
-      sameSite: true,
-      secure: req.secure
-    })
-
-    res.redirect('/')
-  })
-
-  return app
-}
-
-/**
  * @param {import('firebase-admin').firestore.Firestore} db
  * @param {import('@google-cloud/storage').Bucket} bucket
  * @param {import('firebase-functions').logger} logger
@@ -77,7 +40,7 @@ const inboundHandler = (db, bucket, logger) => async (req, res) => {
       const message = {
         headers: Object.fromEntries(headers),
         attachments: [],
-        ...envelope
+        ...envelope,
       }
 
       const getExistingPerson = async (person) => {
@@ -87,7 +50,7 @@ const inboundHandler = (db, bucket, logger) => async (req, res) => {
         return {
           address: person.address,
           name: person.name || existing.name,
-          messages: existing.messages || []
+          messages: existing.messages || [],
         }
       }
 
@@ -96,10 +59,12 @@ const inboundHandler = (db, bucket, logger) => async (req, res) => {
       parties.push(sender)
 
       for (const field of ['to', 'cc', 'bcc']) {
-        if (!envelope[field]) continue
+        if (!envelope[field])
+          continue
 
         for (let participant of envelope[field]) {
-          if (participant.address.endsWith('@feryardiant.id')) continue
+          if (participant.address.endsWith('@feryardiant.id'))
+            continue
 
           participant = await getExistingPerson(participant)
 
@@ -109,7 +74,8 @@ const inboundHandler = (db, bucket, logger) => async (req, res) => {
 
       await Promise.all(
         attachments.map(async ({ headers, ...attachment }) => {
-          if (attachment.contentDisposition === 'inline') return
+          if (attachment.contentDisposition === 'inline')
+            return
 
           const uploadedFile = await storeAttachment(attachment, bucket)
           const attachmentFile = {
@@ -120,19 +86,18 @@ const inboundHandler = (db, bucket, logger) => async (req, res) => {
             size: attachment.size,
             isUploaded: attachment.isUploaded,
             headers: Object.fromEntries(headers),
-            publicUrl: uploadedFile.publicUrl()
+            publicUrl: uploadedFile.publicUrl(),
           }
 
           trans.set(attachmentCol.doc(attachment.checksum), attachmentFile)
           trans.set(convAttachmentCol.doc(attachment.checksum), attachmentFile)
           message.attachments.push(attachmentFile)
-        })
+        }),
       )
 
       for (const party of parties) {
-        if (!party.messages.includes(messageId)) {
+        if (!party.messages.includes(messageId))
           party.messages.push(messageId)
-        }
 
         trans.set(peopleCol.doc(party.address), party)
         trans.set(convParticipantCol.doc(party.address), party)
@@ -145,9 +110,47 @@ const inboundHandler = (db, bucket, logger) => async (req, res) => {
     logger.info('message recieved', { messageId })
 
     res.sendStatus(200)
-  } catch (err) {
+  }
+  catch (err) {
     logger.error(err)
 
     res.sendStatus(500)
   }
+}
+
+/**
+ * @param {import('firebase-admin').app.App} admin
+ * @param {import('firebase-functions').logger} logger
+ * @returns {express.Application}
+ */
+export function requestHandler(admin, logger) {
+  const app = express()
+  const db = admin.firestore()
+  const bucket = admin.storage().bucket()
+
+  app.use(cookieParser())
+  app.use(useLogger(logger))
+
+  app.get('/api', (req, res) => {
+    const body = {
+      ok: true,
+    }
+
+    res.status(200).send(JSON.stringify(body))
+  })
+
+  app.post('/inbound', inboundParser(), inboundHandler(db, bucket, logger))
+
+  app.all('*', (req, res) => {
+    res.cookie('redirect', req.path, {
+      path: '/',
+      expires: new Date(Date.now() + 5 * 60000),
+      sameSite: true,
+      secure: req.secure,
+    })
+
+    res.redirect('/')
+  })
+
+  return app
 }

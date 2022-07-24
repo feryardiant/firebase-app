@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@antfu/eslint-config-basic': ^0.25.2
       '@commitlint/cli': ^17.0.3
       '@commitlint/config-conventional': ^17.0.3
       cross-env: ^7.0.3
@@ -16,6 +17,7 @@ importers:
       pnpm: ^7.6.0
       typescript: ^4.7.4
     devDependencies:
+      '@antfu/eslint-config-basic': 0.25.2_he2ccbldppg44uulnyq4rwocfa
       '@commitlint/cli': 17.0.3
       '@commitlint/config-conventional': 17.0.3
       cross-env: 7.0.3
@@ -32,27 +34,27 @@ importers:
     specifiers:
       '@antfu/eslint-config-basic': ^0.25.2
       '@feryardiant/sendgrid-inbound-parser': workspace:^0.0.5
-      '@firebase/app-compat': ^0.1.19
+      '@firebase/app-compat': ^0.1.30
       '@firebase/app-types': ^0.7.0
-      '@firebase/util': ^1.4.3
-      '@google-cloud/storage': ^5.18.2
-      '@rollup/plugin-commonjs': ^21.0.2
+      '@firebase/util': ^1.6.3
+      '@google-cloud/storage': ^5.20.5
+      '@rollup/plugin-commonjs': ^21.1.0
       '@rollup/plugin-json': ^4.1.0
-      '@rollup/plugin-node-resolve': ^13.1.3
-      '@sendgrid/mail': ^7.6.1
+      '@rollup/plugin-node-resolve': ^13.3.0
+      '@sendgrid/mail': ^7.7.0
       chai: ^4.3.6
       cookie-parser: ^1.4.6
       eslint: ^8.20.0
-      express: ^4.17.3
-      firebase-admin: ^10.0.2
-      firebase-functions: ^3.18.1
+      express: ^4.18.1
+      firebase-admin: ^10.3.0
+      firebase-functions: ^3.22.0
       firebase-functions-test: ^0.3.3
       mocha: ^8.4.0
-      qs: ^6.10.3
-      rollup: ^2.69.1
+      qs: ^6.11.0
+      rollup: ^2.77.0
       rollup-plugin-terser: ^7.0.2
-      sinon: ^13.0.1
-      supertest: ^6.2.2
+      sinon: ^13.0.2
+      supertest: ^6.2.4
       typescript: ^4.7.4
     dependencies:
       '@feryardiant/sendgrid-inbound-parser': link:../../packages/sendgrid-inbound-parser
@@ -85,42 +87,41 @@ importers:
     specifiers:
       '@antfu/eslint-config-vue': ^0.25.2
       '@types/markdown-it': ^12.2.3
-      '@vitejs/plugin-vue': ^2.2.4
-      '@vue/compiler-sfc': ^3.2.31
-      '@vue/server-renderer': ^3.2.31
-      '@vue/test-utils': ^2.0.0-rc.17
+      '@vitejs/plugin-vue': ^2.3.3
+      '@vue/compiler-sfc': ^3.2.37
+      '@vue/server-renderer': ^3.2.37
+      '@vue/test-utils': ^2.0.2
       '@vueuse/core': ^7.7.1
-      '@vueuse/head': ^0.7.5
-      '@web/test-runner': ^0.13.27
+      '@vueuse/head': ^0.7.7
+      '@web/test-runner': ^0.13.31
       chai: ^4.3.6
       dotenv: ^10.0.0
       eslint: ^8.20.0
-      eslint-plugin-vue: ^8.5.0
-      firebase: ^9.6.8
+      firebase: ^9.9.1
       gray-matter: ^4.0.3
       js-cookie: ^3.0.1
       markdown-it: ^12.3.2
-      markdown-it-anchor: ^8.4.1
+      markdown-it-anchor: ^8.6.4
       markdown-it-link-attributes: ^4.0.0
       nprogress: ^0.2.0
-      postcss: ^8.4.7
+      postcss: ^8.4.14
       postcss-nested: ^5.0.6
-      qs: ^6.10.3
-      rollup: ^2.69.1
+      qs: ^6.11.0
+      rollup: ^2.77.0
       typescript: ^4.7.4
       unplugin-vue-components: ^0.17.21
-      vite: ^2.8.6
-      vite-plugin-md: ^0.11.8
-      vite-plugin-pages: ^0.21.3
+      vite: ^2.9.14
+      vite-plugin-md: ^0.11.9
+      vite-plugin-pages: ^0.21.4
       vite-plugin-pwa: ^0.11.13
       vite-plugin-vue-layouts: ^0.6.0
-      vite-plugin-windicss: ^1.8.3
+      vite-plugin-windicss: ^1.8.7
       vite-ssg: ^0.17.11
       vite-web-test-runner-plugin: ^0.1.0
-      vue: ^3.2.31
-      vue-router: ^4.0.13
-      windicss: ^3.5.1
-      workbox-window: ^6.5.1
+      vue: ^3.2.37
+      vue-router: ^4.1.2
+      windicss: ^3.5.6
+      workbox-window: ^6.5.3
     dependencies:
       firebase: 9.9.1
       js-cookie: 3.0.1
@@ -141,7 +142,6 @@ importers:
       chai: 4.3.6
       dotenv: 10.0.0
       eslint: 8.20.0
-      eslint-plugin-vue: 8.7.1_eslint@8.20.0
       gray-matter: 4.0.3
       markdown-it: 12.3.2
       markdown-it-anchor: 8.6.4_2zb4u3vubltivolgu556vv4aom
@@ -165,17 +165,17 @@ importers:
   packages/sendgrid-inbound-parser:
     specifiers:
       '@antfu/eslint-config-basic': ^0.25.2
-      busboy: ^1.4.0
+      busboy: ^1.6.0
       chai: ^4.3.6
       eslint: ^8.20.0
       esm: ^3.2.25
-      express: ^4.17.3
-      mailparser: ^3.4.0
+      express: ^4.18.1
+      mailparser: ^3.5.0
       mocha: ^8.4.0
-      rollup: ^2.69.1
-      sinon: ^13.0.1
-      standard-version: ^9.3.2
-      supertest: ^6.2.2
+      rollup: ^2.77.0
+      sinon: ^13.0.2
+      standard-version: ^9.5.0
+      supertest: ^6.2.4
       typescript: ^4.7.4
     dependencies:
       busboy: 1.6.0
@@ -6020,23 +6020,6 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
-  /eslint-plugin-vue/8.7.1_eslint@8.20.0:
-    resolution: {integrity: sha512-28sbtm4l4cOzoO1LtzQPxfxhQABararUb1JtqusQqObJpWX2e/gmVyeYVfepizPFne0Q5cILkYGiBoV36L12Wg==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
-    dependencies:
-      eslint: 8.20.0
-      eslint-utils: 3.0.0_eslint@8.20.0
-      natural-compare: 1.4.0
-      nth-check: 2.1.1
-      postcss-selector-parser: 6.0.10
-      semver: 7.3.7
-      vue-eslint-parser: 8.3.0_eslint@8.20.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /eslint-plugin-vue/9.2.0_eslint@8.20.0:
     resolution: {integrity: sha512-W2hc+NUXoce8sZtWgZ45miQTy6jNyuSdub5aZ1IBune4JDeAyzucYX0TzkrQ1jMO52sNUDYlCIHDoaNePe0p5g==}
     engines: {node: ^14.17.0 || >=16.0.0}
@@ -7324,7 +7307,7 @@ packages:
       source-map: 0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
-      uglify-js: 3.16.2
+      uglify-js: 3.16.3
     dev: true
 
   /har-schema/2.0.0:
@@ -7445,7 +7428,7 @@ packages:
       he: 1.2.0
       param-case: 2.1.1
       relateurl: 0.2.7
-      uglify-js: 3.16.2
+      uglify-js: 3.16.3
     dev: true
 
   /html-to-text/8.2.0:
@@ -10169,7 +10152,7 @@ packages:
       protobufjs: 7.0.0
       semver: 7.3.7
       tmp: 0.2.1
-      uglify-js: 3.16.2
+      uglify-js: 3.16.3
     dev: true
 
   /protobufjs/6.11.3:
@@ -11856,8 +11839,8 @@ packages:
   /uc.micro/1.0.6:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
 
-  /uglify-js/3.16.2:
-    resolution: {integrity: sha512-AaQNokTNgExWrkEYA24BTNMSjyqEXPSfhqoS0AxmHkCJ4U+Dyy5AvbGV/sqxuxficEfGGoX3zWw9R7QpLFfEsg==}
+  /uglify-js/3.16.3:
+    resolution: {integrity: sha512-uVbFqx9vvLhQg0iBaau9Z75AxWJ8tqM9AV890dIZCLApF4rTcyHwmAvLeEdYRs+BzYWu8Iw81F79ah0EfTXbaw==}
     engines: {node: '>=0.8.0'}
     hasBin: true
     dev: true
@@ -12327,24 +12310,6 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.37
-    dev: true
-
-  /vue-eslint-parser/8.3.0_eslint@8.20.0:
-    resolution: {integrity: sha512-dzHGG3+sYwSf6zFBa0Gi9ZDshD7+ad14DGOdTLjruRVgZXe2J+DcZ9iUhyR48z5g1PqRa20yt3Njna/veLJL/g==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: '>=6.0.0'
-    dependencies:
-      debug: 4.3.4
-      eslint: 8.20.0
-      eslint-scope: 7.1.1
-      eslint-visitor-keys: 3.3.0
-      espree: 9.3.2
-      esquery: 1.4.0
-      lodash: 4.17.21
-      semver: 7.3.7
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /vue-eslint-parser/9.0.3_eslint@8.20.0:
@@ -12867,11 +12832,11 @@ packages:
   /yargs-parser/20.2.4:
     resolution: {integrity: sha512-WOkpgNhPTlE73h4VFAFsOnomJVaovO8VqLDzy5saChRBFQFBoMYirowyW+Q9HB4HFF4Z7VZTiG3iSzJJA29yRA==}
     engines: {node: '>=10'}
+    dev: true
 
   /yargs-parser/20.2.9:
     resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
     engines: {node: '>=10'}
-    dev: true
 
   /yargs-parser/21.0.1:
     resolution: {integrity: sha512-9BK1jFpLzJROCI5TzwZL/TU4gqjK5xiHV/RfWLOahrjAko/e4DJkRDZQXfvqAsiZzzYhgAzbgz6lg48jcm4GLg==}
@@ -12898,7 +12863,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 20.2.4
+      yargs-parser: 20.2.9
 
   /yargs/17.5.1:
     resolution: {integrity: sha512-t6YAJcxDkNX7NFYiVtKvWUz8l+PaKTLiL63mJYWR2GnHq2gjEWISzsLp9wg3aY36dY1j+gfIEL3pIF+XlJJfbA==}

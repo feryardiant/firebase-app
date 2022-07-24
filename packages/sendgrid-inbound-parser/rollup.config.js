@@ -13,5 +13,5 @@ export default {
   output: [
     { file: pkg.main, format: 'cjs', sourcemap: true, exports: 'auto' },
   ],
-  external
+  external,
 }

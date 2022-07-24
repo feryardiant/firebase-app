@@ -5,8 +5,8 @@ export default defineConfig({
   darkMode: 'class',
   variants: {
     extends: {
-      responsive: ['sm', 'md']
-    }
+      responsive: ['sm', 'md'],
+    },
   },
   theme: {
     extend: {
@@ -18,15 +18,15 @@ export default defineConfig({
               fontWeight: '700',
               marginTop: false,
               marginBottom: false,
-              margin: '0'
+              margin: '0',
             },
             figure: {
-              marginTop: false
+              marginTop: false,
             },
             img: {
               borderRadius: '.25rem',
-              border: '1px solid #D1D5DB'
-            }
+              border: '1px solid #D1D5DB',
+            },
           },
         },
       },
@@ -36,23 +36,23 @@ export default defineConfig({
       mono: ['Fira Code', fontFamily.mono],
     },
     screens: {
-      'sm': '640px',
-      'md': '768px',
+      sm: '640px',
+      md: '768px',
     },
     container: {
       center: true,
       padding: {
-        DEFAULT: '1rem'
+        DEFAULT: '1rem',
       },
       css: {
-        padding: '1rem'
-      }
-    }
+        padding: '1rem',
+      },
+    },
   },
   plugins: [
     require('windicss/plugin/typography')({
       modifiers: ['sm', 'md'],
     }),
-    require('windicss/plugin/forms')
-  ]
+    require('windicss/plugin/forms'),
+  ],
 })

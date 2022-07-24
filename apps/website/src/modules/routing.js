@@ -5,7 +5,8 @@ import { useAnalytics } from '../firebase'
  * @param {import('vite-ssg').ViteSSGContext} ctx
  */
 export const install = async ({ app, isClient, router }) => {
-  if (!isClient) return
+  if (!isClient)
+    return
 
   const redirect = Cookies.get('redirect')
 
@@ -20,7 +21,7 @@ export const install = async ({ app, isClient, router }) => {
   app.config.errorHandler = (error) => {
     analytics?.logEvent('exception', {
       description: error.toString(),
-      fatal: true
+      fatal: true,
     })
   }
 
@@ -28,7 +29,7 @@ export const install = async ({ app, isClient, router }) => {
     analytics?.logEvent('page_view', {
       page_location: to.fullPath,
       page_path: to.path,
-      page_title: to.meta.title
+      page_title: to.meta.title,
     })
   })
 }

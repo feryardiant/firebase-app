@@ -12,20 +12,23 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    ".": {
+      "require": "./index.cjs",
+      "import": "./index.js"
+    }
+  },
   "main": "index.cjs",
   "module": "index.js",
   "types": "index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.js",
-      "require": "./index.cjs"
-    }
-  },
   "files": [
     "index.cjs",
     "index.d.ts",
     "index.js"
   ],
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint .",
@@ -34,24 +37,21 @@
     "test": "mocha -r esm '*.spec.js'",
     "watch": "rollup -c --watch"
   },
-  "engines": {
-    "node": ">=10"
-  },
   "dependencies": {
-    "busboy": "^1.4.0",
-    "mailparser": "^3.4.0"
+    "busboy": "^1.6.0",
+    "mailparser": "^3.5.0"
   },
   "devDependencies": {
     "@antfu/eslint-config-basic": "^0.25.2",
     "chai": "^4.3.6",
     "eslint": "^8.20.0",
     "esm": "^3.2.25",
-    "express": "^4.17.3",
+    "express": "^4.18.1",
     "mocha": "^8.4.0",
-    "rollup": "^2.69.1",
-    "sinon": "^13.0.1",
-    "standard-version": "^9.3.2",
-    "supertest": "^6.2.2",
+    "rollup": "^2.77.0",
+    "sinon": "^13.0.2",
+    "standard-version": "^9.5.0",
+    "supertest": "^6.2.4",
     "typescript": "^4.7.4"
   },
   "babel": {
@@ -68,7 +68,17 @@
   },
   "eslintConfig": {
     "extends": [
-      "@feryardiant"
+      "@antfu/basic"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "*.spec.js"
+        ],
+        "env": {
+          "mocha": true
+        }
+      }
     ]
   },
   "standard-version": {
