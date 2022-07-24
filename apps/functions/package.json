@@ -16,7 +16,7 @@
   "main": "dist/index.cjs",
   "types": "types.d.ts",
   "engines": {
-    "node": "14"
+    "node": "16"
   },
   "dependencies": {
     "@feryardiant/sendgrid-inbound-parser": "workspace:^0.0.5",
