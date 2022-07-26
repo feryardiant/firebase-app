@@ -2,7 +2,7 @@
   "name": "@feryardiant/admin-app",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@7.2.0",
+  "packageManager": "pnpm@7.5.0",
   "description": "My Personal Admin App",
   "author": {
     "name": "Fery Wardiyanto",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "engines": {
     "node": "14.x || 16.x",
-    "pnpm": "^7.2.0"
+    "pnpm": "^7.5.0"
   },
   "scripts": {
     "deploy": "firebase deploy",
@@ -30,7 +30,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "eslint": "^8.20.0",
-    "firebase-tools": "^11.3.0",
+    "firebase-tools": "^11.4.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
