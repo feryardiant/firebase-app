@@ -1,6 +1,5 @@
 'use strict'
 
-import { extname } from 'path'
 import Busboy from 'busboy'
 import { simpleParser } from 'mailparser'
 
@@ -94,35 +93,6 @@ const parseBody = req =>
       .end(req.rawBody)
 
     req.pipe(busboy)
-  })
-
-/**
- * @param {import('.').AttachmentFile} attachment
- * @param {import('@google-cloud/storage').Bucket} bucket
- * @returns {Promise<import('@google-cloud/storage').File>}
- */
-export const storeAttachment = (attachment, bucket) =>
-  new Promise((resolve, reject) => {
-    const filename = `${attachment.checksum}${extname(attachment.filename).toLowerCase()}`
-    const file = bucket.file(`attachments/${filename}`)
-    const stream = file.createWriteStream({
-      public: true,
-      metadata: {
-        contentType: attachment.contentType,
-      },
-    })
-
-    stream.on('error', (err) => {
-      attachment.isUploaded = false
-      reject(err)
-    })
-
-    stream.on('finish', () => {
-      attachment.isUploaded = true
-      resolve(file)
-    })
-
-    stream.end(attachment.content)
   })
 
 /**
