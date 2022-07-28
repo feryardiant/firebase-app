@@ -59,6 +59,9 @@
     "extends": [
       "@antfu/ts"
     ],
+    "ignorePatterns": [
+      "test/fixtures/**"
+    ],
     "overrides": [
       {
         "files": [
