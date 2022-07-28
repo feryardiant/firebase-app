@@ -17,7 +17,7 @@ Content-Type: multipart/mixed;  boundary="----=_Part_3283471_1682940703.16590010
 X-Mailer: WebService/1.1.20447 YMailNorrin
 
 ------=_Part_3283471_1682940703.1659001093863
-Content-Type: multipart/alternative;
+Content-Type: multipart/alternative; 
 	boundary="----=_Part_3283468_345320958.1659001093785"
 
 ------=_Part_3283468_345320958.1659001093785
@@ -25,22 +25,22 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
  Reply from Yahoo!
-    On Thursday, July 28, 2022 at 03:52:10 PM GMT+7, ferywardiyanto@yahoo.com <ferywardiyanto@yahoo.com> wrote:
-
+    On Thursday, July 28, 2022 at 03:52:10 PM GMT+7, ferywardiyanto@yahoo.com <ferywardiyanto@yahoo.com> wrote:  
+ 
  Hello with Attachment from Yahoo!
 
 
-
+  
 ------=_Part_3283468_345320958.1659001093785
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 <html><head></head><body><div class="ydp384a9424yahoo-style-wrap" style="font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;"><div></div>
         <div dir="ltr" data-setdir="false">Reply from Yahoo!</div><div><br></div>
-
+        
         </div><div id="yahoo_quoted_9918500039" class="yahoo_quoted">
             <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:13px;color:#26282a;">
-
+                
                 <div>
                     On Thursday, July 28, 2022 at 03:52:10 PM GMT+7, ferywardiyanto@yahoo.com &lt;ferywardiyanto@yahoo.com&gt; wrote:
                 </div>
