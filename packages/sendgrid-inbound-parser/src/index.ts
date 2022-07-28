@@ -1,75 +1,166 @@
-import type { Busboy, FileInfo } from 'busboy'
+import { extname } from 'path'
+import type { Writable } from 'stream'
 import busboy from 'busboy'
-import type { Request, RequestHandler } from 'express'
+import type { BusboyEvents } from 'busboy'
+import type { Request, RequestHandler, Response } from 'express'
 import { simpleParser } from 'mailparser'
+import type { Logger } from '@firebase/logger'
+import type { Bucket, File } from '@google-cloud/storage'
+import type { AttachmentFile, NormalizedEmail } from './types'
 import { normalize } from './normalizer'
 
 declare module 'express' {
   interface Request {
-    rawBody?: any
-    bb?: Busboy
+    rawBody?: Buffer
+    body: NormalizedEmail
   }
 }
 
-export { store as storeAttachment } from './attachment'
-
-export const parseBody = (req: Request) => {
+/**
+ * Store file buffer into writable stream.
+ */
+async function store(stream: Writable, file: Buffer): Promise<void> {
   return new Promise((resolve, reject) => {
-    const bb = busboy({ headers: req.headers })
-    const body: Record<string, any> = {}
-
-    function onError(err: unknown) {
+    stream.on('error', (err) => {
       reject(err)
-    }
+    })
 
-    function onField(field: string, value: string) {
-      body[field] = value
-    }
+    stream.on('finish', () => {
+      resolve()
+    })
 
-    function onFile(name: string, _: ReadableStream, info: FileInfo) {
-      console.info({ name, info }) // eslint-disable-line no-console
-    }
+    stream.end(file)
+  })
+}
 
-    function cleanUp() {
-      bb
-        .off('error', onError)
-        .off('field', onField)
-        .off('file', onFile)
-    }
+/**
+ * Store the attachment file to google storage bucket.
+ */
+export async function storeAttachment(attachment: AttachmentFile, bucket: Bucket): Promise<File> {
+  const ext = extname(attachment.filename as string).toLowerCase()
+  const name = `${attachment.checksum}${ext}`
+  const file = bucket.file(`attachments/${name}`)
 
-    bb
-      .on('field', onField)
-      .on('file', onFile)
-      .on('error', onError)
+  const stream = file.createWriteStream({
+    public: true,
+    metadata: {
+      contentType: attachment.contentType,
+    },
+  })
+
+  await store(stream, attachment.content)
+
+  return file
+}
+
+/**
+ * Normalize field with it's given value
+ */
+function parseFieldValue(field: string, value: string) {
+  if (['envelope', 'charsets'].includes(field))
+    return JSON.parse(value)
+
+  if (field === 'spam_score')
+    return parseFloat(value)
+
+  return value
+}
+
+/**
+ * Parse inbound mail body.
+ */
+function parseBody(req: Request): Promise<Record<string, any>> {
+  const bb = busboy({ headers: req.headers })
+  const body: Record<string, any> = {}
+
+  const onField: BusboyEvents['field'] = (field, value) => {
+    body[field] = parseFieldValue(field, value)
+  }
+
+  const onFile: BusboyEvents['file'] = (filename, _, info) => {
+    body.attachments.push({ filename, info })
+  }
+
+  const cleanUp = () => {
+    bb.off('field', onField)
+    bb.off('file', onFile)
+  }
+
+  return new Promise((resolve, reject) => {
+    bb.on('field', onField)
+    bb.on('file', onFile)
+
+    bb.on('error', (error) => {
+      cleanUp()
+      reject(error)
+    })
 
     bb.on('finish', () => {
-      console.info('body:', body) // eslint-disable-line no-console
-      // req.body = body
+      cleanUp()
       resolve(body)
     })
 
-    bb.on('close', () => {
-      cleanUp()
-      bb.end(req.rawBody)
-    })
+    bb.end(req.rawBody)
 
     req.pipe(bb)
   })
 }
 
+/**
+ * Parse email field in inbound mail body.
+ */
+export async function parseEmail(req: Request): Promise<NormalizedEmail> {
+  const parsed = await parseBody(req)
+  const result: Record<string, any> = {}
+
+  for (const [field, value] of Object.entries(parsed)) {
+    if (field === 'email') {
+      result[field] = await simpleParser(value).then(normalize)
+      continue
+    }
+
+    result[field] = value
+  }
+
+  return result as NormalizedEmail
+}
+
 export function inboundParser(): RequestHandler {
-  return async (req, res, next) => {
-    if (!req.body.email)
+  //
+
+  return async (req, _, next) => {
+    if (req.method !== 'POST')
       return next()
 
     try {
-      await parseBody(req)
-      req.body.email = await simpleParser(req.body.email)
-      req.body.envelope = normalize(req.body)
+      req.body = await parseEmail(req)
       next()
     }
     catch (err) {
       next(err)
+    }
+  }
+}
+
+export function handleInbound(logger: Logger) {
+  //
+
+  return async (req: Request, res: Response) => {
+    try {
+      req.body = await parseEmail(req)
+
+      logger.info('Message recieved', req.body)
+
+      res.json({
+        ok: true,
+      })
+    }
+    catch (error) {
+      logger.error(error)
+
+      res.json({
+        ok: false,
+      })
     }
   }
 }

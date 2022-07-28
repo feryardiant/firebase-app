@@ -1,34 +1,5 @@
 import type { AddressObject, EmailAddress, ParsedMail } from 'mailparser'
-import type { AttachmentFile } from './attachment'
-
-export interface Envelope extends Record<string, any> {
-  date: Date
-  from: EmailAddress
-  to?: EmailAddress | EmailAddress[]
-  messageId?: string
-  // spamReport: string
-  // spamScore: number
-  // headers: Headers
-  // headerLines: HeaderLines
-  // subject: string
-  topic?: string
-  replyTo?: EmailAddress | EmailAddress[]
-  cc?: EmailAddress | EmailAddress[]
-  bcc?: EmailAddress | EmailAddress[]
-  inReplyTo?: string
-  references?: string[]
-  contents: Record<string, string>
-  attachments: AttachmentFile[]
-}
-
-export interface IncomingMail extends Record<string, any> {
-  email: ParsedMail & Record<string, any>
-  envelope: Envelope
-  spam_report: string
-  spam_score: string
-  sender_ip: string
-  subject: string
-}
+import type { NormalizedMail } from './types'
 
 function normalizeAddress(address?: AddressObject | AddressObject[]) {
   const normalized = Array.isArray(address)
@@ -44,37 +15,61 @@ function normalizeAddress(address?: AddressObject | AddressObject[]) {
   return normalized
 }
 
-export function normalize(body: IncomingMail): Envelope {
-  const mail: Envelope = {
-    date: body.email.date as Date,
-    from: body.email.from?.value[0] as EmailAddress,
-    to: normalizeAddress(body.email.to),
-    attachments: body.email.attachments,
-    contents: {},
+export function normalize(email: ParsedMail & Record<string, any>): NormalizedMail {
+  const normalized: NormalizedMail = {
+    date: email.date as Date,
+    envelope: {
+      from: email.from?.value[0] as EmailAddress,
+      to: normalizeAddress(email.to) as EmailAddress[],
+    },
+    subject: email.subject as string,
+    attachments: email.attachments,
+    headers: new Map<string, any>(),
+    message: {},
   }
 
-  if (body.email.headers.has('thread-topic'))
-    mail.topic = body.email.headers.get('thread-topic')?.toString()
+  email.headers.forEach((value, key) => {
+    normalized.headers.set(key, value)
+  })
 
-  const participants = ['to', 'cc', 'bcc', 'replyTo']
-  const types = ['html', 'text', 'textAsHtml']
+  if (email.references) {
+    const references = Array.isArray(email.references)
+      ? email.references
+      : email.references.split(',')
 
-  for (const key of ['messageId', 'inReplyTo', ...participants, ...types]) {
-    if (!body.email[key])
+    normalized.references = references
+      .reduce((arr, ref) => {
+        arr.push(...ref.split(','))
+        return arr.filter(ref => !ref.includes('.ref@mail.yahoo.com'))
+      }, [] as string[])
+      .filter(ref => ref.length > 0)
+  }
+
+  normalized.topic = email.headers.has('thread-topic')
+    ? email.headers.get('thread-topic')?.toString()
+    : email.subject?.toLowerCase().startsWith('re: ')
+      ? email.subject.slice(4)
+      : undefined
+
+  const participants = ['cc', 'bcc', 'replyTo']
+  const messages = ['html', 'text', 'textAsHtml']
+
+  for (const key of ['messageId', 'inReplyTo', ...participants, ...messages]) {
+    if (!email[key])
       continue
 
     if (participants.includes(key)) {
-      mail[key] = normalizeAddress(body.email[key])
+      normalized[key] = normalizeAddress(email[key])
       continue
     }
 
-    if (types.includes(key)) {
-      mail.contents[key] = body.email[key]
+    if (messages.includes(key)) {
+      normalized.message[key] = email[key]
       continue
     }
 
-    mail[key] = body.email[key]
+    normalized[key] = email[key]
   }
 
-  return mail
+  return normalized
 }
