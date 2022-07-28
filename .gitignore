@@ -5,6 +5,7 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 ._
+_.*
 *.cache
 *.log
 *.old
