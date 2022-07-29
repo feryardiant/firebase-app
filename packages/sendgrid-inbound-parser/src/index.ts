@@ -6,7 +6,7 @@ import type { Request, RequestHandler, Response } from 'express'
 import { simpleParser } from 'mailparser'
 import type { Logger } from '@firebase/logger'
 import type { Bucket, File } from '@google-cloud/storage'
-import type { AttachmentFile, NormalizedEmail } from './types'
+import type { AttachmentFile, NormalizedEmail, ParsedEmail } from './types'
 import { normalize } from './normalizer'
 
 declare module 'express' {
@@ -69,7 +69,7 @@ function parseFieldValue(field: string, value: string) {
 /**
  * Parse inbound mail body.
  */
-function parseBody(req: Request): Promise<Record<string, any>> {
+function parseBody(req: Request): Promise<ParsedEmail> {
   const bb = busboy({ headers: req.headers })
   const body: Record<string, any> = {}
 
@@ -97,7 +97,7 @@ function parseBody(req: Request): Promise<Record<string, any>> {
 
     bb.on('finish', () => {
       cleanUp()
-      resolve(body)
+      resolve(body as ParsedEmail)
     })
 
     bb.end(req.rawBody)
@@ -115,7 +115,13 @@ export async function parseEmail(req: Request): Promise<NormalizedEmail> {
 
   for (const [field, value] of Object.entries(parsed)) {
     if (field === 'email') {
-      result[field] = await simpleParser(value).then(normalize)
+      const normalized = await simpleParser(value).then(normalize)
+
+      normalized.headers.set('sender-ip', parsed.sender_ip)
+      normalized.headers.set('spam-report', parsed.spam_report)
+      normalized.headers.set('spam-score', parseFloat(parsed.spam_score))
+
+      result[field] = normalized
       continue
     }
 

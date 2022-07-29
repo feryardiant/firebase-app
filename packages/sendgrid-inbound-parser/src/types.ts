@@ -8,10 +8,8 @@ export interface IncomingEmail extends Record<string, any> {
   from: string
   sender_ip: string
   spam_report: string
-  spam_score: number
   envelope: string
   subject: string
-  charsets: string
   email: Record<string, any>
   attachments: any[]
 }
@@ -52,9 +50,13 @@ export interface NormalizedMail extends Record<string, any> {
 }
 
 export interface ParsedEmail extends IncomingEmail {
+  charsets: string
+  spam_score: string
   email: ParsedMail
 }
 
 export interface NormalizedEmail extends IncomingEmail {
+  charsets: any
+  spam_score: number
   email: NormalizedMail
 }
