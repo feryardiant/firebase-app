@@ -17,7 +17,6 @@
     "test": "web-test-runner --config tests/web-test-runner.config.mjs"
   },
   "dependencies": {
-    "firebase": "^9.9.1",
     "js-cookie": "^3.0.1",
     "nprogress": "^0.2.0",
     "qs": "^6.11.0",
@@ -37,6 +36,7 @@
     "chai": "^4.3.6",
     "dotenv": "^10.0.0",
     "eslint": "^8.20.0",
+    "firebase": "^9.9.1",
     "gray-matter": "^4.0.3",
     "markdown-it": "^12.3.2",
     "markdown-it-anchor": "^8.6.4",

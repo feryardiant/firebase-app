@@ -6,7 +6,7 @@ export const install = async ({ isClient, router }) => {
     return
 
   await router.isReady()
-  const { registerSW } = await import('virtual:pwa-register')
+  // const { registerSW } = await import('virtual:pwa-register')
 
-  registerSW({ immediate: true })
+  // registerSW({ immediate: true })
 }

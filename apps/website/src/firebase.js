@@ -1,8 +1,8 @@
-import firebase from 'firebase'
+import { initializeApp } from 'firebase/app'
 
 const initialized = {}
 const isDev = import.meta.env.DEV
-const $app = firebase.initializeApp(FIREBASE_CONFIG) // eslint-disable-line no-undef
+const $app = initializeApp(FIREBASE_CONFIG) // eslint-disable-line no-undef
 
 /**
  * @param {firebase.app.App} app
@@ -15,8 +15,8 @@ export const useAnalytics = async (app = $app) => {
   if (initialized.analytics)
     return initialized.analytics
 
-  await import('firebase/analytics')
-  initialized.analytics = firebase.analytics(app)
+  const { getAnalytics } = await import('firebase/analytics')
+  initialized.analytics = getAnalytics(app)
 
   return initialized.analytics
 }
@@ -29,8 +29,8 @@ export const useAuth = async (app = $app) => {
   if (initialized.auth)
     return initialized.auth
 
-  await import('firebase/auth')
-  const auth = firebase.auth(app)
+  const { getAuth } = await import('firebase/auth')
+  const auth = getAuth(app)
 
   if (isDev)
     auth.useEmulator('http://localhost:9099')
@@ -63,8 +63,8 @@ export const useDatabase = async (app = $app) => {
   if (initialized.database)
     return initialized.database
 
-  await import('firebase/database')
-  const database = firebase.database(app)
+  const { getDatabase } = await import('firebase/database')
+  const database = getDatabase(app)
 
   if (isDev)
     database.useEmulator('localhost', 9000)
@@ -80,8 +80,8 @@ export const useFirestore = async (app = $app) => {
   if (initialized.firestore)
     return initialized.firestore
 
-  await import('firebase/firestore')
-  const firestore = firebase.firestore(app)
+  const { getFirestore } = await import('firebase/firestore')
+  const firestore = getFirestore(app)
 
   if (isDev)
     firestore.useEmulator('localhost', 8080)
@@ -97,8 +97,8 @@ export const useFunctions = async (app = $app) => {
   if (initialized.functions)
     return initialized.functions
 
-  await import('firebase/functions')
-  const functions = firebase.functions(app)
+  const { getFunctions } = await import('firebase/functions')
+  const functions = getFunctions(app)
 
   if (isDev)
     functions.useEmulator('localhost', 5001)
@@ -114,8 +114,8 @@ export const useMessaging = async (app = $app) => {
   if (initialized.messaging)
     return initialized.messaging
 
-  await import('firebase/messaging')
-  initialized.messaging = firebase.messaging(app)
+  const { getMessaging } = await import('firebase/messaging')
+  initialized.messaging = getMessaging(app)
 
   return initialized.messaging
 }
@@ -128,8 +128,8 @@ export const useStorage = async (app = $app) => {
   if (initialized.storage)
     return initialized.storage
 
-  await import('firebase/storage')
-  initialized.storage = firebase.storage(app)
+  const { getStorage } = await import('firebase/storage')
+  initialized.storage = getStorage(app)
 
   return initialized.storage
 }
