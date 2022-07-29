@@ -57,7 +57,7 @@ jobs:
     - name: Code Quality
       run: |
         pnpm -r lint
-        pnpm -r test
+        pnpm test
 
     - name: Build Distributions
       run: pnpm -r build
