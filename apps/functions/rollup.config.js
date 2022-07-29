@@ -9,7 +9,7 @@ const external = Object.keys(Object.assign({}, pkg.dependencies, pkg.devDependen
 
 export default {
   input: 'src/index.js',
-  output: [{ file: pkg.main, format: 'cjs', sourcemap: true, exports: 'auto' }],
+  output: [{ file: pkg.main, format: 'cjs', sourcemap: false, exports: 'auto' }],
   external,
   plugins: [json(), commonjs(), nodeResolve(), terser()],
 }
