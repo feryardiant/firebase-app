@@ -15,6 +15,35 @@ function normalizeAddress(address?: AddressObject | AddressObject[]) {
   return normalized
 }
 
+function normalizeReferences(refs?: string | string[]) {
+  if (!refs)
+    return []
+
+  const references = Array.isArray(refs) ? refs : refs.split(',')
+
+  return references
+    .reduce((arr, ref) => {
+      arr.push(...ref.split(','))
+      return arr.filter(ref => !ref.includes('.ref@mail.yahoo.com'))
+    }, [] as string[])
+    .filter(ref => ref.length > 0)
+}
+
+const excludedHeaders: string[] = [
+  'content-type',
+  'date',
+  'from',
+  'to',
+  'cc',
+  'bcc',
+  'mime-version',
+  'in-reply-to',
+  'message-id',
+  'references',
+  'reply-to',
+  'subject',
+]
+
 export function normalize(email: ParsedMail & Record<string, any>): NormalizedMail {
   const normalized: NormalizedMail = {
     date: email.date as Date,
@@ -24,42 +53,32 @@ export function normalize(email: ParsedMail & Record<string, any>): NormalizedMa
     },
     subject: email.subject as string,
     attachments: email.attachments,
+    messageId: email.messageId as string,
     headers: new Map<string, any>(),
+    references: normalizeReferences(email.references),
     message: {},
   }
 
   email.headers.forEach((value, key) => {
-    normalized.headers.set(key, value)
+    if (!excludedHeaders.includes(key))
+      normalized.headers.set(key, value)
   })
-
-  if (email.references) {
-    const references = Array.isArray(email.references)
-      ? email.references
-      : email.references.split(',')
-
-    normalized.references = references
-      .reduce((arr, ref) => {
-        arr.push(...ref.split(','))
-        return arr.filter(ref => !ref.includes('.ref@mail.yahoo.com'))
-      }, [] as string[])
-      .filter(ref => ref.length > 0)
-  }
 
   normalized.topic = email.headers.has('thread-topic')
     ? email.headers.get('thread-topic')?.toString()
     : email.subject?.toLowerCase().startsWith('re: ')
       ? email.subject.slice(4)
-      : undefined
+      : email.subject
 
   const participants = ['cc', 'bcc', 'replyTo']
   const messages = ['html', 'text', 'textAsHtml']
 
-  for (const key of ['messageId', 'inReplyTo', ...participants, ...messages]) {
+  for (const key of ['inReplyTo', ...participants, ...messages]) {
     if (!email[key])
       continue
 
     if (participants.includes(key)) {
-      normalized[key] = normalizeAddress(email[key])
+      normalized.envelope[key] = normalizeAddress(email[key])
       continue
     }
 

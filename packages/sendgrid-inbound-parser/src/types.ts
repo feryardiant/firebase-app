@@ -39,15 +39,14 @@ export interface NormalizedMail extends Record<string, any> {
   date: Date
   envelope: Envelope
   headers: Map<string, any>
-  messageId?: string
+  messageId: string
   // spamReport: string
   // spamScore: number
   // headerLines: HeaderLines
   subject: string
   topic?: string
-  replyTo?: EmailAddress | EmailAddress[]
   inReplyTo?: string
-  references?: string[]
+  references: string[]
   message: Record<keyof MessageText | string, string>
   attachments: AttachmentFile[]
 }
