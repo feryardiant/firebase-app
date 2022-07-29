@@ -3,6 +3,7 @@ import { expect } from 'chai'
 import { stub } from 'sinon'
 import supertest from 'supertest'
 import admin from 'firebase-admin'
+import functions from 'firebase-functions'
 import testInit from 'firebase-functions-test'
 
 import { loadEnv } from '../../../scripts/util'
@@ -12,38 +13,46 @@ const env = loadEnv(resolve(__dirname, '../../.env'))
 const test = testInit(JSON.parse(env.FIREBASE_CONFIG))
 
 describe(pkg.name, () => {
-  let apiFunc, adminStub
+  let adminStub, functionsStub, inbound
 
   before(async () => {
+    functionsStub = stub(functions, 'logger')
     adminStub = stub(admin, 'initializeApp').returns({
       firestore: stub(admin, 'firestore'),
       storage: stub(admin, 'storage').returns({
         bucket: stub()
       })
     })
-
-    const { func } = await import('../src')
-
-    /** @type {import('supertest').Test} */
-    apiFunc = supertest(func)
   })
 
   after(() => {
     adminStub.restore()
+    functionsStub.restore()
     test.cleanup()
   })
 
-  describe('func', () => {
-    it('should be ok', async () => {
-      const res = await apiFunc.get('/api')
+  describe('inbound', () => {
+    beforeEach(async () => {
+      const functions = await import('../src')
 
-      expect(res.status).equal(200)
+      inbound = test.wrap(functions.inbound)
     })
 
-    it('should redirect', async () => {
-      const res = await apiFunc.get('/foo')
+    it('should be ok', async () => {
+      const req = {
+        method: 'GET'
+      }
 
-      expect(res.status).equal(302)
+      const res = {
+        status: (code) => {
+          expect(code).equal(404)
+        },
+        json: (obj) => {
+          expect(obj.ok).equal(false)
+        }
+      }
+
+      await inbound(req, res)
     })
   })
 })

@@ -15,13 +15,13 @@
   },
   "scripts": {
     "deploy": "firebase deploy",
+    "dev": "pnpm run --parallel --if-present dev",
     "emulator:start": "firebase emulators:start",
-    "emulator:test": "firebase emulators:exec \"pnpm test -r\"",
     "prepare": "husky install scripts/husky",
     "publish:packages": "pnpm -r publish --ignore-scripts --no-git-checks",
-    "serve": "run-p emulator:start watch",
+    "serve": "run-p emulator:start dev",
     "shell": "firebase functions:shell",
-    "watch": "pnpm run --parallel --if-present watch"
+    "test": "firebase emulators:exec \"pnpm test -r\""
   },
   "devDependencies": {
     "@antfu/eslint-config-basic": "^0.25.2",
@@ -33,6 +33,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "eslint": "^8.20.0",
+    "esm": "^3.2.25",
     "firebase-tools": "^11.4.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",

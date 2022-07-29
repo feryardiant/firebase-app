@@ -11,13 +11,10 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "dev": "rollup -c --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "start": "firebase functions:shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log",
-    "test": "mocha -r esm 'test/*.spec.js'",
-    "watch": "rollup -c --watch"
+    "test": "mocha -r esm 'test/*.spec.js'"
   },
   "dependencies": {
     "@feryardiant/sendgrid-inbound-parser": "workspace:*",
