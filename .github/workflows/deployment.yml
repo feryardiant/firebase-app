@@ -34,12 +34,16 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
 
-    - name: Set up Node.JS
-      uses: actions/setup-node@v2
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v2.2.1
+
+    - name: Setup Node.JS
+      uses: actions/setup-node@v3
       with:
-        node-version: '14'
+        node-version: '16.x'
+        cache: 'pnpm'
 
     - name: Set up Java
       uses: actions/setup-java@v2
@@ -47,26 +51,8 @@ jobs:
         distribution: 'adopt'
         java-version: '11'
 
-    - name: Cache Dependencies
-      uses: actions/cache@v2
-      env:
-        cache-name: pnpm-cache
-      with:
-        path: |
-          ~/.pnpm-store
-          */*/node_modules
-          ${{ env.FIREBASE_EMULATORS_PATH }}
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-      continue-on-error: true
-
-    - name: Install Dependencies
-      uses: pnpm/action-setup@v2.0.1
-      with:
-        version: 6.10.0
-        run_install: |
-          - args: [--frozen-lockfile, --package-import-method, copy]
+    - name: Install dependencies
+      run: pnpm install
 
     - name: Code Quality
       run: |
