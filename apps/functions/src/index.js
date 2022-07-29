@@ -1,7 +1,7 @@
 import { https, logger } from 'firebase-functions'
 import { initializeApp } from 'firebase-admin'
-import { requestHandler } from './app'
+import { inboundHandler } from './email'
 
 const admin = initializeApp()
 
-export const func = https.onRequest(requestHandler(admin, logger))
+export const inbound = https.onRequest(inboundHandler(admin, logger))

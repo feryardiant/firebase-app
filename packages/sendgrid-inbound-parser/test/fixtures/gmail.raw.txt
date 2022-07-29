@@ -1,0 +1,38 @@
+Received: by mx0081p1iad2.sendgrid.net with SMTP id wT7VopqMdR Thu, 28 Jul 2022 08:27:32 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (unknown [209.85.218.41]) by mx0081p1iad2.sendgrid.net (Postfix) with ESMTPS id 4F12F300EB8 for <test@feryardiant.id>; Thu, 28 Jul 2022 08:27:32 +0000 (UTC)
+Received: by mail-ej1-f41.google.com with SMTP id z23so1892315eju.8 for <test@feryardiant.id>; Thu, 28 Jul 2022 01:27:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112; h=mime-version:reply-to:from:date:message-id:subject:to; bh=1me9bBGqodvSbPYBXEAHcOXW99JYdjd94O7rwi47aIo=; b=U4aFkpADUeFXBb+f7jpuT1MMyb5mDlOLVbPQOkAJRZ45YCO3r3rbRuiCHi7Aebgg7h dC/Cn7lR6ofVn/bSEoRSLfNg4J7DrfFrqNU6407hUpnWWnbzKxT3a/OtUusdKH3wKuXg nv9jkcij1wlXEma/WE54B+jsMtycPCHyf0wvucHFPfS+wBVnFbbGJiH2WBS1mPcUPhHT WIX4A1PfvizrKnuHAfbCdJlwVkGq8EPNVpoBO2+l/nz0BXb36/WK3zepwz5lzvE0Yd3H 38F+f97fgCqvZT35Cjv6zdgfLfoK8FOU9da/3fBk64gAn/US4NQLTM0s/ZWwym20lFxo c/9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20210112; h=x-gm-message-state:mime-version:reply-to:from:date:message-id :subject:to; bh=1me9bBGqodvSbPYBXEAHcOXW99JYdjd94O7rwi47aIo=; b=hcN6HBFeVku8gh5Rhn9cBwXcnUvzFIzz8Z6PhYDxsGRRVaXRjdFoBWlTBeKk06JDgD p4vH3mq74EAdnP3MmFJ6ocMjSvBkbI72qJldNGls2B7RWEs7bmnuRS/f/xUcUEZPKZC1 4kmQqU7N53Xrv8ZWEGxT61bteDsNcmZXoI2m/ljcB301+mIRC5VFNSHTD5juk11MGdqY CtwyWUV622SFQR+bgDC+tTq5+IqoqscAU8ZSj51GH0Yejv9k17e7dNnCvuli/u9SVJ03 0jkakhPlQQg4VFZNIDc38fpGKazCXgK0v0HMaj34dgYRhm4YhdO37jVkz1/now4ZAt4X T1nQ==
+X-Gm-Message-State: AJIora99v3dxpO43EReeXMi49e5yJIljgUbvlagsor/VcOgy8MAWqkTD mV34bleBr0R6WiM1n1WvYQ1g9gk0hXSalEbVyW/axk1ZX8I=
+X-Google-Smtp-Source: AGRyM1vY0bHwXMluGfR2Hv31bV8MpZY5SpnHjBqzuNl23nSUFad8qdkpaNyldv2Eq8JjbquufHXIbRAU1zhLqVY7khs=
+X-Received: by 2002:a17:907:b590:b0:72e:d8ca:5b8d with SMTP id qx16-20020a170907b59000b0072ed8ca5b8dmr20108239ejc.629.1658996851001; Thu, 28 Jul 2022 01:27:31 -0700 (PDT)
+MIME-Version: 1.0
+Reply-To: ferywardiyanto@gmail.com
+From: Fery Wardiyanto <ferywardiyanto@gmail.com>
+Date: Thu, 28 Jul 2022 15:27:20 +0700
+Message-ID: <CAObhxnzbc-CQstq-1LutmMeyp+6SRLUUtfkKXiVALD3T0RcSWw@mail.gmail.com>
+Subject: Sent from Gmail
+To: test@feryardiant.id
+Content-Type: multipart/alternative; boundary="000000000000fccf9905e4d94dbd"
+
+--000000000000fccf9905e4d94dbd
+Content-Type: text/plain; charset="UTF-8"
+
+Hello from Gmail
+
+---
+Sincerely :)
+Fery Wardiyanto
+
+--000000000000fccf9905e4d94dbd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello from Gmail<div><br clear=3D"all"><div><div dir=3D"lt=
+r" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D=
+"ltr"><div><div dir=3D"ltr"><div dir=3D"ltr"><div><span style=3D"font-size:=
+small">---</span></div><div>Sincerely<span style=3D"font-size:small">=C2=A0=
+:)</span></div><div><font size=3D"2">Fery Wardiyanto<br></font></div></div>=
+</div></div></div></div></div></div></div>
+
+--000000000000fccf9905e4d94dbd--

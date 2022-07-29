@@ -1,0 +1,106 @@
+{
+  "dkim": "{@yahoo.com : pass}",
+  "envelope": {
+    "to": [
+      "test@feryardiant.id"
+    ],
+    "from": "ferywardiyanto@yahoo.com"
+  },
+  "subject": "Sent from Yahoo!",
+  "charsets": {
+    "to": "UTF-8",
+    "subject": "UTF-8",
+    "from": "UTF-8"
+  },
+  "SPF": "pass",
+  "to": "\"test@feryardiant.id\" <test@feryardiant.id>",
+  "from": "\"ferywardiyanto@yahoo.com\" <ferywardiyanto@yahoo.com>",
+  "sender_ip": "66.163.189.175",
+  "spam_report": "Spam detection software, running on the system \"mx0111p1mdw1.sendgrid.net\",\nhas NOT identified this incoming email as spam.  The original\nmessage has been attached to this so you can view it or label\nsimilar future email.  If you have any questions, see\n@@CONTACT_ADDRESS@@ for details.\n\nContent preview:  Hello from Yahoo! Hello from Yahoo! [...] \n\nContent analysis details:   (1.0 points, 5.0 required)\n\n pts rule name              description\n---- ---------------------- --------------------------------------------------\n 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail provider\n                            (ferywardiyanto[at]yahoo.com)\n 1.0 FORGED_YAHOO_RCVD      'From' yahoo.com does not match 'Received' headers\n 0.0 HTML_MESSAGE           BODY: HTML included in message\n\n",
+  "spam_score": 1.024,
+  "email": {
+    "attachments": [],
+    "headers": {
+      "received": [
+        "by mx0111p1mdw1.sendgrid.net with SMTP id 6qe7tqYld4 Thu, 28 Jul 2022 08:49:31 +0000 (UTC)",
+        "from sonic314-49.consmr.mail.ne1.yahoo.com (unknown [66.163.189.175]) by mx0111p1mdw1.sendgrid.net (Postfix) with ESMTPS id DDA4F840C1B for <test@feryardiant.id>; Thu, 28 Jul 2022 08:49:31 +0000 (UTC)",
+        "from sonic.gate.mail.ne1.yahoo.com by sonic314.consmr.mail.ne1.yahoo.com with HTTP; Thu, 28 Jul 2022 08:49:31 +0000"
+      ],
+      "dkim-signature": {
+        "value": "v=1",
+        "params": {
+          "a": "rsa-sha256",
+          "c": "relaxed/relaxed",
+          "d": "yahoo.com",
+          "s": "s2048",
+          "t": "1658998171",
+          "bh": "w2/hV3DGQ03gCCe5uTfX3ca1SqResJIp3cRlrn8RRqY=",
+          "h": "Date:From:To:Subject:References:From:Subject:Reply-To",
+          "b": "ezWUOdIJCt7/DOCMRzf4DHaf2WLFOBuap9ePLUVmwZVrpHdEnQUYc7WAMIkTDS5uHQK2xYu7Cr2Texiv4f+Sc12e9P+3ZE7Q25GCjQhBIxtZbMbWa9wtvNSWO+xAya27W/9nvyiZNHPtI1odpEtHKcatW08XYRCiaBkYAWjpGi392sRCzJO3xt7sKjDfmD6aqgjFo3aRJnIsOD54Lm93Fte7BkjNfPIPdlUQt4iwP2Nt7+f4/xE6ils0g9rwlsv/PfguPJggekK5higZhXz9ZiQk1J0CIZVwm0AY/tN48Opq1madtJClwjvZyzLeonD9N5dSoitPrjRT5vrhrQbGxA=="
+        }
+      },
+      "x-sonic-dkim-sign": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1658998171; bh=X6lTsGUpCkPOooOwXgIrie7rcIwpELE1T1/5RT2+9e5=; h=X-Sonic-MF:Date:From:To:Subject:From:Subject; b=Zf8dbSxQBRhWQK3TZ8GBoXmewfICycZOmj6VJtgjoXv6Ft7ASV64G3fYk1A8di+3Up9xfxUqIrb+pOToJBLrFvU0mQvvIXQJSrqOfdC5Jc1s1Gaqh4zqCJq7b3DrxJnskbM4shbQbbCZjttQktny+1UZL7ZAF1Bkcpseir6KU64lT3kY/IBGl1G7MTrJk1ozQPCVHEVJoO3DpZ3ck7IoLk+oktWTSUlYINAisEslilROo/rAloGLQLD2Fg+kuW0oeX6CcZq4UXFKhABL6/DiVj05xZWwRCZTaSQqezloWzkJdq1bMTFfEK9h4gPysItk87s0QJqoG4VzYCBDLTCzQg==",
+      "x-ymail-osg": "axDWGlEVM1lH9WEoSbdpEtdhSeUM.ttwolBS32mV_SZPTRAHo0g40Kg1odtIz.t i66VDL._Q_Jd5UrEzmQt3DYvNZ4B4bLR7iHouBDVVL.HJRVK4NBr12CSGgtG0B0zUVUeIs3ffd7G wDcsJOPxyHQU0Z3QcVdQg7YAc2YjpbphwUD.8H3dFZaAXRMVjPtaSrGg71EwxJcfNdq4swQ.E7R8 n6Ge5DKfWUiMOQoRUUsMC41PDKcR8IZ84kIw2SIENyAKVG1ht.8Do60Ou9HcvOlPPg1Jr162bTGR 6jmOYB5jybmnzMEAedHQEdbEPWCMgSa_fwcVCnvUEKJSQjaoMGT6ZxKx32Ym2SNpptYU2A1HzmGh S10ba6xxhU2zb8yvaCaOFKNR4jSfPGW1SVAI3fL6uwQw9aZaN4Tf8ZL_1nuxtTlVf3hVvHU1nzQU blAFriT3ZYYZ3fZMv4LkNDXDyKkbB8HrLqyXfA7qPJUUyB7JRKp9J2eqZhSOE9gs7CMsgORiDeR0 y64TYzznReH0Jw.ycBi_TBXFV5nQs0ZAl.41vHmJ.frUZ1LjuhdRs0n9z7SAOh1PeoaobKdJ1uhq IQfuZXxFhU9uWC1lzpWz1k3.LUMe.DOJHTXDxjTKx869dXSf0mToqTOKhLJBrwh5d0resL6Y6InA 94fk5knw2F2Hg3NazJ.t_E99lQQx25dQfomcSgfbZ8sx2NqXoSlHgN85kde6WtPPQnjDiNVtpdXT QRZS2MD.VUw6lMoljfKddSIRk6gl01s5fSoLXBzNnrVup8KAamxYMLyfpHJwCianBRk9P_6Y8TXx wE2UFX2PAb36RvnUfmJwEJX1RVcvoYpZnCyL2H1IbV7yFb2GkV.bjIRYphwNbwTAF.YmwJ2nhb68 E.Qzk1IyQeX6tQ14cVisPlNVENlLpqIiI348456op.zjD.JRVlAf4H77Xt7.T_zTkjN2l2CsG8Dq v2psTN.SI6mRi2R5KOzKo9hA9g9mk61gZOnJ9sFkMj7LMtPGXn.o__J3G_vlArjbuLl1dRC11mRN IYypcb_nATalFO3JcaP43mJurWoXwJft0VOAtByz1sOH23mI3knVo3FAse5nMXXyCtlpBOTv1jU3 dXHl5PJwHVuXvpXYi0ztpxl8bqVMPevWiZPJdp4o.p1OerzcBuItnDaAHkYCxtfSs.yHjZhKIIUh IDLCmXeFHXnRsQGtDGoZxEevaCWings6I_R5BGMML6j8UgJOIlh2UqkXmAs4vuK4565q_JrBqzGI F.EKq9SvKYq.7BICMEAk.lONIewBAjSxFWwP8CxwK1SROyfhGxPwK32vo0v3079K1fsXL_9wIGtd zY02UCZ8ebvuo6Gjp2F6pdGy2VbI7VF9zB7kkyNxMteCnv1M83bPkx9ieUHcKuAI.G060KQWA1td 9fq2saEur0sA8LaOX2GGVlb1OsKsc7B5r8ZdMTdV7H7tw6hlWB2PP5VdpFUm2og0jwiRoGqzulkV zCbnHn.7TG3lVeR2Xm_wZaiItw.9FB6gAiPGaBbCGo47nQ4m5Mv3Sv5Cf35R54L34hRXTDf6HvKo t1mzY8W8QbaoCJKqUnx7PFSadwFBDeYFjlXkJFacYPQpLSpRD8qCCWTK3dlwBg0zOCYQLx7Tl46t d.dtcj06UwsXH6dMSElzg07ti4zje13ISK4YLTQW.Xlk28MlLFneBK5nEy6b6syFYyjFqzHgPbNH qT2AdJQJGLlE5.YPsO6eHUnEoTUT67eu.upEDV__UUe9GGZ.R9M2dwrnLfilm21HlDKRYDoaLR9I jo_ZzhQ_bz6EPt2kmbW18X6iPoRorezygcNuz_60fAeE4dP6se0Da_QNRsO45LgJguAH8gQU9WLM Zx5xBvWeqqRg48Gi2FG.lBbwIwP0Erkurc5BlWBNqIypFz7EHvk0BJeUmHasmj7Pgo3d3VDAQRmm tvhKNh4J0VPf8UVbGBxWYfg.4Q7Huwo8MMJhTus1xJcTpJdS.8NFGpJ.GxD2rFApAu0XJhmUZa4B MLK9S6ExuRz97ISD7lZbcUkOyvmPBTe0GigU7HUv7xEatxpqANc9QEB_BzzFX3.nd.u.WnKhCz4k 7S6HFmiKgl1y2xrDjEWaZaLlyX81v4r5zjsjNtPPG7Ur_8Mxrqfb1u9m1gyGKU2vO0hfTQpJ2XJn g9xgNoZw75.xOIj9U83HSXRzWpqzhYIuCwkY0YpHc7sRFjilm_txpV1F4.joj2mGdg37w5KU7_.b M1Uv3uEouGxI2upoSkT0V401COwhV6y1xmi3pUTxH",
+      "x-sonic-mf": "<ferywardiyanto@yahoo.com>",
+      "date": "2022-07-28T08:47:30.000Z",
+      "from": {
+        "value": [
+          {
+            "address": "ferywardiyanto@yahoo.com",
+            "name": ""
+          }
+        ],
+        "html": "<span class=\"mp_address_group\"><a href=\"mailto:ferywardiyanto@yahoo.com\" class=\"mp_address_email\">ferywardiyanto@yahoo.com</a></span>",
+        "text": "ferywardiyanto@yahoo.com"
+      },
+      "to": {
+        "value": [
+          {
+            "address": "test@feryardiant.id",
+            "name": ""
+          }
+        ],
+        "html": "<span class=\"mp_address_group\"><a href=\"mailto:test@feryardiant.id\" class=\"mp_address_email\">test@feryardiant.id</a></span>",
+        "text": "test@feryardiant.id"
+      },
+      "message-id": "<1231932446.3270984.1658998050840@mail.yahoo.com>",
+      "subject": "Sent from Yahoo!",
+      "mime-version": "1.0",
+      "content-type": {
+        "value": "multipart/alternative",
+        "params": {
+          "boundary": "----=_Part_3270983_1876296630.1658998050839"
+        }
+      },
+      "references": "<1231932446.3270984.1658998050840.ref@mail.yahoo.com>",
+      "x-mailer": "WebService/1.1.20447 YMailNorrin"
+    },
+    "html": "<html><head></head><body><div class=\"yahoo-style-wrap\" style=\"font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;\"><div dir=\"ltr\" data-setdir=\"false\">Hello from Yahoo!</div></div></body></html>",
+    "text": "Hello from Yahoo!",
+    "textAsHtml": "<p>Hello from Yahoo!</p>",
+    "subject": "Sent from Yahoo!",
+    "references": "<1231932446.3270984.1658998050840.ref@mail.yahoo.com>",
+    "date": "2022-07-28T08:47:30.000Z",
+    "to": {
+      "value": [
+        {
+          "address": "test@feryardiant.id",
+          "name": ""
+        }
+      ],
+      "html": "<span class=\"mp_address_group\"><a href=\"mailto:test@feryardiant.id\" class=\"mp_address_email\">test@feryardiant.id</a></span>",
+      "text": "test@feryardiant.id"
+    },
+    "from": {
+      "value": [
+        {
+          "address": "ferywardiyanto@yahoo.com",
+          "name": ""
+        }
+      ],
+      "html": "<span class=\"mp_address_group\"><a href=\"mailto:ferywardiyanto@yahoo.com\" class=\"mp_address_email\">ferywardiyanto@yahoo.com</a></span>",
+      "text": "ferywardiyanto@yahoo.com"
+    },
+    "messageId": "<1231932446.3270984.1658998050840@mail.yahoo.com>"
+  }
+}

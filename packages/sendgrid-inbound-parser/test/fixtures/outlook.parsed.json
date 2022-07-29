@@ -1,0 +1,129 @@
+{
+  "dkim": "{@outlook.com : pass}",
+  "to": "\"test@feryardiant.id\" <test@feryardiant.id>",
+  "from": "Fery Wardiyanto <feryardiant@outlook.com>",
+  "sender_ip": "40.92.53.49",
+  "spam_report": "Spam detection software, running on the system \"mx0068p1iad2.sendgrid.net\",\nhas NOT identified this incoming email as spam.  The original\nmessage has been attached to this so you can view it or label\nsimilar future email.  If you have any questions, see\n@@CONTACT_ADDRESS@@ for details.\n\nContent preview:  Hello from Outlook Hello from Outlook [...] \n\nContent analysis details:   (0.0 points, 5.0 required)\n\n pts rule name              description\n---- ---------------------- --------------------------------------------------\n 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail provider\n                            (feryardiant[at]outlook.com)\n 0.0 HTML_MESSAGE           BODY: HTML included in message\n 0.0 T_MIME_NO_TEXT         No (properly identified) text body parts\n\n",
+  "envelope": {
+    "to": [
+      "test@feryardiant.id"
+    ],
+    "from": "feryardiant@outlook.com"
+  },
+  "subject": "Sent from Outlook",
+  "spam_score": 0.012,
+  "charsets": {
+    "to": "UTF-8",
+    "subject": "UTF-8",
+    "from": "UTF-8"
+  },
+  "SPF": "pass",
+  "email": {
+    "attachments": [],
+    "headers": {
+      "received": [
+        "by mx0068p1iad2.sendgrid.net with SMTP id pIWdzYRDgh Thu, 28 Jul 2022 09:40:18 +0000 (UTC)",
+        "from APC01-SG2-obe.outbound.protection.outlook.com (unknown [40.92.53.49]) by mx0068p1iad2.sendgrid.net (Postfix) with ESMTPS id BE4A71E0FB3 for <test@feryardiant.id>; Thu, 28 Jul 2022 09:40:17 +0000 (UTC)",
+        "from SEZPR04MB5697.apcprd04.prod.outlook.com (2603:1096:101:46::9) by TY0PR04MB5635.apcprd04.prod.outlook.com (2603:1096:400:1ac::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5482.10; Thu, 28 Jul 2022 09:40:14 +0000",
+        "from SEZPR04MB5697.apcprd04.prod.outlook.com ([fe80::fdba:41b4:5187:7c34]) by SEZPR04MB5697.apcprd04.prod.outlook.com ([fe80::fdba:41b4:5187:7c34%6]) with mapi id 15.20.5458.024; Thu, 28 Jul 2022 09:40:14 +0000"
+      ],
+      "arc-seal": "i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none; b=l5bogRUIZ44o44mi7RytFUIDVa86eEL2d/o2vv+kX1gxthALJWQumE/ql/4fNNKVQLOBwSlUHkkUV1qbp0YF2i3Tq0s41hx91FmbhDwkzDrzhT98JLVPja7xpai6RU5meO/eeSTW2v/Fzi0gGJRJhTSvbYz0YIlnWOKiAYV1fxLHoUJFeVXMj9jMgdKnA0XnMAjlRstbo/3ltcHEOgeEUhrRC3mv2YXWy0t+B7QndKlAbuvwty0m6PdpUUNrc8HDcveDibT1ZIEOd/nHz+otTO73LN8aS+wh/G3gkr7JtCEYE+b+62hHX4oAMtfd6Ms6LOtMRwk1bR+AQm93OqHweg==",
+      "arc-message-signature": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1; bh=ZdYsYFYuq+dgx41jb4qZzi0MwLPErh78QUsBS72ufOM=; b=K1cz+AT/tT+djBI8rLgURh47kid3ZiRA/ZpVvlAGNCAHdM+brTd3pAHrhfTj42WP0ovyWqMWJx46xJz2SeNHx6w+DOABtPVIjxIafmWyT5KLDDkEhrUcIQf1Zi5L2c0re0hQ6vb3Oj+s8wYB9wpm4MftmccsFVLMyLiJoCcXv05dXzcAkplB0O4T+0Z9buigBKqN2LTif+h66PxvWp9IDtvBczYSZjS62g5fbwyboHxNMv/eJEsMo8B6q4lXdQKOVD6yCittS2LKP9Lz3OWtZJdfEfoAgHVVUf27O2Z5AlIbp6WtQN5jktJmj1Rq6iTHZdhwaYobgNr/f+H641uAaQ==",
+      "arc-authentication-results": "i=1; mx.microsoft.com 1; spf=none; dmarc=none; dkim=none; arc=none",
+      "dkim-signature": {
+        "value": "v=1",
+        "params": {
+          "a": "rsa-sha256",
+          "c": "relaxed/relaxed",
+          "d": "outlook.com",
+          "s": "selector1",
+          "h": "From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck",
+          "bh": "ZdYsYFYuq+dgx41jb4qZzi0MwLPErh78QUsBS72ufOM=",
+          "b": "MOYDtwNtA6kwBepMtYIlxqFzDarlhotoFdi8CBLuXJMevneeZ648/6eB7ECS6JnF2qiJxEGABFbdYjdq9LMbSh9D7hQO2nqCA1ZpjSfiWAawVvRp4VEHSJS/DpX5FQekSa0vOxGssj+8xiQQ4dzfJnwpXlDiPIsRqsvIqHs3loG6GC6K3IphtF6i5gPeESLhHFygPqLIVb9FEjVju5FkPpjrF2fIkF1UDWmPi7H2VQIpr817LEYsh10RVfmFBXuJY4RhE94kFA/1uzMT/2jx4BuHrqokrjEnc2Uj3Kk93zUyH4zmk50Mz7dtBVrvPB+sXct90RZrH8VPLxvFqImXTw=="
+        }
+      },
+      "from": {
+        "value": [
+          {
+            "address": "feryardiant@outlook.com",
+            "name": "Fery Wardiyanto"
+          }
+        ],
+        "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Fery Wardiyanto</span> &lt;<a href=\"mailto:feryardiant@outlook.com\" class=\"mp_address_email\">feryardiant@outlook.com</a>&gt;</span>",
+        "text": "Fery Wardiyanto <feryardiant@outlook.com>"
+      },
+      "to": {
+        "value": [
+          {
+            "address": "test@feryardiant.id",
+            "name": ""
+          }
+        ],
+        "html": "<span class=\"mp_address_group\"><a href=\"mailto:test@feryardiant.id\" class=\"mp_address_email\">test@feryardiant.id</a></span>",
+        "text": "test@feryardiant.id"
+      },
+      "subject": "Sent from Outlook",
+      "thread-topic": "Sent from Outlook",
+      "thread-index": "AQHYomYBah8FFr0wZU6Z3ld3iLzl+g==",
+      "date": "2022-07-28T09:40:14.000Z",
+      "message-id": "<SEZPR04MB56978A389E9B1C6CA21453A1B1969@SEZPR04MB5697.apcprd04.prod.outlook.com>",
+      "accept-language": "id-ID, en-US",
+      "content-language": "id-ID",
+      "suggested_attachment_session_id": "29768035-66c7-9730-dde6-cb684ef82428",
+      "x-ms-exchange-messagesentrepresentingtype": "1",
+      "x-tmn": "[4SRQttsHrxyvtT7BwJwjdhhLaSIkRRFD3FDtzjar431jGQK78bhWCfFZCZAnBvA5CT2fzc/ecew=]",
+      "x-ms-publictraffictype": "Email",
+      "x-ms-office365-filtering-correlation-id": "b08d3649-9b3b-4150-24e1-08da707d2c7b",
+      "x-ms-traffictypediagnostic": "TY0PR04MB5635:EE_",
+      "x-microsoft-antispam": "BCL:0;",
+      "x-microsoft-antispam-message-info": "IjFtlcty/8Ol90ypJt1VwZuIWvcUTpGQMdZvUQgqGNcyXy8dd5MLtGDpHjEW5XWrgVR2AdQv6mDb9qIO138tYrhnM+bJAB8pSl5woKbHf3dbTLZGDpcgnvWSSIaWHNPWa0QuSb6J82Yk3SKu/NkpMyVFJ94HzxzTBS2jR2q5crkCXWcSK5O4dOti3wpm0KA8evPSnYVvjFbfhTJRze1NLQabxe2Kt/Zk/B911hwTvRZaBTN9hrbxthDxJYaNUOlX1RD1WF/iYWHOxnwymltmvV56V9tQmSEK8wgb7fTn9Vf4BGWXkbbksCvkpgObdaOHErMqmPF6RbzUrKM7GvCx0bTbQ1ZTqgA+39rp21bUEftxSHdYI77qm3l3X7BAfdBSCwVDC0ngbrkRjdMLWNfbRFhxMhyrWNk4uB3sDsyGzDZyG+p1ebKQ/JV7A4YXJecchxFq6qAxbcbegxRgI9oolUgUemB80I1DZLypKxlv8OehvnXM+evZbIkL0B4CSGajLZjkL7fByePFLr6wWeACr2NUVdP0FrKupb44OBPScxPmDFx/gDshdWhOxmWpdDUt9FqswXBqEPK2okOpWZvtvYd06iYCQUzYiMHZHPurE+HCZg1bdrTjWOXVl1/mNr9Nxhs76ouAD1aGkrB+dGKORw==",
+      "x-ms-exchange-antispam-messagedata-chunkcount": "1",
+      "x-ms-exchange-antispam-messagedata-0": "=?iso-8859-1?Q?Bp7h7GaHfotrsDdjbMpTBI8IzexaVUBSy7mtKzJMFijilYfILXmxtDnkXr?= =?iso-8859-1?Q?1dyd+m+QMKusiV7NLUrKMLwgma5pEfkUqoavrRj/5BFuSmvhGrLGzLxQcO?= =?iso-8859-1?Q?SbXmnfHUeZ2mCy9pjCj1G20q6xKIxLXLu4vZJStvrZjCOcj8xwYWk602Qm?= =?iso-8859-1?Q?I6TBthtoBu6Hp0nlTkkIi9fI4o+9xb7kfe4nHBRGlboxwEeLyezHfR0yjj?= =?iso-8859-1?Q?g9EFjnRtJwq/y3SZBr3xi4BykTDH7MAXIM9xL1eHsZ8pzLDLo9W6mFwoR8?= =?iso-8859-1?Q?sqNxi/vmhx/ZIAzebnA2CWdWID65I2DsRNQyfJ4MocSmav6MsSVpGizY4e?= =?iso-8859-1?Q?s/f0hQbKbh6ligcNqM7q5DfnM1Fhx8z2pt8K14N/gycIVXk/Ca5znn5jkF?= =?iso-8859-1?Q?D5yhP7R2F2p+i1mV48Q2ViP3I5CLSxg6J6HKxXKlfB+GUUCPnO/sZnTXtN?= =?iso-8859-1?Q?Bly8c4kouI2cTCeANvShPMLYQZg0Oudc4jdyB5uLOyKwmZdHnuL5h1MI0p?= =?iso-8859-1?Q?g9hFDCP8rLHVYD/cjVWFPTUJ/SLpccTTPZl8aD/FbExFHo8Zi4wbrblkLb?= =?iso-8859-1?Q?WD8Eu3abhu90/0fOoPFqssbMLAyI6xHA4Hjpc5ADzhKDWP5vGfGYszr40n?= =?iso-8859-1?Q?/ZjX5V+c5MMrsJlL+qA1+O+I6+I9ui8ZYrTZkUg3AhrRQ4GQ0xrgmeWIjP?= =?iso-8859-1?Q?bR8iED3jreqhgIHDkNVPmQzUuLBvAAwHqE2T7UVhTeFedTcSaBh3L3naBj?= =?iso-8859-1?Q?/gIkAIw4OQR1aSSR4xrjmT1zrX2i5e5qJWjXbRegnTgTftHV97dxPKBz4X?= =?iso-8859-1?Q?oC2/dOCur4hw1A6IDgEiTzG++c46uMKAP9LRk/Y9Cfnqr+egbRonTrTko5?= =?iso-8859-1?Q?SaEdQfSwMi3L1EUxOrrd83RNSBiXNeversSl03EcHiOeBsGzbS1nYg2ceJ?= =?iso-8859-1?Q?72U9LMavuI4gG0H0Uy3l8/a26LOyq6x7ngKEoQptENvF4GbBDeQUSSG3ZI?= =?iso-8859-1?Q?6l6aTz3edrTKqSHVFAKa78oplx9lCJkt4aypPDu53g22ENREtDJ5pxVflG?= =?iso-8859-1?Q?4D9PffeU88CEACCP6r/tjjH8RkihKmev8U+dMBhlFZlM36PnSvWniqqp86?= =?iso-8859-1?Q?jlKD0ttDv5A6kcbFQBfQxPGokmurKJzqKFDT1IL8SIXlWSzdJhUu+zuAFe?= =?iso-8859-1?Q?VAKrG7E2gGDD1AFNCnE7yfZZfkmS4Mh88Wth8QNpXPNhPnZlypaOClMx79?= =?iso-8859-1?Q?JrLVtHb7Es+sbyZOpryQUa8TPdBI9HG8aorHvGdHMHmsZp8pcRHKc89UFz?= =?iso-8859-1?Q?teRQ7nz0CbxXi3fYX0F/dcpqmw4qll9lJ//UuowscYWut2bF0bOGf7Qudj?= =?iso-8859-1?Q?KpKTmjOvQxvbRcBVkUQ7ce0KFyAnjPqw=3D=3D?=",
+      "content-type": {
+        "value": "multipart/alternative",
+        "params": {
+          "boundary": "_000_SEZPR04MB56978A389E9B1C6CA21453A1B1969SEZPR04MB5697apcp_"
+        }
+      },
+      "mime-version": "1.0",
+      "x-originatororg": "outlook.com",
+      "x-ms-exchange-crosstenant-authas": "Internal",
+      "x-ms-exchange-crosstenant-authsource": "SEZPR04MB5697.apcprd04.prod.outlook.com",
+      "x-ms-exchange-crosstenant-rms-persistedconsumerorg": [
+        "00000000-0000-0000-0000-000000000000",
+        "00000000-0000-0000-0000-000000000000"
+      ],
+      "x-ms-exchange-crosstenant-network-message-id": "b08d3649-9b3b-4150-24e1-08da707d2c7b",
+      "x-ms-exchange-crosstenant-originalarrivaltime": "28 Jul 2022 09:40:14.5212 (UTC)",
+      "x-ms-exchange-crosstenant-fromentityheader": "Hosted",
+      "x-ms-exchange-crosstenant-id": "84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa",
+      "x-ms-exchange-transport-crosstenantheadersstamped": "TY0PR04MB5635"
+    },
+    "html": "<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<style type=\"text/css\" style=\"display:none;\"> P {margin-top:0;margin-bottom:0;} </style>\n</head>\n<body dir=\"ltr\">\n<div style=\"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);\" class=\"elementToProof\">\nHello from Outlook</div>\n</body>\n</html>\n",
+    "text": "Hello from Outlook\n",
+    "textAsHtml": "<p>Hello from Outlook</p>",
+    "subject": "Sent from Outlook",
+    "date": "2022-07-28T09:40:14.000Z",
+    "to": {
+      "value": [
+        {
+          "address": "test@feryardiant.id",
+          "name": ""
+        }
+      ],
+      "html": "<span class=\"mp_address_group\"><a href=\"mailto:test@feryardiant.id\" class=\"mp_address_email\">test@feryardiant.id</a></span>",
+      "text": "test@feryardiant.id"
+    },
+    "from": {
+      "value": [
+        {
+          "address": "feryardiant@outlook.com",
+          "name": "Fery Wardiyanto"
+        }
+      ],
+      "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Fery Wardiyanto</span> &lt;<a href=\"mailto:feryardiant@outlook.com\" class=\"mp_address_email\">feryardiant@outlook.com</a>&gt;</span>",
+      "text": "Fery Wardiyanto <feryardiant@outlook.com>"
+    },
+    "messageId": "<SEZPR04MB56978A389E9B1C6CA21453A1B1969@SEZPR04MB5697.apcprd04.prod.outlook.com>"
+  }
+}

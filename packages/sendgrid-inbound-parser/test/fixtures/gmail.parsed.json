@@ -1,0 +1,123 @@
+{
+  "dkim": "{@gmail.com : pass}",
+  "subject": "Sent from Gmail",
+  "to": "test@feryardiant.id",
+  "spam_score": 0.002,
+  "from": "Fery Wardiyanto <ferywardiyanto@gmail.com>",
+  "sender_ip": "209.85.218.41",
+  "spam_report": "Spam detection software, running on the system \"mx0081p1iad2.sendgrid.net\",\nhas NOT identified this incoming email as spam.  The original\nmessage has been attached to this so you can view it or label\nsimilar future email.  If you have any questions, see\n@@CONTACT_ADDRESS@@ for details.\n\nContent preview:  Hello from Gmail --- Sincerely :) Fery Wardiyanto Hello from\n   Gmail [...] \n\nContent analysis details:   (0.0 points, 5.0 required)\n\n pts rule name              description\n---- ---------------------- --------------------------------------------------\n 0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail provider\n                            (ferywardiyanto[at]gmail.com)\n 0.0 HTML_MESSAGE           BODY: HTML included in message\n\n",
+  "envelope": {
+    "to": [
+      "test@feryardiant.id"
+    ],
+    "from": "ferywardiyanto@gmail.com"
+  },
+  "charsets": {
+    "to": "UTF-8",
+    "subject": "UTF-8",
+    "from": "UTF-8"
+  },
+  "SPF": "pass",
+  "email": {
+    "attachments": [],
+    "headers": {
+      "received": [
+        "by mx0081p1iad2.sendgrid.net with SMTP id wT7VopqMdR Thu, 28 Jul 2022 08:27:32 +0000 (UTC)",
+        "from mail-ej1-f41.google.com (unknown [209.85.218.41]) by mx0081p1iad2.sendgrid.net (Postfix) with ESMTPS id 4F12F300EB8 for <test@feryardiant.id>; Thu, 28 Jul 2022 08:27:32 +0000 (UTC)",
+        "by mail-ej1-f41.google.com with SMTP id z23so1892315eju.8 for <test@feryardiant.id>; Thu, 28 Jul 2022 01:27:32 -0700 (PDT)"
+      ],
+      "dkim-signature": {
+        "value": "v=1",
+        "params": {
+          "a": "rsa-sha256",
+          "c": "relaxed/relaxed",
+          "d": "gmail.com",
+          "s": "20210112",
+          "h": "mime-version:reply-to:from:date:message-id:subject:to",
+          "bh": "1me9bBGqodvSbPYBXEAHcOXW99JYdjd94O7rwi47aIo=",
+          "b": "U4aFkpADUeFXBb+f7jpuT1MMyb5mDlOLVbPQOkAJRZ45YCO3r3rbRuiCHi7Aebgg7h dC/Cn7lR6ofVn/bSEoRSLfNg4J7DrfFrqNU6407hUpnWWnbzKxT3a/OtUusdKH3wKuXg nv9jkcij1wlXEma/WE54B+jsMtycPCHyf0wvucHFPfS+wBVnFbbGJiH2WBS1mPcUPhHT WIX4A1PfvizrKnuHAfbCdJlwVkGq8EPNVpoBO2+l/nz0BXb36/WK3zepwz5lzvE0Yd3H 38F+f97fgCqvZT35Cjv6zdgfLfoK8FOU9da/3fBk64gAn/US4NQLTM0s/ZWwym20lFxo c/9Q=="
+        }
+      },
+      "x-google-dkim-signature": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20210112; h=x-gm-message-state:mime-version:reply-to:from:date:message-id :subject:to; bh=1me9bBGqodvSbPYBXEAHcOXW99JYdjd94O7rwi47aIo=; b=hcN6HBFeVku8gh5Rhn9cBwXcnUvzFIzz8Z6PhYDxsGRRVaXRjdFoBWlTBeKk06JDgD p4vH3mq74EAdnP3MmFJ6ocMjSvBkbI72qJldNGls2B7RWEs7bmnuRS/f/xUcUEZPKZC1 4kmQqU7N53Xrv8ZWEGxT61bteDsNcmZXoI2m/ljcB301+mIRC5VFNSHTD5juk11MGdqY CtwyWUV622SFQR+bgDC+tTq5+IqoqscAU8ZSj51GH0Yejv9k17e7dNnCvuli/u9SVJ03 0jkakhPlQQg4VFZNIDc38fpGKazCXgK0v0HMaj34dgYRhm4YhdO37jVkz1/now4ZAt4X T1nQ==",
+      "x-gm-message-state": "AJIora99v3dxpO43EReeXMi49e5yJIljgUbvlagsor/VcOgy8MAWqkTD mV34bleBr0R6WiM1n1WvYQ1g9gk0hXSalEbVyW/axk1ZX8I=",
+      "x-google-smtp-source": "AGRyM1vY0bHwXMluGfR2Hv31bV8MpZY5SpnHjBqzuNl23nSUFad8qdkpaNyldv2Eq8JjbquufHXIbRAU1zhLqVY7khs=",
+      "x-received": "by 2002:a17:907:b590:b0:72e:d8ca:5b8d with SMTP id qx16-20020a170907b59000b0072ed8ca5b8dmr20108239ejc.629.1658996851001; Thu, 28 Jul 2022 01:27:31 -0700 (PDT)",
+      "mime-version": "1.0",
+      "reply-to": {
+        "value": [
+          {
+            "address": "ferywardiyanto@gmail.com",
+            "name": ""
+          }
+        ],
+        "html": "<span class=\"mp_address_group\"><a href=\"mailto:ferywardiyanto@gmail.com\" class=\"mp_address_email\">ferywardiyanto@gmail.com</a></span>",
+        "text": "ferywardiyanto@gmail.com"
+      },
+      "from": {
+        "value": [
+          {
+            "address": "ferywardiyanto@gmail.com",
+            "name": "Fery Wardiyanto"
+          }
+        ],
+        "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Fery Wardiyanto</span> &lt;<a href=\"mailto:ferywardiyanto@gmail.com\" class=\"mp_address_email\">ferywardiyanto@gmail.com</a>&gt;</span>",
+        "text": "Fery Wardiyanto <ferywardiyanto@gmail.com>"
+      },
+      "date": "2022-07-28T08:27:20.000Z",
+      "message-id": "<CAObhxnzbc-CQstq-1LutmMeyp+6SRLUUtfkKXiVALD3T0RcSWw@mail.gmail.com>",
+      "subject": "Sent from Gmail",
+      "to": {
+        "value": [
+          {
+            "address": "test@feryardiant.id",
+            "name": ""
+          }
+        ],
+        "html": "<span class=\"mp_address_group\"><a href=\"mailto:test@feryardiant.id\" class=\"mp_address_email\">test@feryardiant.id</a></span>",
+        "text": "test@feryardiant.id"
+      },
+      "content-type": {
+        "value": "multipart/alternative",
+        "params": {
+          "boundary": "000000000000fccf9905e4d94dbd"
+        }
+      }
+    },
+    "html": "<div dir=\"ltr\">Hello from Gmail<div><br clear=\"all\"><div><div dir=\"ltr\" class=\"gmail_signature\" data-smartmail=\"gmail_signature\"><div dir=\"ltr\"><div><div dir=\"ltr\"><div dir=\"ltr\"><div><span style=\"font-size:small\">---</span></div><div>Sincerely<span style=\"font-size:small\"> :)</span></div><div><font size=\"2\">Fery Wardiyanto<br></font></div></div></div></div></div></div></div></div></div>\n",
+    "text": "Hello from Gmail\n\n---\nSincerely :)\nFery Wardiyanto\n",
+    "textAsHtml": "<p>Hello from Gmail</p><p>---<br/>Sincerely :)<br/>Fery Wardiyanto</p>",
+    "subject": "Sent from Gmail",
+    "date": "2022-07-28T08:27:20.000Z",
+    "to": {
+      "value": [
+        {
+          "address": "test@feryardiant.id",
+          "name": ""
+        }
+      ],
+      "html": "<span class=\"mp_address_group\"><a href=\"mailto:test@feryardiant.id\" class=\"mp_address_email\">test@feryardiant.id</a></span>",
+      "text": "test@feryardiant.id"
+    },
+    "from": {
+      "value": [
+        {
+          "address": "ferywardiyanto@gmail.com",
+          "name": "Fery Wardiyanto"
+        }
+      ],
+      "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Fery Wardiyanto</span> &lt;<a href=\"mailto:ferywardiyanto@gmail.com\" class=\"mp_address_email\">ferywardiyanto@gmail.com</a>&gt;</span>",
+      "text": "Fery Wardiyanto <ferywardiyanto@gmail.com>"
+    },
+    "messageId": "<CAObhxnzbc-CQstq-1LutmMeyp+6SRLUUtfkKXiVALD3T0RcSWw@mail.gmail.com>",
+    "replyTo": {
+      "value": [
+        {
+          "address": "ferywardiyanto@gmail.com",
+          "name": ""
+        }
+      ],
+      "html": "<span class=\"mp_address_group\"><a href=\"mailto:ferywardiyanto@gmail.com\" class=\"mp_address_email\">ferywardiyanto@gmail.com</a></span>",
+      "text": "ferywardiyanto@gmail.com"
+    }
+  }
+}
