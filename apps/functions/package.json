@@ -14,7 +14,7 @@
     "dev": "rollup -c --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "mocha -r esm 'test/*.spec.js'"
+    "test": "mocha --config .mocharc.json"
   },
   "dependencies": {
     "@feryardiant/sendgrid-inbound-parser": "workspace:*",
@@ -41,7 +41,7 @@
     "mocha": "^8.4.0",
     "rollup": "^2.77.2",
     "rollup-plugin-terser": "^7.0.2",
-    "sinon": "^13.0.2",
+    "sinon": "^14.0.0",
     "supertest": "^6.2.4",
     "typescript": "^4.7.4"
   },
@@ -61,8 +61,16 @@
     "extends": [
       "@antfu/basic"
     ],
-    "ignorePatterns": [
-      "test/*.spec.js"
+    "overrides": [
+      {
+        "files": [
+          "*.test.ts",
+          "*.test.js"
+        ],
+        "env": {
+          "mocha": true
+        }
+      }
     ]
   }
 }
