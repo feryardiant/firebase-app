@@ -83,15 +83,11 @@
     ],
     "rewrites": [
       {
-        "source": "/api",
-        "function": "func"
-      },
-      {
         "source": "/inbound",
-        "function": "func"
+        "function": "inbound"
       },
       {
-        "source": "!/@(api|inbound)/**",
+        "source": "!/@(inbound)/**",
         "destination": "/index.html"
       }
     ]
