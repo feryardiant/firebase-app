@@ -14,9 +14,9 @@
     "pnpm": "^7.5.0"
   },
   "scripts": {
-    "deploy": "firebase deploy",
     "dev": "pnpm run --parallel --if-present dev",
     "emulator:start": "firebase emulators:start",
+    "firebase": "firebase",
     "prepare": "husky install scripts/husky",
     "publish:packages": "pnpm -r publish --ignore-scripts --no-git-checks",
     "serve": "run-p emulator:start dev",

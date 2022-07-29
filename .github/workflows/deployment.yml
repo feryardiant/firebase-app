@@ -68,4 +68,4 @@ jobs:
       run: pnpm -r publish --ignore-scripts --no-git-checks
 
     - name: Deploy
-      run: pnpm deploy -- --project ${{ env.PROJECT_ID }}
+      run: pnpm firebase deploy --project ${{ env.PROJECT_ID }}
