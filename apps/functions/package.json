@@ -20,7 +20,7 @@
     "watch": "rollup -c --watch"
   },
   "dependencies": {
-    "@feryardiant/sendgrid-inbound-parser": "workspace:^0.0.5",
+    "@feryardiant/sendgrid-inbound-parser": "workspace:*",
     "@google-cloud/storage": "^5.20.5",
     "@sendgrid/mail": "^7.7.0",
     "busboy": "^1.6.0",
