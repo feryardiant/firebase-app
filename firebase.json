@@ -95,6 +95,7 @@
 
   "functions": {
     "source": "apps/functions",
+    "predeploy": "npm --prefix $RESOURCE_DIR run build",
     "ignore": [
       "README.md",
       "node_modules",
