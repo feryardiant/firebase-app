@@ -44,6 +44,9 @@ const excludedHeaders: string[] = [
   'subject',
 ]
 
+/**
+ * Normalize parsed-mail from 'mailparser' package
+ */
 export function normalize(email: ParsedMail & Record<string, any>): NormalizedMail {
   const normalized: NormalizedMail = {
     date: email.date as Date,

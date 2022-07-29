@@ -2,9 +2,8 @@ import { extname } from 'path'
 import type { Writable } from 'stream'
 import busboy from 'busboy'
 import type { BusboyEvents } from 'busboy'
-import type { Request, RequestHandler, Response } from 'express'
+import type { Request, RequestHandler } from 'express'
 import { simpleParser } from 'mailparser'
-import type { Logger } from '@firebase/logger'
 import type { Bucket, File } from '@google-cloud/storage'
 import type { AttachmentFile, NormalizedEmail, ParsedEmail } from './types'
 import { normalize } from './normalizer'
@@ -106,6 +105,8 @@ function parseBody(req: Request): Promise<ParsedEmail> {
   })
 }
 
+export { normalize }
+
 /**
  * Parse email field in inbound mail body.
  */
@@ -131,42 +132,21 @@ export async function parseEmail(req: Request): Promise<NormalizedEmail> {
   return result as NormalizedEmail
 }
 
+/**
+ * Express middleware to parse request body.
+ */
 export function inboundParser(): RequestHandler {
   //
 
-  return async (req, _, next) => {
+  return (req, _, next) => {
     if (req.method !== 'POST')
       return next()
 
-    try {
-      req.body = await parseEmail(req)
+    parseEmail(req).then((parsed) => {
+      req.body = parsed
       next()
-    }
-    catch (err) {
+    }).catch((err) => {
       next(err)
-    }
-  }
-}
-
-export function handleInbound(logger: Logger) {
-  //
-
-  return async (req: Request, res: Response) => {
-    try {
-      req.body = await parseEmail(req)
-
-      logger.info('Message recieved', req.body)
-
-      res.json({
-        ok: true,
-      })
-    }
-    catch (error) {
-      logger.error(error)
-
-      res.json({
-        ok: false,
-      })
-    }
+    })
   }
 }
