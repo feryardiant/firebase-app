@@ -7,19 +7,11 @@
     "*.css": "postcss",
     ".env.*": "env"
   },
-  "json.schemas": [
-    {
-      "fileMatch": [
-        ".github/workflows/*.yml"
-      ],
-      "url": "https://json.schemastore.org/github-workflow.json"
-    },
-    {
-      "fileMatch": [
-        "firebase.json"
-      ],
-      "url": "https://raw.githubusercontent.com/firebase/firebase-tools/master/schema/firebase-config.json"
-    }
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.enabledFrameworks": ["vue", "vue-sfc"],
+  "i18n-ally.localesPaths": [
+    "**/locales",
   ],
   "prettier.enable": false,
 }
