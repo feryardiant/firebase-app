@@ -4,6 +4,7 @@ import busboy from 'busboy'
 import type { BusboyEvents } from 'busboy'
 import type { Request, RequestHandler } from 'express'
 import { simpleParser } from 'mailparser'
+import mime from 'mime-types'
 import type { Bucket, File } from '@google-cloud/storage'
 import type { AttachmentFile, NormalizedEmail, ParsedEmail } from './types'
 import { normalize } from './normalizer'
@@ -32,13 +33,19 @@ async function store(stream: Writable, file: Buffer): Promise<void> {
   })
 }
 
+function getFilename(attachment: AttachmentFile): string {
+  const ext = attachment.filename
+    ? extname(attachment.filename).toLowerCase()
+    : mime.extension(attachment.contentType)
+
+  return `${attachment.checksum}${ext}`
+}
+
 /**
  * Store the attachment file to google storage bucket.
  */
 export async function storeAttachment(attachment: AttachmentFile, bucket: Bucket): Promise<File> {
-  const ext = extname(attachment.filename as string).toLowerCase()
-  const name = `${attachment.checksum}${ext}`
-  const file = bucket.file(`attachments/${name}`)
+  const file = bucket.file(`attachments/${getFilename(attachment)}`)
 
   const stream = file.createWriteStream({
     public: true,
