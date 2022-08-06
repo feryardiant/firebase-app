@@ -4,7 +4,7 @@ import type { Request, Response } from 'express'
 import request from 'supertest'
 
 import { inboundParser } from '../src'
-import pkg from '../package.json'
+import pkg from '../package.json' assert {type: 'json'}
 // import { fixture } from './fixtures'
 
 let app: any

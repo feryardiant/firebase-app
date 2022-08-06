@@ -1,5 +1,5 @@
 {
-  "extension": ["js", "ts", "json"],
-  "node-option": ["experimental-specifier-resolution=node", "no-warnings", "loader=esm"],
-  "spec": ["test/*.test.js", "test/*.test.ts"]
+  "extension": ["ts"],
+  "node-option": ["experimental-specifier-resolution=node", "no-warnings", "loader=ts-node/esm"],
+  "spec": ["./test/**/*.test.ts"]
 }

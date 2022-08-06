@@ -27,13 +27,14 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
     "release": "standard-version",
-    "test": "mocha"
+    "test": "mocha",
+    "watch": "tsup --watch"
   },
   "dependencies": {
+    "@types/busboy": "^1.5.0",
+    "@types/mailparser": "^3.4.0",
     "busboy": "^1.6.0",
     "mailparser": "^3.5.0",
     "mime-types": "^2.1.35"
@@ -42,8 +43,6 @@
     "@antfu/eslint-config-ts": "^0.25.2",
     "@firebase/logger": "^0.3.3",
     "@google-cloud/storage": "^6.3.0",
-    "@types/busboy": "^1.5.0",
-    "@types/mailparser": "^3.4.0",
     "@types/mime-types": "^2.1.1",
     "chai": "^4.3.6",
     "eslint": "^8.21.0",

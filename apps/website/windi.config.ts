@@ -1,13 +1,15 @@
 import { defineConfig } from 'vite-plugin-windicss'
-import { fontFamily } from 'windicss/defaultTheme'
+import defaultTheme from 'windicss/defaultTheme'
 
 export default defineConfig({
   darkMode: 'class',
-  variants: {
-    extends: {
-      responsive: ['sm', 'md'],
-    },
+  extract: {
+    include: ['index.html', 'src/**/*.{vue,html,js,ts}'],
   },
+  plugins: [
+    require('windicss/plugin/typography'),
+    require('windicss/plugin/forms'),
+  ],
   theme: {
     extend: {
       typography: {
@@ -32,8 +34,8 @@ export default defineConfig({
       },
     },
     fontFamily: {
-      sans: ['Merriweather Sans', ...fontFamily.sans],
-      mono: ['Fira Code', fontFamily.mono],
+      sans: ['Merriweather Sans', ...defaultTheme.fontFamily.sans],
+      mono: ['Fira Code', defaultTheme.fontFamily.mono],
     },
     screens: {
       sm: '640px',
@@ -49,10 +51,4 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    require('windicss/plugin/typography')({
-      modifiers: ['sm', 'md'],
-    }),
-    require('windicss/plugin/forms'),
-  ],
 })

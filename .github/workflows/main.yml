@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [master]
+
+env:
+  APP_NAME: 'Admin App'
+  BASE_URL: 'https://admin.feryardiant.id/'
+  PROJECT_ID: 'fery-wardiyanto'
+  FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/.firebase
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+
+    env:
+      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+      FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+      FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+      RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+
+    environment:
+      name: production
+      url: ${{ env.BASE_URL }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache Emulators
+        id: cache-primes
+        uses: actions/cache@v3
+        with:
+          path: .firebase
+          key: firebase-emulators
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2.2.1
+
+      - name: Setup Node.JS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'pnpm'
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name:  Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test -- --project ${{ env.PROJECT_ID }}
+
+      # - name: Publish Packages
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: pnpm -r publish --ignore-scripts --no-git-checks
+
+      # - name: Deploy
+      #   run: pnpm firebase deploy --project ${{ env.PROJECT_ID }}

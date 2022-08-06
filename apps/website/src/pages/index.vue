@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <div class="columns">
     <figure class="image column is-one-third-desktop">
@@ -17,17 +20,6 @@
   </div>
 </template>
 
-<style scoped>
-.image {
-  max-width: 326px;
-  min-height: 100%;
-}
-
-p {
-  margin-bottom: 2rem;
-}
-</style>
-
 <route lang="yaml">
-title: Home
+name: home
 </route>

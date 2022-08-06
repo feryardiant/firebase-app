@@ -1,0 +1,8 @@
+errors:
+  not-found: Not Found
+
+home:
+  greeting: Hello World
+
+button:
+  back: Back

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const { frontmatter } = defineProps({
   frontmatter: {
     type: Object,

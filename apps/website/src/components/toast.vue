@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
 const { show } = defineProps({
   show: {
     type: Boolean,
     default: () => true,
   },
 })
+
 const emit = defineEmits(['close'])
 </script>
 

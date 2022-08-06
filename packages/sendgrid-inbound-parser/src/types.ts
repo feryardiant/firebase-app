@@ -25,7 +25,7 @@ export interface AttachmentFile extends Attachment {
   uploadedFile?: File
 }
 
-export interface Envelope extends Record<string, EmailAddress | EmailAddress[] | undefined> {
+export interface Envelope extends Record<string, any> {
   from: EmailAddress
   to: EmailAddress[]
   cc?: EmailAddress[]

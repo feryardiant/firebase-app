@@ -1,70 +1,64 @@
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
 
-import { loadEnv } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { vueI18n as i18n } from '@intlify/vite-plugin-vue-i18n'
+import windicss from 'vite-plugin-windicss'
+import autoImport from 'unplugin-auto-import/vite'
 import components from 'unplugin-vue-components/vite'
-import { VueUseComponentsResolver } from 'unplugin-vue-components/resolvers'
+import markdown from 'vite-plugin-md'
+import meta from '@yankeeinlondon/meta-builder'
+import { VitePWA as pwa } from 'vite-plugin-pwa'
 import pages from 'vite-plugin-pages'
 import layouts from 'vite-plugin-vue-layouts'
-import windiCSS from 'vite-plugin-windicss'
-import markdown from 'vite-plugin-md'
-import { VitePWA as pwa } from 'vite-plugin-pwa'
-import matter from 'gray-matter'
 import mdIt from 'markdown-it'
 import mdAnchor from 'markdown-it-anchor'
 import mdLinkAttr from 'markdown-it-link-attributes'
+import mdPrism from 'markdown-it-prism'
+import matter from 'gray-matter'
+// import type { RouteMeta, RouteRecord } from 'vue-router'
 
-import { ensureEnv, loadEnvFile } from '../../scripts/util'
-import { author, description, name, version } from '../../package.json'
+import { author, name, version } from '../../package.json'
 
-/**
- * @param {string} mode
- * @param {string} envDir
- */
-const resolveEnv = (mode, envDir) => {
-  const env = loadEnv(mode, envDir)
+export default defineConfig(({ mode }) => {
+  const envDir = '../../'
+  const env = loadEnv(mode, envDir, ['FIREBASE', 'PROJECT'])
+  const FIREBASE_CONFIG = {
+    projetId: env.PROJECT_ID,
+    appId: env.FIREBASE_APP_ID,
+    apiKey: env.FIREBASE_API_KEY,
+    messagingSenderId: env.FIREBASE_MESSAGING_SENDER_ID,
+    measurementId: env.FIREBASE_MEASUREMENT_ID,
+    storageBucket: `${env.PROJECT_ID}.appspot.com`,
+    authDomain: `${env.PROJECT_ID}.firebaseapp.com`,
+  }
 
-  loadEnvFile(envDir, env)
-
-  return ensureEnv(env)
-}
-
-/**
- * @type {import('vite').UserConfigFn}
- */
-export default ({ mode }) => {
-  const root = __dirname
-  const envDir = resolve(root, '../.env')
-  const env = resolveEnv(mode, envDir)
   const APP_INFO = {
     title: env.APP_NAME,
     name: env.PROJECT_ID || name.split('/')[1],
-    description,
+    description: '',
     author,
     version,
   }
 
   /** @type {import('vite').UserConfig} */
   return {
-    base: env.BASE_URL || '/',
-    root,
     envDir,
-
     resolve: {
       alias: {
-        '/@/': `/${resolve(__dirname, 'src')}/`,
+        '~/': `${resolve(__dirname, 'src')}/`,
       },
     },
 
     define: {
       APP_INFO: JSON.stringify(APP_INFO),
-      FIREBASE_CONFIG: env.FIREBASE_CONFIG,
+      FIREBASE_CONFIG: JSON.stringify(FIREBASE_CONFIG),
     },
 
     server: {
       fs: {
-        allow: ['..'],
+        allow: [envDir],
       },
 
       // https://vitejs.dev/config/#server-proxy
@@ -80,23 +74,37 @@ export default ({ mode }) => {
     optimizeDeps: {
       include: [
         '@vueuse/core',
-        'vue',
+        '@vueuse/head',
+        'vue-i18n',
         'vue-router',
+        'vue',
       ],
       exclude: [
         'vue-demi',
       ],
     },
 
-    // https://github.com/antfu/vite-ssg
-    ssgOptions: {
-      script: 'async',
-      formatting: 'minify',
+    // https://github.com/vitest-dev/vitest
+    test: {
+      include: ['test/**/*.test.ts'],
+      environment: 'happy-dom',
+      globals: true,
+      deps: {
+        inline: ['@vue', '@vueuse', 'vue-demi'],
+      },
     },
 
     plugins: [
       vue({
         include: [/\.vue$/, /\.md$/],
+        reactivityTransform: true,
+      }),
+
+      // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
+      i18n({
+        runtimeOnly: true,
+        compositionOnly: true,
+        include: [resolve(__dirname, 'locales/**')],
       }),
 
       // https://github.com/hannoeru/vite-plugin-pages
@@ -118,7 +126,7 @@ export default ({ mode }) => {
             })
 
             meta.frontmatter = Object.assign({}, frontmatter, {
-              excerpt: mdIt().render(excerpt),
+              excerpt: excerpt ? mdIt().render(excerpt) : undefined,
             }, data)
           }
 
@@ -145,17 +153,27 @@ export default ({ mode }) => {
           quotes: '""\'\'',
         },
 
+        excerpt: true,
+
+        builders: [
+          meta({
+            metaProps: ['title', 'description', 'tags'],
+            routeProps: ['layout', 'locale', 'container'],
+            headProps: ['title'],
+          }),
+        ],
+
         markdownItSetup(md) {
+          md.use(mdPrism)
+
           md.use(mdAnchor, {
-            permalink: true,
-            // permalinkBefore: true,
-            permalinkSymbol: '🔗',
-            permalinkSpace: false,
-            permalinkAttrs: () => ({ 'aria-hidden': true }),
+            permalink: mdAnchor.permalink.ariaHidden({
+              renderAttrs: () => ({ 'aria-hidden': 'true' }),
+            }),
           })
 
           md.use(mdLinkAttr, {
-            pattern: /^(https?:\/\/|\/\/)/,
+            matcher: (link: string) => /^(https?:\/\/|\/\/)/.test(link),
             attrs: {
               target: '_blank',
               rel: 'noopener',
@@ -167,19 +185,32 @@ export default ({ mode }) => {
       // https://github.com/antfu/vite-plugin-components
       components({
         dts: 'src/components.d.ts',
+        // allow auto load markdown components under `./src/components/`
+        extensions: ['vue', 'md'],
+        // allow auto import and register components used in markdown
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-        resolvers: [
-          VueUseComponentsResolver(),
+      }),
+
+      // https://github.com/antfu/unplugin-auto-import
+      autoImport({
+        dts: 'src/auto-imports.d.ts',
+        dirs: [
+          'src/composables',
+          'src/store',
         ],
+        imports: [
+          '@vueuse/head',
+          '@vueuse/core',
+          'vue-i18n',
+          'vue-router',
+          'vue/macros',
+          'vue',
+        ],
+        vueTemplate: true,
       }),
 
       // https://github.com/antfu/vite-plugin-windicss
-      windiCSS({
-        safelist: 'prose prose-sm m-auto text-left',
-        preflight: {
-          enableAll: true,
-        },
-      }),
+      windicss(),
 
       pwa({
         registerType: 'autoUpdate',
@@ -211,4 +242,4 @@ export default ({ mode }) => {
       }),
     ],
   }
-}
+})
