@@ -46,7 +46,7 @@ export interface NormalizedMail extends Record<string, any> {
   inReplyTo?: string
   references: string[]
   message: Record<keyof MessageText | string, string>
-  attachments: AttachmentFile[]
+  attachments: Attachment[]
 }
 
 export interface ParsedEmail extends IncomingEmail {
