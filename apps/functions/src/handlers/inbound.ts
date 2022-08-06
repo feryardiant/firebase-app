@@ -1,21 +1,18 @@
+import { getFirestore } from 'firebase-admin/firestore'
+import { getStorage } from 'firebase-admin/storage'
+import logger from 'firebase-functions/logger'
+import type { App } from 'firebase-admin/app'
 import { parseEmail, storeAttachment } from '@feryardiant/sendgrid-inbound-parser'
+import type { Attachment, Envelope } from '@feryardiant/sendgrid-inbound-parser'
+import type { Handler, Person } from '../types'
 
-/**
- * @param {import('firebase-admin').app.App} admin
- * @param {import('firebase-functions').logger} logger
- * @returns {import('firebase-functions').HttpsFunction}
- */
-export const inboundHandler = (admin, logger) => {
-  const db = admin.firestore()
-  const bucket = admin.storage().bucket()
+export default function handler(app: App): Handler {
+  const db = getFirestore(app)
+  const bucket = getStorage(app).bucket()
   const convCol = db.collection('conversations')
   const peopleCol = db.collection('people')
 
-  /**
-   * @param {String[]} refs
-   * @returns {Promise<import('firebase-admin').firestore.DocumentReference>}
-   */
-  async function getConversation(refs) {
+  async function getConversation(refs: string[]) {
     if (refs.length === 0)
       return convCol.doc()
 
@@ -24,25 +21,15 @@ export const inboundHandler = (admin, logger) => {
     return convs.empty ? convCol.doc() : convs.docs[0].ref
   }
 
-  /**
-   * @typedef {Object} Person
-   * @property {String} address
-   * @property {String} name
-   * @property {String[]} messages
-   *
-   * @param {String} address
-   * @param {String} name
-   * @returns {Promise<Person>}
-   */
-  async function getPerson(address, name) {
+  async function getPerson(address: string, name: string) {
     const person = await peopleCol.doc(address).get()
     const existing = person.exists ? person.data() : { address, name }
 
     return {
-      address: existing.address,
-      name: existing.name || name,
-      messages: existing.message || [],
-    }
+      address: existing?.address,
+      name: existing?.name || name,
+      messages: existing?.message || [],
+    } as Person
   }
 
   return async (req, res) => {
@@ -51,9 +38,7 @@ export const inboundHandler = (admin, logger) => {
         ok: false,
       })
     }
-
-    /** @type {Person[]} */
-    const people = []
+    const people: Person[] = []
     const msgCol = db.collection('messages')
     const attCol = db.collection('attachments')
 
@@ -62,14 +47,16 @@ export const inboundHandler = (admin, logger) => {
       const messageRef = msgCol.doc(mail.messageId)
       const convRef = await getConversation(references)
 
-      for (const [field, party] of Object.entries(envelope)) {
+      for (const [field, party] of Object.entries<any>(envelope)) {
         const parties = Array.isArray(party) ? party : [party]
 
         await Promise.all(parties.map(async ({ address, name }, i) => {
           const person = await getPerson(address, name)
 
-          if (field !== 'from' && !name)
-            envelope[field][i].name = person.name
+          if (field !== 'from' && !name) {
+            const envlp = envelope[field][i] as Envelope
+            envlp.name = person.name
+          }
 
           people.push(person)
         }))
@@ -85,7 +72,7 @@ export const inboundHandler = (admin, logger) => {
         }
 
         trans.set(convRef, {
-          messageId: convData.exists ? convData.data().messageId : mail.messageId,
+          messageId: convData.exists ? convData.data()?.messageId : mail.messageId,
           date: mail.date,
           topic: mail.topic || mail.subject,
         })
@@ -100,7 +87,7 @@ export const inboundHandler = (admin, logger) => {
 
         await Promise.all(attachments.map(async ({ headers, ...file }) => {
           const ref = attCol.doc(file.checksum)
-          const stored = await storeAttachment(file, bucket)
+          const stored = await storeAttachment(file as Attachment, bucket)
           const attachment = {
             headers: Object.fromEntries(headers),
             publicUrl: stored.publicUrl(),

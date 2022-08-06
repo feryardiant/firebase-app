@@ -1,6 +1,5 @@
-import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
-import Toast from '/@/components/toast.vue'
+import Toast from '~/components/toast.vue'
 
 describe('toast', () => {
   it('show', () => {

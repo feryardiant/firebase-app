@@ -1,47 +1,48 @@
 {
   "name": "@feryardiant/admin-app",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@7.5.0",
-  "description": "My Personal Admin App",
+  "packageManager": "pnpm@7.6.0",
   "author": {
     "name": "Fery Wardiyanto",
     "email": "ferywardiyanto@gmail.com"
   },
   "license": "MIT",
   "engines": {
-    "node": "14.x || 16.x",
-    "pnpm": "^7.5.0"
+    "node": "16.x"
   },
   "scripts": {
-    "dev": "pnpm run --parallel --if-present dev",
-    "emulator:start": "firebase emulators:start",
+    "build": "pnpm run -r build",
+    "emulate": "firebase emulators:start --export-on-exit --import .firebase/exports",
     "firebase": "firebase",
     "prepare": "husky install scripts/husky",
     "publish:packages": "pnpm -r publish --ignore-scripts --no-git-checks",
-    "serve": "run-p emulator:start dev",
-    "shell": "firebase functions:shell",
-    "test": "firebase emulators:exec \"pnpm test -r\""
+    "lint": "pnpm run -r lint",
+    "start": "dotenv -e .env run-p emulate watch",
+    "test": "firebase emulators:exec \"pnpm run -r test\"",
+    "watch": "pnpm run --parallel watch"
   },
   "devDependencies": {
     "@antfu/eslint-config-basic": "^0.25.2",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@types/chai": "^4.3.1",
+    "@types/cookie-parser": "^1.4.3",
     "@types/express": "^4.17.13",
+    "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.1",
-    "@types/node": "~16.11.47",
+    "@types/node": "*",
     "@types/sinon": "^10.0.13",
     "@types/supertest": "^2.0.12",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
+    "dotenv-cli": "^6.0.0",
     "eslint": "^8.21.0",
-    "esm": "^3.2.25",
-    "firebase-tools": "^11.4.1",
+    "firebase-tools": "^11.4.2",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
-    "pnpm": "^7.8.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
   },

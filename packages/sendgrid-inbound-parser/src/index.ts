@@ -4,10 +4,10 @@ import busboy from 'busboy'
 import type { BusboyEvents } from 'busboy'
 import type { Request, RequestHandler } from 'express'
 import { simpleParser } from 'mailparser'
-import type { Attachment } from 'mailparser'
+import type { Attachment, EmailAddress } from 'mailparser'
 import mime from 'mime-types'
 import type { Bucket, File } from '@google-cloud/storage'
-import type { NormalizedEmail, ParsedEmail } from './types'
+import type { Envelope, NormalizedEmail, ParsedEmail } from './types'
 import { normalize } from './normalizer'
 
 declare module 'express' {
@@ -113,7 +113,7 @@ function parseBody(req: Request): Promise<ParsedEmail> {
   })
 }
 
-export { normalize }
+export { Attachment, Envelope, EmailAddress, normalize, NormalizedEmail, ParsedEmail }
 
 /**
  * Parse email field in inbound mail body.

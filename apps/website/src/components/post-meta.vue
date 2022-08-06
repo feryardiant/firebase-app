@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const { excerpt, frontmatter } = defineProps({
   frontmatter: {
     type: Object,
@@ -11,7 +11,7 @@ const { excerpt, frontmatter } = defineProps({
 })
 
 const postDate = frontmatter.modified || frontmatter.date
-const formatDate = date => new Date(date).toLocaleDateString()
+const formatDate = (date: string) => new Date(date).toLocaleDateString()
 </script>
 
 <template>
