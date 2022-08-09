@@ -33,6 +33,8 @@ export interface Envelope extends Record<string, any> {
   replyTo?: EmailAddress | EmailAddress[]
 }
 
+export type Recipients = keyof Envelope | string
+
 export interface NormalizedMail extends Record<string, any> {
   date: Date
   envelope: Envelope
