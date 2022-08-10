@@ -40,9 +40,9 @@
     "mime-types": "^2.1.35"
   },
   "devDependencies": {
-    "@antfu/eslint-config-ts": "^0.25.2",
+    "@antfu/eslint-config-ts": "^0.26.1",
     "@firebase/logger": "^0.3.3",
-    "@google-cloud/storage": "^6.3.0",
+    "@google-cloud/storage": "^6.4.0",
     "@types/mime-types": "^2.1.1",
     "chai": "^4.3.6",
     "eslint": "^8.21.0",

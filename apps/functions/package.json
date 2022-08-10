@@ -20,9 +20,9 @@
     "watch": "tsup --watch"
   },
   "dependencies": {
-    "@feryardiant/sendgrid-inbound-parser": "workspace:0.0.9",
+    "@feryardiant/sendgrid-inbound-parser": "workspace:0.0.10",
     "@google-cloud/functions-framework": "^3.1.2",
-    "@google-cloud/storage": "^6.3.0",
+    "@google-cloud/storage": "^6.4.0",
     "cookie-parser": "^1.4.6",
     "express": "^4.18.1",
     "firebase-admin": "^11.0.1",
@@ -31,14 +31,14 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config-ts": "^0.25.2",
+    "@antfu/eslint-config-ts": "^0.26.1",
     "@firebase/app-compat": "^0.1.31",
     "@firebase/app-types": "^0.7.0",
     "@firebase/util": "^1.6.3",
     "@types/node": "*",
     "chai": "^4.3.6",
     "eslint": "^8.21.0",
-    "firebase-functions-test": "^2.2.0",
+    "firebase-functions-test": "^2.3.0",
     "mocha": "^10.0.0",
     "ts-node": "^10.9.1",
     "tsup": "^6.2.1",
