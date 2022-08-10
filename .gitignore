@@ -20,8 +20,6 @@ _.*
 .firebaserc
 dist
 node_modules
-runtime-config.json
-service-account.json
 
 # testing
 coverage
