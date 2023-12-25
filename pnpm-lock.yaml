@@ -11262,6 +11262,7 @@ packages:
   /optionator@0.8.3:
     resolution: {integrity: sha512-+IW9pACdk3XWmmTXG8m3upGUJst5XRGzxMRjXzAuJ1XnIFNvfhjjIuYkDvysnPQ7qzqVzLt78BCruntqRhWQbA==}
     engines: {node: '>= 0.8.0'}
+    requiresBuild: true
     dependencies:
       deep-is: 0.1.4
       fast-levenshtein: 2.0.6
