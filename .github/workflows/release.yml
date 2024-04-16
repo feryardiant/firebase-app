@@ -1,0 +1,84 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+jobs:
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+
+    env:
+      APP_NAME: 'Admin App'
+      BASE_URL: 'https://admin.feryardiant.id/'
+      PROJECT_ID: 'fery-wardiyanto'
+      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+      FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+      FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/.firebase
+      RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+      RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache Emulators
+        id: cache-primes
+        uses: actions/cache@v4
+        with:
+          path: .firebase
+          key: firebase-emulators
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          run_install: true
+
+      - name: Set up node
+        uses: actions/setup-node@v4
+        with:
+          registry-url: 'https://registry.npmjs.org/'
+          node-version: '20.x'
+          cache: 'pnpm'
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name:  Build
+        run: pnpm build
+
+      # - name: Publish Packages
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: pnpm -r publish --ignore-scripts --no-git-checks
+
+      # - name: Deploy Apps
+      #   run: pnpm firebase deploy --project ${{ env.PROJECT_ID }}
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: package
+
+    permissions:
+      contents: write
+      discussions: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read Changelog file
+        run: npx @feryardiant/read-changelog > PUBLISH.md
+
+      - name: Publish
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body_path: PUBLISH.md
