@@ -155,6 +155,7 @@ export function inboundParser(): RequestHandler {
       req.body = parsed
       next()
     }).catch((err) => {
+      console.log(err)
       next(err)
     })
   }

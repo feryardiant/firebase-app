@@ -1,10 +1,11 @@
 import { readFileSync } from 'fs'
-import { dirname, resolve } from 'path'
-import { fileURLToPath } from 'url'
-type Provider = 'gmail' | 'outlook' | 'yahoo'
+import { resolve } from 'path'
+
+export type Provider = 'gmail' | 'outlook' | 'yahoo'
+
+export const providers: Provider[] = ['gmail', 'outlook', 'yahoo']
 
 export async function fixture(provider: Provider) {
-  const __dirname = dirname(fileURLToPath(import.meta.url))
   const raw = readFileSync(resolve(__dirname, `./${provider}.raw.txt`))
   const { email: parsed, ...body } = await import(`./${provider}.parsed.json`)
   const { email: normalized } = await import(`./${provider}.normalized.json`)
