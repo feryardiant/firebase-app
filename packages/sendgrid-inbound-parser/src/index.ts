@@ -1,5 +1,6 @@
-import { extname } from 'path'
-import type { Writable } from 'stream'
+import { extname } from 'node:path'
+import type { Writable } from 'node:stream'
+import type { Buffer } from 'node:buffer'
 import busboy from 'busboy'
 import type { BusboyEvents } from 'busboy'
 import type { Request, RequestHandler } from 'express'
@@ -68,7 +69,7 @@ function parseFieldValue(field: string, value: string) {
     return JSON.parse(value)
 
   if (field === 'spam_score')
-    return parseFloat(value)
+    return Number.parseFloat(value)
 
   return value
 }
@@ -128,7 +129,7 @@ export async function parseEmail(req: Request): Promise<NormalizedEmail> {
 
       normalized.headers.set('sender-ip', parsed.sender_ip)
       normalized.headers.set('spam-report', parsed.spam_report)
-      normalized.headers.set('spam-score', parseFloat(parsed.spam_score))
+      normalized.headers.set('spam-score', Number.parseFloat(parsed.spam_score))
 
       result[field] = normalized
       continue

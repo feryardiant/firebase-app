@@ -18,8 +18,11 @@ _.*
 .env.*
 .env
 .firebaserc
+.runtimeconfig.json
+.tool-versions
 dist
 node_modules
+service-account.json
 
 # testing
 coverage
@@ -32,4 +35,6 @@ coverage
 
 # But Keep these
 # --------------------------
+!.env.*.example
+!.env.example
 !.gitkeep

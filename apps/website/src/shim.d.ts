@@ -1,5 +1,5 @@
 import type { FirebaseOptions } from 'firebase/app'
-import { AppLocale } from './types'
+import type { AppLocale } from './types'
 
 export {}
 
@@ -11,7 +11,7 @@ declare global {
 declare module 'vue-router' {
   interface RouteMeta {
     layout?: string
-    locale?: AppLocale,
+    locale?: AppLocale
     title?: string
     description?: string
   }

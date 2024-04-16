@@ -1,15 +1,14 @@
 {
   "extends": "../../tsconfig.json",
-  "include": [
-    "src/**/*.ts"
-  ],
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist",
-    "target": "ES2019",
     "paths": {
       "~/*": ["src/*"]
-    }
-  }
+    },
+    "outDir": "dist"
+  },
+  "include": [
+    "./**/.*.d.ts",
+    "./**/*.ts"
+  ]
 }
-

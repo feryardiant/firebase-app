@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite-plugin-windicss'
 import defaultTheme from 'windicss/defaultTheme'
+import typography from 'windicss/plugin/typography'
+import forms from 'windicss/plugin/forms'
+import filters from 'windicss/plugin/filters'
 
 export default defineConfig({
   darkMode: 'class',
@@ -7,8 +10,9 @@ export default defineConfig({
     include: ['index.html', 'src/**/*.{vue,html,js,ts}'],
   },
   plugins: [
-    require('windicss/plugin/typography'),
-    require('windicss/plugin/forms'),
+    typography(),
+    forms,
+    filters,
   ],
   theme: {
     extend: {

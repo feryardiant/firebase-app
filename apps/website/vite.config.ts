@@ -1,29 +1,33 @@
-import { resolve } from 'path'
-import { readFileSync } from 'fs'
-
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import type { ServerOptions } from 'node:https'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { vueI18n as i18n } from '@intlify/vite-plugin-vue-i18n'
-import windicss from 'vite-plugin-windicss'
-import autoImport from 'unplugin-auto-import/vite'
-import components from 'unplugin-vue-components/vite'
-import markdown from 'vite-plugin-md'
-import meta from '@yankeeinlondon/meta-builder'
-import { VitePWA as pwa } from 'vite-plugin-pwa'
-import pages from 'vite-plugin-pages'
-import layouts from 'vite-plugin-vue-layouts'
-import mdIt from 'markdown-it'
+import i18n from '@intlify/unplugin-vue-i18n/vite'
+import unhead from '@unhead/addons/vite'
+import { SchemaOrgResolver, schemaAutoImports } from '@unhead/schema-org/vue'
+import { unheadVueComposablesImports } from '@unhead/vue'
 import mdAnchor from 'markdown-it-anchor'
 import mdLinkAttr from 'markdown-it-link-attributes'
 import mdPrism from 'markdown-it-prism'
-import matter from 'gray-matter'
+import autoImport from 'unplugin-auto-import/vite'
+import components from 'unplugin-vue-components/vite'
+import markdown from 'unplugin-vue-markdown/vite'
+import router from 'unplugin-vue-router/vite'
+import { VueRouterAutoImports } from 'unplugin-vue-router'
+import { VitePWA as pwa } from 'vite-plugin-pwa'
+import layouts from 'vite-plugin-vue-layouts'
+import windicss from 'vite-plugin-windicss'
 // import type { RouteMeta, RouteRecord } from 'vue-router'
 
 import { author, name, version } from '../../package.json'
 
+/**
+ * @see https://vitejs.dev/config/
+ */
 export default defineConfig(({ mode }) => {
   const envDir = '../../'
-  const env = loadEnv(mode, envDir, ['FIREBASE', 'PROJECT'])
+  const env = loadEnv(mode, envDir, ['FIREBASE', 'PROJECT', 'VITE'])
   const FIREBASE_CONFIG = {
     projetId: env.PROJECT_ID,
     appId: env.FIREBASE_APP_ID,
@@ -42,12 +46,12 @@ export default defineConfig(({ mode }) => {
     version,
   }
 
-  /** @type {import('vite').UserConfig} */
   return {
     envDir,
+
     resolve: {
       alias: {
-        '~/': `${resolve(__dirname, 'src')}/`,
+        '~': resolve(__dirname, 'src'),
       },
     },
 
@@ -60,6 +64,11 @@ export default defineConfig(({ mode }) => {
       fs: {
         allow: [envDir],
       },
+
+      /**
+       * @see https://vitejs.dev/config/server-options.html#server-https
+       */
+      https: httpsCert(envDir),
 
       // https://vitejs.dev/config/#server-proxy
       proxy: {
@@ -89,79 +98,94 @@ export default defineConfig(({ mode }) => {
       include: ['test/**/*.test.ts'],
       environment: 'happy-dom',
       globals: true,
-      deps: {
-        inline: ['@vue', '@vueuse', 'vue-demi'],
+      server: {
+        deps: {
+          inline: ['@vue', '@vueuse', 'vue-demi'],
+        },
       },
     },
 
     plugins: [
       vue({
         include: [/\.vue$/, /\.md$/],
-        reactivityTransform: true,
       }),
 
-      // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
-      i18n({
-        runtimeOnly: true,
-        compositionOnly: true,
-        include: [resolve(__dirname, 'locales/**')],
+      /**
+       * @see https://github.com/antfu/unplugin-auto-import
+       */
+      autoImport({
+        dts: 'src/.auto-imports.d.ts',
+        dirs: [
+          'src/composables',
+          'src/store',
+        ],
+        imports: [
+          '@vueuse/core',
+          unheadVueComposablesImports,
+          VueRouterAutoImports,
+          {
+            '@unhead/schema-org': schemaAutoImports,
+          },
+          'vue-i18n',
+          {
+            // add any other imports you were relying on
+            'vue-router/auto': ['useLink'],
+          },
+          'vue/macros',
+          'vue',
+        ],
+        vueTemplate: true,
       }),
 
-      // https://github.com/hannoeru/vite-plugin-pages
-      pages({
+      /**
+       * @see https://github.com/antfu/unplugin-vue-components
+       */
+      components({
+        // allow auto load markdown components under `./src/components/`
         extensions: ['vue', 'md'],
-        extendRoute({ title, description, meta, ...route }) {
-          const frontmatter = {
-            title,
-            comments: true,
-            layout: 'default',
-            locale: 'en',
-          }
-
-          if (typeof route.component === 'string' && route.component.endsWith('.md')) {
-            const path = resolve(__dirname, route.component.slice(1))
-            const { data, excerpt } = matter(readFileSync(path, 'utf-8'), {
-              excerpt: true,
-              excerpt_separator: '<!-- more -->',
-            })
-
-            meta.frontmatter = Object.assign({}, frontmatter, {
-              excerpt: excerpt ? mdIt().render(excerpt) : undefined,
-            }, data)
-          }
-
-          route.meta = Object.assign({}, {
-            title: frontmatter.title,
-            description: description || APP_INFO.description,
-          }, meta)
-
-          return route
-        },
+        // allow auto import and register components used in markdown
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        dts: 'src/.components.d.ts',
+        directoryAsNamespace: true,
+        resolvers: [
+          SchemaOrgResolver(),
+        ],
       }),
 
-      // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
+      /**
+       * @see https://github.com/posva/unplugin-vue-router
+       */
+      router({
+        dts: 'src/.typed-router.d.ts',
+        extensions: ['.vue', '.md'],
+      }),
+
+      /**
+       * @see https://unhead.unjs.io
+       */
+      unhead(),
+
+      /**
+       * @see https://github.com/JohnCampionJr/vite-plugin-vue-layouts
+       */
       layouts(),
 
-      // https://github.com/antfu/vite-plugin-md
+      /**
+       * @see https://github.com/unplugin/unplugin-vue-markdown
+       */
       markdown({
-        wrapperComponent: 'page',
-        wrapperClasses: 'page-content entry-content',
+        wrapperComponent: 'page-content',
+        wrapperClasses: 'prose max-w-none',
         headEnabled: true,
-
-        // see: https://markdown-it.github.io/markdown-it/
-        markdownItOptions: {
-          quotes: '""\'\'',
-        },
-
         excerpt: true,
 
-        builders: [
-          meta({
-            metaProps: ['title', 'description', 'tags'],
-            routeProps: ['layout', 'locale', 'container'],
-            headProps: ['title'],
-          }),
-        ],
+        /**
+         * @see https://markdown-it.github.io/markdown-it/
+         */
+        markdownItOptions: {
+          html: true,
+          typographer: true,
+        },
 
         markdownItSetup(md) {
           md.use(mdPrism)
@@ -182,64 +206,69 @@ export default defineConfig(({ mode }) => {
         },
       }),
 
-      // https://github.com/antfu/vite-plugin-components
-      components({
-        dts: 'src/components.d.ts',
-        // allow auto load markdown components under `./src/components/`
-        extensions: ['vue', 'md'],
-        // allow auto import and register components used in markdown
-        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      }),
-
-      // https://github.com/antfu/unplugin-auto-import
-      autoImport({
-        dts: 'src/auto-imports.d.ts',
-        dirs: [
-          'src/composables',
-          'src/store',
-        ],
-        imports: [
-          '@vueuse/head',
-          '@vueuse/core',
-          'vue-i18n',
-          'vue-router',
-          'vue/macros',
-          'vue',
-        ],
-        vueTemplate: true,
-      }),
-
-      // https://github.com/antfu/vite-plugin-windicss
+      /**
+       * @see https://github.com/antfu/vite-plugin-windicss
+       */
       windicss(),
 
+      /**
+       * @see https://github.com/antfu/vite-plugin-pwa
+       */
       pwa({
-        registerType: 'autoUpdate',
-        includeAssets: ['favicon.ico', 'robots.txt', 'icons/safari-pinned-tab.svg'],
+        filename: 'sw.ts',
+        devOptions: {
+          // enabled: true,
+        },
+        strategies: 'injectManifest',
+        srcDir: 'src',
+        scope: '/',
         manifest: {
-          name: APP_INFO.title,
-          short_name: APP_INFO.name,
-          description: APP_INFO.description,
+          id: '/',
+          name: env.VITE_APP_NAME,
+          description: env.VITE_APP_DESCRIPTION,
+          short_name: env.VITE_APP_NAME,
           theme_color: '#ffffff',
           icons: [
             {
-              src: '/icons/mobile-icon-192x192.png',
+              src: '/assets/icon-192x192.png',
               sizes: '192x192',
               type: 'image/png',
             },
             {
-              src: '/icons/mobile-icon-512x512.png',
+              src: '/assets/icon-512x512.png',
               sizes: '512x512',
               type: 'image/png',
             },
             {
-              src: '/icons/mobile-icon-512x512.png',
+              src: '/assets/icon-512x512.png',
               sizes: '512x512',
               type: 'image/png',
-              purpose: 'any maskable',
+              purpose: 'maskable',
             },
           ],
         },
       }),
+
+      /**
+       * @see https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
+       */
+      i18n({
+        runtimeOnly: true,
+        compositionOnly: true,
+        include: [resolve(__dirname, 'locales/**')],
+      }),
     ],
   }
 })
+
+function httpsCert(envDir: string): ServerOptions | undefined {
+  try {
+    return {
+      cert: readFileSync(resolve(envDir, 'scripts/local-cert.pem')),
+      key: readFileSync(resolve(envDir, 'scripts/local-key.pem')),
+    }
+  }
+  catch {
+    return undefined
+  }
+}

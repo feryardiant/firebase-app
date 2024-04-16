@@ -28,7 +28,7 @@ const formatDate = (date: string) => new Date(date).toLocaleDateString()
   </slot>
 
   <figure v-if="frontmatter.thumb">
-    <img :alt="frontmatter.title" :src="`/uploads/${frontmatter.thumb}`" />
+    <img :alt="frontmatter.title" :src="`/uploads/${frontmatter.thumb}`">
   </figure>
 
   <p v-if="excerpt && frontmatter.excerpt" class="excerpt" v-html="frontmatter.excerpt" />

@@ -1,19 +1,35 @@
 {
-  "exclude": [".turbo", "**/.turbo/*", "dist", "**/dist/*", "node_modules", "**/node_modules/*"],
   "compilerOptions": {
     "module": "ESNext",
-    "target": "ESNext",
+    "target": "ES2020",
     "allowJs": true,
+    "jsx": "preserve",
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
     "resolveJsonModule": true,
+    "moduleResolution": "Bundler",
+    "skipDefaultLibCheck": true,
     "typeRoots": ["./node_modules/@types"],
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
+    "noEmit": true,
     "useDefineForClassFields": true
-  }
+  },
+  "include": [
+    "./*.config.ts",
+    "./**/*.d.ts",
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "**/*.old/**",
+    "**/.turbo/**",
+    "**/dist/**",
+    "**/dev-dist/**",
+    "**/fixtures/*.json",
+    "**/node_modules/**",
+    "**/public/**"
+  ]
 }

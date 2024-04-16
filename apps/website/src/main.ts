@@ -1,10 +1,10 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createI18n } from 'vue-i18n'
-import { createHead } from '@vueuse/head'
+import { createHead } from '@unhead/vue'
 import { createGtm, useGtm } from '@gtm-support/vue-gtm'
 
-import autoRoutes from 'pages-generated'
+import { routes } from 'vue-router/auto-routes'
 import { setupLayouts } from 'layouts-generated'
 import 'virtual:windi-devtools'
 
@@ -34,7 +34,7 @@ app.use(i18n)
 // Router Resources
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: setupLayouts(autoRoutes),
+  routes: setupLayouts(routes),
 })
 
 app.use(router)

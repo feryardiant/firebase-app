@@ -1,20 +1,18 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "lib": ["ESNext", "DOM", "WebWorker"],
     "baseUrl": ".",
-    "outDir": "dist",
-    "lib": ["ESNext", "DOM"],
-    "jsx": "preserve",
-    "types": [
-      "vitest",
-      "vite/client",
-      "vue/ref-macros",
-      "vite-plugin-pages/client",
-      "vite-plugin-pwa/client",
-      "vite-plugin-vue-layouts/client"
-    ],
     "paths": {
       "~/*": ["src/*"]
-    }
-  }
+    },
+    "types": [],
+    "outDir": "dist"
+  },
+  "include": [
+    "./**/.*.d.ts",
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.vue"
+  ]
 }

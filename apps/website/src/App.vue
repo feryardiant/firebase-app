@@ -5,7 +5,7 @@ const menuOpened = toRef(sitePreference.value, 'menuOpened', false)
 const bodyClass = computed(() => menuOpened.value ? 'overflow-hidden' : '')
 
 const showToast = ref(false)
-const close = () => {
+function close() {
   showToast.value = false
 }
 
