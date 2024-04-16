@@ -9,8 +9,8 @@ import { setupLayouts } from 'layouts-generated'
 import 'virtual:windi-devtools'
 
 import 'virtual:windi.css'
-import './assets/style.css'
-import App from './app.vue'
+import '~/assets/style.css'
+import App from '~/app.vue'
 
 const app = createApp(App)
 
