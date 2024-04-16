@@ -20,7 +20,7 @@
     "watch": "tsup --watch"
   },
   "dependencies": {
-    "@feryardiant/sendgrid-inbound-parser": "workspace:*",
+    "@feryardiant/sendgrid-inbound-parser": "^0.1.6",
     "@google-cloud/functions-framework": "^3.3.0",
     "@google-cloud/storage": "^7.10.0",
     "@sendgrid/mail": "^8.1.3",
