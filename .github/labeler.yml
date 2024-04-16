@@ -1,0 +1,21 @@
+integration:
+- changed-files:
+  - any-glob-to-any-file:
+    - '.github/workflows/*.yml'
+    - 'scripts/**'
+    - '**/test/**'
+
+docs:
+- changed-files:
+  - any-glob-to-any-file:
+    - '.env.example'
+    - '**.md'
+
+localization:
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/locales/**'
+
+enhancement:
+- changed-files:
+  - any-glob-to-any-file: '**'

@@ -4,31 +4,44 @@ on:
   push:
     branches: [main]
   pull_request:
-    types: [opened, synchronize, reopened]
     branches: [main]
 
 env:
-  APP_NAME: 'Admin App'
-  BASE_URL: 'https://admin.feryardiant.id/'
-  PROJECT_ID: 'fery-wardiyanto'
-  FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/.firebase
 
 jobs:
+  labels:
+    name: Labels
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Labeler
+        uses: actions/labeler@v5
+        with:
+          dot: true
+
   test:
     runs-on: ubuntu-latest
     name: Test
 
     env:
+      APP_NAME: 'Admin App'
+      BASE_URL: 'https://admin.feryardiant.id/'
+      PROJECT_ID: 'fery-wardiyanto'
       FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
       FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
       FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/.firebase
       RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
       RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
-
-    environment:
-      name: production
-      url: ${{ env.BASE_URL }}
 
     steps:
       - name: Checkout
@@ -58,16 +71,5 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      - name:  Build
-        run: pnpm build
-
       - name: Test
         run: pnpm test -- --project ${{ env.PROJECT_ID }}
-
-      # - name: Publish Packages
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: pnpm -r publish --ignore-scripts --no-git-checks
-
-      # - name: Deploy
-      #   run: pnpm firebase deploy --project ${{ env.PROJECT_ID }}
