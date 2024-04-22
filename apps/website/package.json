@@ -1,5 +1,5 @@
 {
-  "name": "@feryardiant/admin-web",
+  "name": "web",
   "type": "module",
   "version": "0.0.0",
   "private": true,
@@ -12,24 +12,24 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@gtm-support/vue-gtm": "^1.6.0",
-    "@unhead/vue": "^1.9.5",
+    "@gtm-support/vue-gtm": "^2.2.0",
+    "@unhead/vue": "^1.9.7",
     "@vueuse/core": "^10.9.0",
     "firebase": "^10.11.0",
     "js-cookie": "^3.0.5",
     "nprogress": "^0.2.0",
     "vue": "^3.4.23",
-    "vue-i18n": "^9.12.1",
-    "vue-router": "^4.3.0"
+    "vue-i18n": "^9.13.1",
+    "vue-router": "^4.3.2"
   },
   "devDependencies": {
-    "@fontsource/nunito": "^5.0.17",
-    "@iconify/vue": "^4.1.1",
+    "@fontsource/nunito": "^5.0.18",
+    "@iconify/vue": "^4.1.2",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@types/markdown-it": "^14.0.1",
     "@types/markdown-it-link-attributes": "^3.0.5",
-    "@unhead/addons": "^1.9.5",
-    "@unhead/schema-org": "^1.9.5",
+    "@unhead/addons": "^1.9.7",
+    "@unhead/schema-org": "^1.9.7",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.5",
     "markdown-it": "^14.1.0",
@@ -39,7 +39,7 @@
     "prismjs": "^1.29.0",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
-    "unplugin-vue-markdown": "^0.26.1",
+    "unplugin-vue-markdown": "^0.26.2",
     "unplugin-vue-router": "^0.8.6",
     "vite-plugin-pwa": "^0.19.8",
     "vite-plugin-vue-layouts": "^0.11.0",
