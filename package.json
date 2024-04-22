@@ -19,7 +19,7 @@
     "publish:packages": "pnpm -r publish --ignore-scripts --no-git-checks",
     "start": "dotenv -e .env run-p emulate watch serve",
     "serve": "pnpm -C apps/website dev",
-    "test": "firebase emulators:exec \"pnpm run -r test\"",
+    "test": "firebase emulators:exec \"vitest run\"",
     "watch": "pnpm run --parallel watch"
   },
   "devDependencies": {
