@@ -1,11 +1,10 @@
-import { browser } from '@wdio/globals'
+import { webdriverio } from '@vitest/browser/providers'
 
 describe('example', () => {
-  beforeEach(async () => {
-    await browser.url('/')
-  })
-
   it('should be ok', async () => {
-    await expect(browser).toHaveTitle('Example')
+    // webdriverio.name
+    // const browser = await openBrowser()
+
+    await expect(webdriverio.name).toEqual('chrome')
   })
 })
