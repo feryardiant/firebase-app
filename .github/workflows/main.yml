@@ -32,6 +32,8 @@ jobs:
     env:
       APP_NAME: 'Admin App'
       BASE_URL: 'https://admin.feryardiant.id/'
+      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       PROJECT_ID: 'fery-wardiyanto'
       FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
