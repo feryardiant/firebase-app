@@ -20,6 +20,7 @@
     "start": "dotenv -e .env run-p emulate watch serve",
     "serve": "pnpm -C apps/website dev",
     "test": "firebase emulators:exec \"vitest run\"",
+    "test:e2e": "firebase emulators:exec \"vitest run --browser=chrome --project=root\"",
     "watch": "pnpm run --parallel watch"
   },
   "devDependencies": {
@@ -31,8 +32,10 @@
     "@types/glob": "^8.1.0",
     "@types/node": "^20.12.7",
     "@types/supertest": "^6.0.2",
+    "@vitest/browser": "^1.5.0",
     "@vue/compiler-sfc": "^3.4.23",
     "@vue/server-renderer": "^3.4.23",
+    "@wdio/globals": "^8.36.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",
@@ -48,7 +51,8 @@
     "typescript": "^5.4.5",
     "vite": "^5.2.10",
     "vitest": "^1.5.0",
-    "vue-tsc": "^2.0.14"
+    "vue-tsc": "^2.0.14",
+    "webdriverio": "^8.36.1"
   },
   "commitlint": {
     "extends": [
