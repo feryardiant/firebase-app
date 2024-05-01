@@ -180,7 +180,7 @@ importers:
         version: 1.9.7(rollup@2.79.1)
       '@unhead/schema-org':
         specifier: ^1.9.7
-        version: 1.9.7(@unhead/shared@1.9.7)(unhead@1.9.7)
+        version: 1.9.7(@unhead/shared@1.9.7)(unhead@1.9.8)
       '@vitejs/plugin-vue':
         specifier: ^5.0.4
         version: 5.0.4(vite@5.2.10)(vue@3.4.23)
@@ -2810,6 +2810,32 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+    dev: false
+
+  /@google-cloud/storage@7.10.2:
+    resolution: {integrity: sha512-NaCyhwu0cSqwj6waZO+8WiyzCXUBUfVE7T1fHAGRHEJ+CRy5on2ah/jfC0ZPYXL0q4JoPj98VtMW4bEgtFfKHw==}
+    engines: {node: '>=14'}
+    requiresBuild: true
+    dependencies:
+      '@google-cloud/paginator': 5.0.0
+      '@google-cloud/projectify': 4.0.0
+      '@google-cloud/promisify': 4.0.0
+      abort-controller: 3.0.0
+      async-retry: 1.3.3
+      duplexify: 4.1.3
+      ent: 2.2.0
+      fast-xml-parser: 4.3.6
+      gaxios: 6.5.0
+      google-auth-library: 9.8.0
+      mime: 3.0.0
+      p-limit: 3.1.0
+      retry-request: 7.0.2
+      teeny-request: 9.0.0
+      uuid: 8.3.2
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+    optional: true
 
   /@grpc/grpc-js@1.10.6:
     resolution: {integrity: sha512-xP58G7wDQ4TCmN/cMUHh00DS7SRDv/+lC+xFLrTkMIN8h55X5NhZMLYbvy7dSELP15qlI6hPhNCRWVMtZMwqLA==}
@@ -4303,8 +4329,16 @@ packages:
     dependencies:
       '@unhead/schema': 1.9.7
       '@unhead/shared': 1.9.7
+    dev: false
 
-  /@unhead/schema-org@1.9.7(@unhead/shared@1.9.7)(unhead@1.9.7):
+  /@unhead/dom@1.9.8:
+    resolution: {integrity: sha512-izvWjrZTU6sxwGnKbu/4iznNpadxdbf9wGH8ye1C0akb1WFn9ZZ/mQncPeRwEXiRxtLD3VLqaAVKRPHk73g9HQ==}
+    dependencies:
+      '@unhead/schema': 1.9.8
+      '@unhead/shared': 1.9.8
+    dev: true
+
+  /@unhead/schema-org@1.9.7(@unhead/shared@1.9.7)(unhead@1.9.8):
     resolution: {integrity: sha512-lBjDrpLsrfCEccE8kC4BgBxcYggQJrtnaboD/N1gVeS0uPYJppYCMM6paWFOXQl97sneZ5OBgrjlWPtzmRRM8Q==}
     peerDependencies:
       '@unhead/shared': 1.9.7
@@ -4312,7 +4346,7 @@ packages:
     dependencies:
       '@unhead/shared': 1.9.7
       ufo: 1.5.3
-      unhead: 1.9.7
+      unhead: 1.9.8
     dev: true
 
   /@unhead/schema@1.9.7:
@@ -4321,10 +4355,23 @@ packages:
       hookable: 5.5.3
       zhead: 2.2.4
 
+  /@unhead/schema@1.9.8:
+    resolution: {integrity: sha512-jh5oT5kQpwWOPRN1wxi0wjsHj34EjvG3ODyx38WG5XJwGSWhShCkqhC16ZNAX+qShNdKe5l3bygGufth7rrgpA==}
+    dependencies:
+      hookable: 5.5.3
+      zhead: 2.2.4
+    dev: true
+
   /@unhead/shared@1.9.7:
     resolution: {integrity: sha512-srji+qaBkkGOTdtTmFxt3AebFYcpt1qQHeQva7X3dSm5nZJDoKj35BJJTZfBSRCjgvkTtsdVUT14f9p9/4BCMA==}
     dependencies:
       '@unhead/schema': 1.9.7
+
+  /@unhead/shared@1.9.8:
+    resolution: {integrity: sha512-JkKSpPgodn/Ku0B8kBjoAL0A7mBaa4n4nB5xe7Y5vHhI8HszZ3IXWogMGTo9cWs50NXyZ6IB8hibQTjVo1DriA==}
+    dependencies:
+      '@unhead/schema': 1.9.8
+    dev: true
 
   /@unhead/vue@1.9.7(vue@3.4.23):
     resolution: {integrity: sha512-c5pcNvi3FwMfqd+lfD3XUyRKPDv/AVPrep84CFXaqB7ebb+2OQTgtxBiCoRsa8+DtdhYI50lYJ/yeVdfLI9XUw==}
@@ -7172,7 +7219,7 @@ packages:
       uuid: 9.0.1
     optionalDependencies:
       '@google-cloud/firestore': 7.6.0
-      '@google-cloud/storage': 7.10.0
+      '@google-cloud/storage': 7.10.2
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -10841,7 +10888,7 @@ packages:
     resolution: {integrity: sha512-AwAuY4g9nxx0u52DnSMkqqgyLHaW/XaPLtaAo3y/ZCfeaQB/g4YDH4kb8Wc/mWzWvu0YjOznVnfn373MVZZrgw==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      protobufjs: 7.2.4
+      protobufjs: 7.2.6
     dev: true
 
   /proto3-json-serializer@2.0.1:
@@ -12476,6 +12523,16 @@ packages:
       '@unhead/schema': 1.9.7
       '@unhead/shared': 1.9.7
       hookable: 5.5.3
+    dev: false
+
+  /unhead@1.9.8:
+    resolution: {integrity: sha512-N37E7vqm+Ma+r45CGXbMXuhOUNB6Rg/iPpSls/Yrphb9DRwLiDkzS/I6UgSmn8698irzj6vnavdkm1pZZifNrg==}
+    dependencies:
+      '@unhead/dom': 1.9.8
+      '@unhead/schema': 1.9.8
+      '@unhead/shared': 1.9.8
+      hookable: 5.5.3
+    dev: true
 
   /unicode-canonical-property-names-ecmascript@2.0.0:
     resolution: {integrity: sha512-yY5PpDlfVIU5+y/BSCxAJRBIS1Zc2dDG3Ujq+sR0U+JjUevW2JhocOF+soROYDSaAezOzOKuyyixhD6mBknSmQ==}
