@@ -180,7 +180,7 @@ importers:
         version: 1.9.7(rollup@2.79.1)
       '@unhead/schema-org':
         specifier: ^1.9.7
-        version: 1.9.7(@unhead/shared@1.9.7)(unhead@1.9.13)
+        version: 1.9.7(@unhead/shared@1.9.7)(unhead@1.9.14)
       '@vitejs/plugin-vue':
         specifier: ^5.0.4
         version: 5.0.4(vite@5.3.1)(vue@3.4.23)
@@ -2772,7 +2772,7 @@ packages:
       '@gtm-support/core': 2.3.1
       vue: 3.4.23(typescript@5.4.5)
     optionalDependencies:
-      vue-router: 4.3.3(vue@3.4.23)
+      vue-router: 4.4.0(vue@3.4.23)
     dev: false
 
   /@humanwhocodes/config-array@0.11.14:
@@ -4137,11 +4137,11 @@ packages:
       - rollup
     dev: true
 
-  /@unhead/dom@1.9.13:
-    resolution: {integrity: sha512-Fzc929W+5f88c90kn9aKs7EbgRBhphArMqBbifre134GWgrgDVR0odoadNa7i9eH4roPEDE1FIGcKVWuxOIHbg==}
+  /@unhead/dom@1.9.14:
+    resolution: {integrity: sha512-XZSZ2Wmm1Sv7k9scSFGrarbteSIl3p3I3oOUprKPDboBTvuG5q81Qz8O99NKUGKGJ8BKUkxCqE982eH3S8DKJA==}
     dependencies:
-      '@unhead/schema': 1.9.13
-      '@unhead/shared': 1.9.13
+      '@unhead/schema': 1.9.14
+      '@unhead/shared': 1.9.14
     dev: true
 
   /@unhead/dom@1.9.7:
@@ -4151,7 +4151,7 @@ packages:
       '@unhead/shared': 1.9.7
     dev: false
 
-  /@unhead/schema-org@1.9.7(@unhead/shared@1.9.7)(unhead@1.9.13):
+  /@unhead/schema-org@1.9.7(@unhead/shared@1.9.7)(unhead@1.9.14):
     resolution: {integrity: sha512-lBjDrpLsrfCEccE8kC4BgBxcYggQJrtnaboD/N1gVeS0uPYJppYCMM6paWFOXQl97sneZ5OBgrjlWPtzmRRM8Q==}
     peerDependencies:
       '@unhead/shared': 1.9.7
@@ -4159,11 +4159,11 @@ packages:
     dependencies:
       '@unhead/shared': 1.9.7
       ufo: 1.5.3
-      unhead: 1.9.13
+      unhead: 1.9.14
     dev: true
 
-  /@unhead/schema@1.9.13:
-    resolution: {integrity: sha512-keOfTXC/tI21fURcEszBHgGvIg2AszQVQEXBG5BYgC2TQph25Bmv7Fk8W2ogFmj+DdZmFiDnSJdz/NKv3bqnTQ==}
+  /@unhead/schema@1.9.14:
+    resolution: {integrity: sha512-60NYSM6QjfK/wx4/QfaYyZ3XnNtwxS9a1oij2abEkGHPmA2/fqBOXeuHtnBo4eD42/Eg+owcS5s3mClPL8AkXw==}
     dependencies:
       hookable: 5.5.3
       zhead: 2.2.4
@@ -4175,10 +4175,10 @@ packages:
       hookable: 5.5.3
       zhead: 2.2.4
 
-  /@unhead/shared@1.9.13:
-    resolution: {integrity: sha512-zNlJ2i5WonQZu/UMHJJzYMyBLhlCCxj1JxHL6lEG+Z6XiERfJDFr8mEAsQY7M2KrGAHR+WRBxNVoLw03j/kfrA==}
+  /@unhead/shared@1.9.14:
+    resolution: {integrity: sha512-7ZIC7uDV8gp3KHm5JxJ/NXMENQgkh+SCyTcsILSpOhkAGeszMHABrB6vjeZDGM4J9mRUxwyPn24KI2zG/R+XiQ==}
     dependencies:
-      '@unhead/schema': 1.9.13
+      '@unhead/schema': 1.9.14
     dev: true
 
   /@unhead/shared@1.9.7:
@@ -5162,7 +5162,7 @@ packages:
     dependencies:
       '@npmcli/fs': 3.1.0
       fs-minipass: 3.0.3
-      glob: 10.4.1
+      glob: 10.4.2
       lru-cache: 10.2.0
       minipass: 7.1.2
       minipass-collect: 2.0.1
@@ -6878,7 +6878,7 @@ packages:
       content-type: 1.0.5
       deep-freeze: 0.0.1
       events-listener: 1.1.0
-      glob: 10.4.1
+      glob: 10.4.2
       json-ptr: 3.1.1
       json-schema-traverse: 1.0.0
       lodash: 4.17.21
@@ -7615,6 +7615,19 @@ packages:
       jackspeak: 3.4.0
       minimatch: 9.0.4
       minipass: 7.1.2
+      path-scurry: 1.11.1
+    dev: true
+
+  /glob@10.4.2:
+    resolution: {integrity: sha512-GwMlUF6PkPo3Gk21UxkCohOv0PLcIXVtKyLlpEI28R/cO/4eNOdmLk3CMW1wROV/WR/EsZOWAfBbBOqYvs88/w==}
+    engines: {node: '>=16 || 14 >=14.18'}
+    hasBin: true
+    dependencies:
+      foreground-child: 3.1.1
+      jackspeak: 3.4.0
+      minimatch: 9.0.4
+      minipass: 7.1.2
+      package-json-from-dist: 1.0.0
       path-scurry: 1.11.1
     dev: true
 
@@ -10035,7 +10048,7 @@ packages:
     dependencies:
       env-paths: 2.2.1
       exponential-backoff: 3.1.1
-      glob: 10.4.1
+      glob: 10.4.2
       graceful-fs: 4.2.11
       make-fetch-happen: 13.0.0
       nopt: 7.2.0
@@ -10327,6 +10340,10 @@ packages:
     dependencies:
       degenerator: 5.0.1
       netmask: 2.0.2
+    dev: true
+
+  /package-json-from-dist@1.0.0:
+    resolution: {integrity: sha512-dATvCeZN/8wQsGywez1mzHtTlP22H8OEfPrVMLNr4/eGa+ijtLn/6M5f0dY8UKNrC2O9UCU6SSoG3qRKnt7STw==}
     dev: true
 
   /parent-module@1.0.1:
@@ -11866,7 +11883,7 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       commander: 4.1.1
-      glob: 10.4.1
+      glob: 10.4.2
       lines-and-columns: 1.2.4
       mz: 2.7.0
       pirates: 4.0.6
@@ -12367,12 +12384,12 @@ packages:
       '@fastify/busboy': 2.1.1
     dev: false
 
-  /unhead@1.9.13:
-    resolution: {integrity: sha512-r7O7s5nw1vUrolueEitawh1HnrzXoekHPM1gsYMF3Tu0A2SzochDJw/1F+Nhu3e073rJ9cUGZqobZY3+RZS4Ew==}
+  /unhead@1.9.14:
+    resolution: {integrity: sha512-npdYu6CfasX/IhB8OO27e3u4A1zhAY77T1FwWDIIUaJvugYTte5hjsolPX0/fG5jmjnWTFTuIkmbCSfj7bfIkg==}
     dependencies:
-      '@unhead/dom': 1.9.13
-      '@unhead/schema': 1.9.13
-      '@unhead/shared': 1.9.13
+      '@unhead/dom': 1.9.14
+      '@unhead/schema': 1.9.14
+      '@unhead/shared': 1.9.14
       hookable: 5.5.3
     dev: true
 
@@ -12936,8 +12953,8 @@ packages:
       '@vue/devtools-api': 6.6.1
       vue: 3.4.23(typescript@5.4.5)
 
-  /vue-router@4.3.3(vue@3.4.23):
-    resolution: {integrity: sha512-8Q+u+WP4N2SXY38FDcF2H1dUEbYVHVPtPCPZj/GTZx8RCbiB8AtJP9+YIxn4Vs0svMTNQcLIzka4GH7Utkx9xQ==}
+  /vue-router@4.4.0(vue@3.4.23):
+    resolution: {integrity: sha512-HB+t2p611aIZraV2aPSRNXf0Z/oLZFrlygJm+sZbdJaW6lcFqEDQwnzUBXn+DApw+/QzDU/I9TeWx9izEjTmsA==}
     requiresBuild: true
     peerDependencies:
       vue: ^3.2.0
