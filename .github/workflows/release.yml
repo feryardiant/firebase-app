@@ -38,7 +38,7 @@ jobs:
           run_install: true
 
       - name: Set up node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           registry-url: 'https://registry.npmjs.org/'
           node-version: '20.x'
