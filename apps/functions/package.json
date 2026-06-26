@@ -20,9 +20,9 @@
     "watch": "tsup --watch"
   },
   "dependencies": {
-    "@feryardiant/sendgrid-inbound-parser": "^0.1.6",
+    "@feryardiant/sendgrid-inbound-parser": "^0.1.9",
     "@google-cloud/functions-framework": "^3.5.1",
-    "@google-cloud/storage": "^7.19.0",
+    "@google-cloud/storage": "^7.21.0",
     "@sendgrid/mail": "^8.1.6",
     "cookie-parser": "^1.4.7",
     "express": "^4.22.2",
